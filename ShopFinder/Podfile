@@ -1,0 +1,8 @@
+platform :ios, '8.0'
+use_frameworks!
+
+pod 'Alamofire', '~> 1.2'
+pod 'DateTools'
+pod 'SwiftDate'
+pod 'Spring', '~> 1.0.3'
+pod 'RESideMenu', '~> 4.0.7'
