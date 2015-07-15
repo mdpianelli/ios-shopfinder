@@ -58,7 +58,7 @@ class LeftMenuController: UIViewController, RESideMenuDelegate, UITableViewDataS
         switch(indexPath.row)
         {
             case 0 :
-                self.sideMenuViewController.setContentViewController(self.storyboard!.instantiateViewControllerWithIdentifier("firstViewController") as! UIViewController, animated: true)
+                self.sideMenuViewController.setContentViewController(self.storyboard!.instantiateViewControllerWithIdentifier("contentViewController") as! UIViewController, animated: true)
                 
             case 1:
                 self.sideMenuViewController.setContentViewController(self.storyboard!.instantiateViewControllerWithIdentifier("secondViewController") as! UIViewController, animated: true)

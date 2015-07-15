@@ -15,6 +15,8 @@ class MainRootController:  RESideMenu, RESideMenuDelegate {
 
     override func awakeFromNib() {
 
+       
+        
         self.menuPreferredStatusBarStyle = UIStatusBarStyle.LightContent
         self.contentViewShadowColor = UIColor.blackColor()
         self.contentViewShadowOffset = CGSizeMake(0,0)
@@ -29,11 +31,30 @@ class MainRootController:  RESideMenu, RESideMenuDelegate {
         
         self.leftMenuViewController = self.storyboard!.instantiateViewControllerWithIdentifier("leftMenuViewController") as! UIViewController
         
-        self.rightMenuViewController =
-            self.storyboard!.instantiateViewControllerWithIdentifier("rightMenuViewController") as! UIViewController
+//        self.rightMenuViewController =
+//            self.storyboard!.instantiateViewControllerWithIdentifier("rightMenuViewController") as! UIViewController
         
         
     }
     
     
+    override func viewDidLoad() {
+        
+        super.viewDidLoad()
+        
+//        self.navigationController?.navigationBarHidden = true
+//        self.navigationController?.navigationBar.hidden = true
+       // self.navigationController?.hidesBarsOnSwipe = true
+        
+      
+        
+    }
+    
+    override func viewWillAppear(animated: Bool) {
+        super.viewWillAppear(animated)
+        
+        let vc = self.storyboard!.instantiateViewControllerWithIdentifier("secondViewController") as! UIViewController
+        
+        self.navigationController?.pushViewController(vc, animated: false)
+    }
 }
