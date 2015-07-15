@@ -2,6 +2,8 @@
 <document type="com.apple.InterfaceBuilder3.CocoaTouch.Storyboard.XIB" version="3.0" toolsVersion="7706" systemVersion="14E46" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" initialViewController="pQb-lO-91G">
     <dependencies>
         <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="7703"/>
+        <capability name="Alignment constraints with different attributes" minToolsVersion="5.1"/>
+        <capability name="Constraints to layout margins" minToolsVersion="6.0"/>
     </dependencies>
     <scenes>
         <!--Main Root Controller-->
@@ -20,17 +22,18 @@
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="wwC-j7-bLv" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="337.5" y="234.75"/>
+            <point key="canvasLocation" x="397.5" y="215.25"/>
         </scene>
         <!--Navigation Controller-->
         <scene sceneID="hwb-Za-uVN">
             <objects>
-                <navigationController storyboardIdentifier="contentViewController" definesPresentationContext="YES" useStoryboardIdentifierAsRestorationIdentifier="YES" id="aVt-dR-VLt" sceneMemberID="viewController">
-                    <navigationBar key="navigationBar" hidden="YES" contentMode="scaleToFill" id="h7u-tD-cOR">
+                <navigationController storyboardIdentifier="NavShopListController" definesPresentationContext="YES" useStoryboardIdentifierAsRestorationIdentifier="YES" id="aVt-dR-VLt" sceneMemberID="viewController">
+                    <navigationBar key="navigationBar" contentMode="scaleToFill" id="h7u-tD-cOR">
                         <autoresizingMask key="autoresizingMask"/>
+                        <color key="tintColor" red="0.15686274510000001" green="0.2156862745" blue="0.28627450980000002" alpha="1" colorSpace="calibratedRGB"/>
+                        <color key="barTintColor" red="0.76923862899999995" green="1" blue="0.22866474110000001" alpha="1" colorSpace="calibratedRGB"/>
                         <textAttributes key="titleTextAttributes">
-                            <fontDescription key="fontDescription" name="HelveticaNeue" family="Helvetica Neue" pointSize="17"/>
-                            <color key="textColor" red="0.086274509799999996" green="0.47450980390000003" blue="1" alpha="1" colorSpace="calibratedRGB"/>
+                            <fontDescription key="fontDescription" type="system" weight="thin" pointSize="20"/>
                         </textAttributes>
                     </navigationBar>
                     <toolbar key="toolbar" opaque="NO" clearsContextBeforeDrawing="NO" contentMode="scaleToFill" id="3uq-ox-xaG">
@@ -43,12 +46,12 @@
                 </navigationController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="Es0-ms-FmN" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="1240.5" y="93.75"/>
+            <point key="canvasLocation" x="1450.5" y="24.75"/>
         </scene>
-        <!--Home-->
+        <!--ShopListController-->
         <scene sceneID="hmq-TZ-qhV">
             <objects>
-                <viewController storyboardIdentifier="firstViewController" useStoryboardIdentifierAsRestorationIdentifier="YES" id="9K9-Wl-0cP" sceneMemberID="viewController">
+                <viewController storyboardIdentifier="ShopListController" useStoryboardIdentifierAsRestorationIdentifier="YES" id="9K9-Wl-0cP" userLabel="ShopListController" customClass="ShopListController" customModule="ShopFinder" customModuleProvider="target" sceneMemberID="viewController">
                     <layoutGuides>
                         <viewControllerLayoutGuide type="top" id="yVe-Pe-Cz9"/>
                         <viewControllerLayoutGuide type="bottom" id="DLm-YZ-Ctp"/>
@@ -57,55 +60,155 @@
                         <rect key="frame" x="0.0" y="0.0" width="600" height="600"/>
                         <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
                         <subviews>
-                            <imageView userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" fixedFrame="YES" image="Balloon" translatesAutoresizingMaskIntoConstraints="NO" id="q3I-Va-nsz">
+                            <tableView clipsSubviews="YES" contentMode="scaleToFill" alwaysBounceVertical="YES" dataMode="prototypes" style="plain" separatorStyle="default" rowHeight="80" sectionHeaderHeight="22" sectionFooterHeight="22" translatesAutoresizingMaskIntoConstraints="NO" id="SzZ-kc-PH8">
                                 <rect key="frame" x="0.0" y="0.0" width="320" height="568"/>
-                                <variation key="heightClass=regular-widthClass=compact" fixedFrame="YES">
-                                    <rect key="frame" x="0.0" y="0.0" width="400" height="800"/>
-                                </variation>
-                            </imageView>
-                            <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="HcK-fr-WK3">
-                                <rect key="frame" x="-23" y="-15" width="46" height="30"/>
-                                <state key="normal" backgroundImage="MenuIcon">
-                                    <color key="titleShadowColor" white="0.5" alpha="1" colorSpace="calibratedWhite"/>
-                                </state>
-                                <variation key="heightClass=regular-widthClass=compact" fixedFrame="YES">
-                                    <rect key="frame" x="15" y="24" width="50" height="50"/>
-                                </variation>
+                                <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
+                                <prototypes>
+                                    <tableViewCell contentMode="scaleToFill" selectionStyle="default" indentationWidth="10" reuseIdentifier="Cell" rowHeight="100" id="XWH-ze-sL2" customClass="ShopCell" customModule="ShopFinder" customModuleProvider="target">
+                                        <rect key="frame" x="0.0" y="0.0" width="320" height="44"/>
+                                        <autoresizingMask key="autoresizingMask"/>
+                                        <tableViewCellContentView key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" tableViewCell="XWH-ze-sL2" id="9te-fg-DSI">
+                                            <autoresizingMask key="autoresizingMask"/>
+                                            <subviews>
+                                                <imageView userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" translatesAutoresizingMaskIntoConstraints="NO" id="qOs-vl-uzZ">
+                                                    <rect key="frame" x="0.0" y="0.0" width="240" height="128"/>
+                                                    <constraints>
+                                                        <constraint firstAttribute="height" constant="90" id="51X-Va-aVg"/>
+                                                        <constraint firstAttribute="width" relation="greaterThanOrEqual" constant="120" id="IKr-nA-dKR">
+                                                            <variation key="heightClass=regular-widthClass=compact" constant="90"/>
+                                                        </constraint>
+                                                        <constraint firstAttribute="width" constant="120" id="NYl-Ss-PYP">
+                                                            <variation key="heightClass=regular-widthClass=compact" constant="90"/>
+                                                        </constraint>
+                                                    </constraints>
+                                                    <variation key="default">
+                                                        <mask key="constraints">
+                                                            <exclude reference="51X-Va-aVg"/>
+                                                            <exclude reference="IKr-nA-dKR"/>
+                                                            <exclude reference="NYl-Ss-PYP"/>
+                                                        </mask>
+                                                    </variation>
+                                                    <variation key="heightClass=regular-widthClass=compact">
+                                                        <mask key="constraints">
+                                                            <include reference="51X-Va-aVg"/>
+                                                            <include reference="IKr-nA-dKR"/>
+                                                            <include reference="NYl-Ss-PYP"/>
+                                                        </mask>
+                                                    </variation>
+                                                </imageView>
+                                                <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Label" lineBreakMode="tailTruncation" numberOfLines="0" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="vcO-bw-kCr">
+                                                    <rect key="frame" x="0.0" y="-21" width="42" height="21"/>
+                                                    <fontDescription key="fontDescription" type="system" weight="thin" pointSize="21"/>
+                                                    <color key="textColor" cocoaTouchSystemColor="darkTextColor"/>
+                                                    <nil key="highlightedColor"/>
+                                                    <variation key="heightClass=regular-widthClass=compact" misplaced="YES">
+                                                        <rect key="frame" x="96" y="8" width="198" height="83"/>
+                                                    </variation>
+                                                </label>
+                                            </subviews>
+                                            <constraints>
+                                                <constraint firstItem="qOs-vl-uzZ" firstAttribute="top" secondItem="9te-fg-DSI" secondAttribute="topMargin" constant="-3" id="6bO-Rz-L3W"/>
+                                                <constraint firstItem="qOs-vl-uzZ" firstAttribute="leading" secondItem="9te-fg-DSI" secondAttribute="leadingMargin" constant="-10" id="G88-UG-Lpv"/>
+                                                <constraint firstItem="vcO-bw-kCr" firstAttribute="top" secondItem="9te-fg-DSI" secondAttribute="topMargin" constant="13" id="NRl-b7-acb">
+                                                    <variation key="heightClass=regular-widthClass=compact" constant="0.0"/>
+                                                </constraint>
+                                                <constraint firstItem="vcO-bw-kCr" firstAttribute="leading" secondItem="qOs-vl-uzZ" secondAttribute="trailing" constant="17" id="S1d-tf-HHC">
+                                                    <variation key="heightClass=regular-widthClass=compact" constant="8"/>
+                                                </constraint>
+                                                <constraint firstAttribute="trailingMargin" secondItem="vcO-bw-kCr" secondAttribute="trailing" constant="18" id="jQl-pK-dFI"/>
+                                                <constraint firstAttribute="bottomMargin" secondItem="qOs-vl-uzZ" secondAttribute="bottom" constant="-4" id="jge-EU-ykX"/>
+                                                <constraint firstAttribute="bottomMargin" secondItem="vcO-bw-kCr" secondAttribute="bottom" constant="28" id="khy-gr-TUm">
+                                                    <variation key="heightClass=regular-widthClass=compact" constant="0.0"/>
+                                                </constraint>
+                                            </constraints>
+                                            <variation key="default">
+                                                <mask key="subviews">
+                                                    <exclude reference="qOs-vl-uzZ"/>
+                                                    <exclude reference="vcO-bw-kCr"/>
+                                                </mask>
+                                                <mask key="constraints">
+                                                    <exclude reference="NRl-b7-acb"/>
+                                                    <exclude reference="S1d-tf-HHC"/>
+                                                    <exclude reference="jQl-pK-dFI"/>
+                                                    <exclude reference="khy-gr-TUm"/>
+                                                    <exclude reference="6bO-Rz-L3W"/>
+                                                    <exclude reference="G88-UG-Lpv"/>
+                                                    <exclude reference="jge-EU-ykX"/>
+                                                </mask>
+                                            </variation>
+                                            <variation key="heightClass=regular-widthClass=compact">
+                                                <mask key="subviews">
+                                                    <include reference="qOs-vl-uzZ"/>
+                                                    <include reference="vcO-bw-kCr"/>
+                                                </mask>
+                                                <mask key="constraints">
+                                                    <include reference="NRl-b7-acb"/>
+                                                    <include reference="S1d-tf-HHC"/>
+                                                    <include reference="jQl-pK-dFI"/>
+                                                    <include reference="khy-gr-TUm"/>
+                                                    <include reference="6bO-Rz-L3W"/>
+                                                    <include reference="G88-UG-Lpv"/>
+                                                    <include reference="jge-EU-ykX"/>
+                                                </mask>
+                                            </variation>
+                                        </tableViewCellContentView>
+                                        <connections>
+                                            <outlet property="shopImageView" destination="qOs-vl-uzZ" id="vJ2-9F-wQO"/>
+                                            <outlet property="titleLabel" destination="vcO-bw-kCr" id="CfB-yQ-qn7"/>
+                                        </connections>
+                                    </tableViewCell>
+                                </prototypes>
                                 <connections>
-                                    <action selector="presentLeftMenuViewController:" destination="9K9-Wl-0cP" eventType="touchUpInside" id="RF3-ek-ewy"/>
+                                    <outlet property="dataSource" destination="9K9-Wl-0cP" id="2xv-th-rOH"/>
+                                    <outlet property="delegate" destination="9K9-Wl-0cP" id="Z1y-ZB-aJ8"/>
                                 </connections>
-                            </button>
+                            </tableView>
                         </subviews>
+                        <constraints>
+                            <constraint firstItem="SzZ-kc-PH8" firstAttribute="leading" secondItem="4Ka-YP-lZn" secondAttribute="leading" id="XVw-R8-F4o"/>
+                            <constraint firstItem="SzZ-kc-PH8" firstAttribute="top" secondItem="4Ka-YP-lZn" secondAttribute="top" id="nbK-4a-OMV"/>
+                            <constraint firstItem="SzZ-kc-PH8" firstAttribute="bottom" secondItem="DLm-YZ-Ctp" secondAttribute="top" id="p8z-q3-Irg"/>
+                            <constraint firstAttribute="trailing" secondItem="SzZ-kc-PH8" secondAttribute="trailing" id="tH0-6g-NIJ"/>
+                        </constraints>
                         <variation key="default">
                             <mask key="subviews">
-                                <exclude reference="HcK-fr-WK3"/>
+                                <exclude reference="SzZ-kc-PH8"/>
+                            </mask>
+                            <mask key="constraints">
+                                <exclude reference="XVw-R8-F4o"/>
+                                <exclude reference="nbK-4a-OMV"/>
+                                <exclude reference="p8z-q3-Irg"/>
+                                <exclude reference="tH0-6g-NIJ"/>
                             </mask>
                         </variation>
                         <variation key="heightClass=regular-widthClass=compact">
                             <mask key="subviews">
-                                <include reference="HcK-fr-WK3"/>
+                                <include reference="SzZ-kc-PH8"/>
+                            </mask>
+                            <mask key="constraints">
+                                <include reference="XVw-R8-F4o"/>
+                                <include reference="nbK-4a-OMV"/>
+                                <include reference="p8z-q3-Irg"/>
+                                <include reference="tH0-6g-NIJ"/>
                             </mask>
                         </variation>
                     </view>
                     <navigationItem key="navigationItem" title="Home" id="l3u-1I-spC">
-                        <barButtonItem key="leftBarButtonItem" image="MenuIcon" style="done" id="q6o-4y-c6X">
-                            <color key="tintColor" red="0.086274509799999996" green="0.47450980390000003" blue="1" alpha="1" colorSpace="calibratedRGB"/>
-                            <connections>
-                                <action selector="presentLeftMenuViewController:" destination="9K9-Wl-0cP" id="Hbt-qA-ceh"/>
-                            </connections>
-                        </barButtonItem>
+                        <barButtonItem key="backBarButtonItem" title="  " id="nG5-XN-nK9"/>
                     </navigationItem>
-                    <simulatedStatusBarMetrics key="simulatedStatusBarMetrics" statusBarStyle="lightContent"/>
-                    <nil key="simulatedTopBarMetrics"/>
+                    <nil key="simulatedStatusBarMetrics"/>
+                    <connections>
+                        <outlet property="table" destination="SzZ-kc-PH8" id="bvH-s6-Jhi"/>
+                    </connections>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="sH9-J5-gqb" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="2170.5" y="99.75"/>
+            <point key="canvasLocation" x="2227.5" y="18.75"/>
         </scene>
-        <!--Left Menu Controller-->
+        <!--Menu Controller-->
         <scene sceneID="13W-l4-N6p">
             <objects>
-                <viewController restorationIdentifier="leftMenuViewController" storyboardIdentifier="leftMenuViewController" id="MgS-OW-oHd" customClass="LeftMenuController" customModule="ShopFinder" customModuleProvider="target" sceneMemberID="viewController">
+                <viewController restorationIdentifier="MenuController" storyboardIdentifier="MenuController" id="MgS-OW-oHd" customClass="MenuController" customModule="ShopFinder" customModuleProvider="target" sceneMemberID="viewController">
                     <layoutGuides>
                         <viewControllerLayoutGuide type="top" id="Zb4-LF-zus"/>
                         <viewControllerLayoutGuide type="bottom" id="Qd3-1U-gEy"/>
@@ -155,30 +258,12 @@
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="0Zx-yh-6jJ" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="1080" y="999"/>
+            <point key="canvasLocation" x="408" y="864"/>
         </scene>
-        <!--View Controller-->
-        <scene sceneID="ppO-KS-Lry">
-            <objects>
-                <viewController restorationIdentifier="rightMenuViewController" storyboardIdentifier="rightMenuViewController" id="r7m-uJ-9zC" sceneMemberID="viewController">
-                    <layoutGuides>
-                        <viewControllerLayoutGuide type="top" id="dBc-ui-pzJ"/>
-                        <viewControllerLayoutGuide type="bottom" id="6Th-mJ-vQW"/>
-                    </layoutGuides>
-                    <view key="view" contentMode="scaleToFill" id="ujX-pb-bjb">
-                        <rect key="frame" x="0.0" y="0.0" width="600" height="600"/>
-                        <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
-                        <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="calibratedWhite"/>
-                    </view>
-                </viewController>
-                <placeholder placeholderIdentifier="IBFirstResponder" id="qUN-5i-VCa" userLabel="First Responder" sceneMemberID="firstResponder"/>
-            </objects>
-            <point key="canvasLocation" x="370.5" y="999"/>
-        </scene>
-        <!--Second Controller-->
+        <!--ShopDetailController-->
         <scene sceneID="OfC-rd-VuU">
             <objects>
-                <viewController restorationIdentifier="secondViewController" storyboardIdentifier="secondViewController" id="kAL-ll-d3X" sceneMemberID="viewController">
+                <viewController restorationIdentifier="ShopDetailController" storyboardIdentifier="ShopDetailController" id="kAL-ll-d3X" userLabel="ShopDetailController" customClass="ShopDetailController" customModule="ShopFinder" customModuleProvider="target" sceneMemberID="viewController">
                     <layoutGuides>
                         <viewControllerLayoutGuide type="top" id="lm2-wJ-U1I"/>
                         <viewControllerLayoutGuide type="bottom" id="Sg2-xy-9Ag"/>
@@ -187,38 +272,77 @@
                         <rect key="frame" x="0.0" y="0.0" width="600" height="600"/>
                         <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
                         <subviews>
-                            <button opaque="NO" contentMode="scaleToFill" fixedFrame="YES" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="CpJ-9D-afi">
-                                <rect key="frame" x="79" y="117" width="162" height="30"/>
-                                <state key="normal" title="Push View Controller">
-                                    <color key="titleShadowColor" white="0.5" alpha="1" colorSpace="calibratedWhite"/>
-                                </state>
+                            <imageView userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" translatesAutoresizingMaskIntoConstraints="NO" id="XQH-XC-FRv">
+                                <rect key="frame" x="0.0" y="0.0" width="240" height="128"/>
+                                <variation key="heightClass=regular-widthClass=compact" fixedFrame="YES">
+                                    <rect key="frame" x="0.0" y="64" width="400" height="171"/>
+                                </variation>
+                            </imageView>
+                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="La casa de pedro" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="KIu-zy-qBu">
+                                <rect key="frame" x="0.0" y="-21" width="42" height="21"/>
+                                <fontDescription key="fontDescription" type="system" weight="thin" pointSize="22"/>
+                                <color key="textColor" white="0.5" alpha="1" colorSpace="calibratedWhite"/>
+                                <nil key="highlightedColor"/>
+                                <variation key="heightClass=regular-widthClass=compact" fixedFrame="YES">
+                                    <rect key="frame" x="16" y="190" width="368" height="28"/>
+                                </variation>
+                            </label>
+                            <mapView clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="scaleToFill" mapType="standard" translatesAutoresizingMaskIntoConstraints="NO" id="cgE-TV-M8a">
+                                <rect key="frame" x="0.0" y="0.0" width="240" height="128"/>
+                                <variation key="heightClass=regular-widthClass=compact" fixedFrame="YES">
+                                    <rect key="frame" x="0.0" y="623" width="400" height="177"/>
+                                </variation>
                                 <connections>
-                                    <action selector="pushViewController:" destination="kAL-ll-d3X" eventType="touchUpInside" id="Xzs-eq-yvN"/>
+                                    <outlet property="delegate" destination="kAL-ll-d3X" id="kIb-F5-WsU"/>
                                 </connections>
-                            </button>
+                            </mapView>
+                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" usesAttributedText="YES" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="8cq-xR-mY8">
+                                <rect key="frame" x="0.0" y="-21" width="42" height="21"/>
+                                <attributedString key="attributedText">
+                                    <fragment content="Address: 30 Borough High St">
+                                        <attributes>
+                                            <color key="NSColor" cocoaTouchSystemColor="darkTextColor"/>
+                                            <font key="NSFont" size="17" name="HelveticaNeue"/>
+                                            <paragraphStyle key="NSParagraphStyle" alignment="left" lineBreakMode="wordWrapping" baseWritingDirection="natural"/>
+                                        </attributes>
+                                    </fragment>
+                                </attributedString>
+                                <nil key="highlightedColor"/>
+                                <variation key="heightClass=regular-widthClass=compact" fixedFrame="YES">
+                                    <rect key="frame" x="16" y="296" width="347" height="21"/>
+                                </variation>
+                            </label>
                         </subviews>
-                        <color key="backgroundColor" red="1" green="0.79024568979999998" blue="0.39722655649999999" alpha="1" colorSpace="calibratedRGB"/>
+                        <color key="backgroundColor" red="0.98431372549999996" green="0.99607843139999996" blue="1" alpha="1" colorSpace="calibratedRGB"/>
+                        <variation key="default">
+                            <mask key="subviews">
+                                <exclude reference="XQH-XC-FRv"/>
+                                <exclude reference="KIu-zy-qBu"/>
+                                <exclude reference="cgE-TV-M8a"/>
+                                <exclude reference="8cq-xR-mY8"/>
+                            </mask>
+                        </variation>
+                        <variation key="heightClass=regular-widthClass=compact">
+                            <mask key="subviews">
+                                <include reference="XQH-XC-FRv"/>
+                                <include reference="KIu-zy-qBu"/>
+                                <include reference="cgE-TV-M8a"/>
+                                <include reference="8cq-xR-mY8"/>
+                            </mask>
+                        </variation>
                     </view>
-                    <navigationItem key="navigationItem" title="Second Controller" id="dLD-B1-B70">
-                        <barButtonItem key="leftBarButtonItem" title="Left" id="Ouj-XS-aep">
-                            <connections>
-                                <action selector="presentLeftMenuViewController:" destination="kAL-ll-d3X" id="vj3-WH-IpF"/>
-                            </connections>
-                        </barButtonItem>
-                        <barButtonItem key="rightBarButtonItem" title="Right" id="Rfr-3k-XoZ">
-                            <connections>
-                                <action selector="presentRightMenuViewController:" destination="kAL-ll-d3X" id="51Y-Ol-lOA"/>
-                            </connections>
-                        </barButtonItem>
-                    </navigationItem>
+                    <navigationItem key="navigationItem" id="dLD-B1-B70"/>
+                    <simulatedNavigationBarMetrics key="simulatedTopBarMetrics" prompted="NO"/>
+                    <connections>
+                        <outlet property="addressLabel" destination="8cq-xR-mY8" id="R4c-UE-IfB"/>
+                        <outlet property="imageView" destination="XQH-XC-FRv" id="HYz-wB-Y4p"/>
+                        <outlet property="mapView" destination="cgE-TV-M8a" id="Y6d-wx-dLI"/>
+                        <outlet property="titleLabel" destination="KIu-zy-qBu" id="Ymg-uS-FJ5"/>
+                    </connections>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="jKa-22-i6W" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="2280" y="817.5"/>
+            <point key="canvasLocation" x="2211" y="697.5"/>
         </scene>
     </scenes>
-    <resources>
-        <image name="Balloon" width="320" height="568"/>
-        <image name="MenuIcon" width="128" height="128"/>
-    </resources>
 </document>

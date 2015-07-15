@@ -13,11 +13,14 @@
 		9A4566061B4D8B4500C40073 /* LaunchScreen.xib in Resources */ = {isa = PBXBuildFile; fileRef = 9A4566041B4D8B4500C40073 /* LaunchScreen.xib */; };
 		9A4566121B4D8B4500C40073 /* ShopFinderTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9A4566111B4D8B4500C40073 /* ShopFinderTests.swift */; };
 		9A45661C1B4D98B300C40073 /* MainRootController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9A45661B1B4D98B300C40073 /* MainRootController.swift */; };
-		9A45662C1B4D9ACB00C40073 /* RECommonFunctions.m in Sources */ = {isa = PBXBuildFile; fileRef = 9A4566271B4D9ACB00C40073 /* RECommonFunctions.m */; };
-		9A45662D1B4D9ACB00C40073 /* RESideMenu.m in Sources */ = {isa = PBXBuildFile; fileRef = 9A4566291B4D9ACB00C40073 /* RESideMenu.m */; };
-		9A45662E1B4D9ACB00C40073 /* UIViewController+RESideMenu.m in Sources */ = {isa = PBXBuildFile; fileRef = 9A45662B1B4D9ACB00C40073 /* UIViewController+RESideMenu.m */; };
 		9A4566311B4D9E6000C40073 /* Lato-Light.ttf in Resources */ = {isa = PBXBuildFile; fileRef = 9A4566301B4D9E5D00C40073 /* Lato-Light.ttf */; };
-		9A4566351B4DA2C600C40073 /* LeftMenuController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9A4566341B4DA2C600C40073 /* LeftMenuController.swift */; };
+		9A4566351B4DA2C600C40073 /* MenuController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9A4566341B4DA2C600C40073 /* MenuController.swift */; };
+		9A4701041B56A99800A4B8E3 /* ShopListController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9A4701031B56A99800A4B8E3 /* ShopListController.swift */; };
+		9A4701081B56CC6D00A4B8E3 /* FontAwesome.otf in Resources */ = {isa = PBXBuildFile; fileRef = 9A4701071B56CC6D00A4B8E3 /* FontAwesome.otf */; };
+		9A47010B1B56D77A00A4B8E3 /* ServerManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9A47010A1B56D77A00A4B8E3 /* ServerManager.swift */; };
+		9A47010F1B56E77E00A4B8E3 /* ShopCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9A47010E1B56E77E00A4B8E3 /* ShopCell.swift */; };
+		9A4701111B56EB5A00A4B8E3 /* ShopDetailController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9A4701101B56EB5A00A4B8E3 /* ShopDetailController.swift */; };
+		9A4701131B56ED7E00A4B8E3 /* MapKit.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 9A4701121B56ED7E00A4B8E3 /* MapKit.framework */; };
 		E3EFD600EB3CCFE5FAA7711A /* Pods.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 381840E40228E8039A62F769 /* Pods.framework */; settings = {ATTRIBUTES = (Weak, ); }; };
 /* End PBXBuildFile section */
 
@@ -46,14 +49,14 @@
 		9A4566111B4D8B4500C40073 /* ShopFinderTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ShopFinderTests.swift; sourceTree = "<group>"; };
 		9A45661B1B4D98B300C40073 /* MainRootController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = MainRootController.swift; sourceTree = "<group>"; };
 		9A4566201B4D998400C40073 /* ShopFinder-Bridging-Header.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = "ShopFinder-Bridging-Header.h"; sourceTree = "<group>"; };
-		9A4566261B4D9ACB00C40073 /* RECommonFunctions.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = RECommonFunctions.h; sourceTree = "<group>"; };
-		9A4566271B4D9ACB00C40073 /* RECommonFunctions.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = RECommonFunctions.m; sourceTree = "<group>"; };
-		9A4566281B4D9ACB00C40073 /* RESideMenu.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = RESideMenu.h; sourceTree = "<group>"; };
-		9A4566291B4D9ACB00C40073 /* RESideMenu.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = RESideMenu.m; sourceTree = "<group>"; };
-		9A45662A1B4D9ACB00C40073 /* UIViewController+RESideMenu.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = "UIViewController+RESideMenu.h"; sourceTree = "<group>"; };
-		9A45662B1B4D9ACB00C40073 /* UIViewController+RESideMenu.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = "UIViewController+RESideMenu.m"; sourceTree = "<group>"; };
 		9A4566301B4D9E5D00C40073 /* Lato-Light.ttf */ = {isa = PBXFileReference; lastKnownFileType = file; name = "Lato-Light.ttf"; path = "Resources/Lato-Light.ttf"; sourceTree = "<group>"; };
-		9A4566341B4DA2C600C40073 /* LeftMenuController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = LeftMenuController.swift; sourceTree = "<group>"; };
+		9A4566341B4DA2C600C40073 /* MenuController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = MenuController.swift; sourceTree = "<group>"; };
+		9A4701031B56A99800A4B8E3 /* ShopListController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ShopListController.swift; sourceTree = "<group>"; };
+		9A4701071B56CC6D00A4B8E3 /* FontAwesome.otf */ = {isa = PBXFileReference; lastKnownFileType = file; path = FontAwesome.otf; sourceTree = "<group>"; };
+		9A47010A1B56D77A00A4B8E3 /* ServerManager.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ServerManager.swift; sourceTree = "<group>"; };
+		9A47010E1B56E77E00A4B8E3 /* ShopCell.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ShopCell.swift; sourceTree = "<group>"; };
+		9A4701101B56EB5A00A4B8E3 /* ShopDetailController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ShopDetailController.swift; sourceTree = "<group>"; };
+		9A4701121B56ED7E00A4B8E3 /* MapKit.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = MapKit.framework; path = System/Library/Frameworks/MapKit.framework; sourceTree = SDKROOT; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -61,6 +64,7 @@
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				9A4701131B56ED7E00A4B8E3 /* MapKit.framework in Frameworks */,
 				E3EFD600EB3CCFE5FAA7711A /* Pods.framework in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
@@ -78,6 +82,7 @@
 		05EE43479FCE964C4014860C /* Frameworks */ = {
 			isa = PBXGroup;
 			children = (
+				9A4701121B56ED7E00A4B8E3 /* MapKit.framework */,
 				381840E40228E8039A62F769 /* Pods.framework */,
 			);
 			name = Frameworks;
@@ -154,27 +159,14 @@
 		9A45661D1B4D990D00C40073 /* ThirdParty */ = {
 			isa = PBXGroup;
 			children = (
-				9A4566251B4D9ACB00C40073 /* RESideMenu */,
 			);
 			name = ThirdParty;
-			sourceTree = "<group>";
-		};
-		9A4566251B4D9ACB00C40073 /* RESideMenu */ = {
-			isa = PBXGroup;
-			children = (
-				9A4566261B4D9ACB00C40073 /* RECommonFunctions.h */,
-				9A4566271B4D9ACB00C40073 /* RECommonFunctions.m */,
-				9A4566281B4D9ACB00C40073 /* RESideMenu.h */,
-				9A4566291B4D9ACB00C40073 /* RESideMenu.m */,
-				9A45662A1B4D9ACB00C40073 /* UIViewController+RESideMenu.h */,
-				9A45662B1B4D9ACB00C40073 /* UIViewController+RESideMenu.m */,
-			);
-			path = RESideMenu;
 			sourceTree = "<group>";
 		};
 		9A45662F1B4D9E4200C40073 /* Fonts */ = {
 			isa = PBXGroup;
 			children = (
+				9A4701071B56CC6D00A4B8E3 /* FontAwesome.otf */,
 				9A4566301B4D9E5D00C40073 /* Lato-Light.ttf */,
 			);
 			name = Fonts;
@@ -183,9 +175,9 @@
 		9A4566321B4DA28800C40073 /* Classes */ = {
 			isa = PBXGroup;
 			children = (
-				9A4565FB1B4D8B4500C40073 /* AppDelegate.swift */,
-				9A45661B1B4D98B300C40073 /* MainRootController.swift */,
-				9A4566341B4DA2C600C40073 /* LeftMenuController.swift */,
+				9A4701091B56D72E00A4B8E3 /* Server */,
+				9A4701051B56AB1600A4B8E3 /* Main */,
+				9A4701061B56AB2300A4B8E3 /* Features */,
 			);
 			name = Classes;
 			sourceTree = "<group>";
@@ -197,6 +189,50 @@
 				9A4566041B4D8B4500C40073 /* LaunchScreen.xib */,
 			);
 			name = Storyboards;
+			sourceTree = "<group>";
+		};
+		9A4701051B56AB1600A4B8E3 /* Main */ = {
+			isa = PBXGroup;
+			children = (
+				9A4565FB1B4D8B4500C40073 /* AppDelegate.swift */,
+				9A45661B1B4D98B300C40073 /* MainRootController.swift */,
+				9A4566341B4DA2C600C40073 /* MenuController.swift */,
+			);
+			name = Main;
+			sourceTree = "<group>";
+		};
+		9A4701061B56AB2300A4B8E3 /* Features */ = {
+			isa = PBXGroup;
+			children = (
+				9A47010C1B56E76400A4B8E3 /* Shops */,
+			);
+			name = Features;
+			sourceTree = "<group>";
+		};
+		9A4701091B56D72E00A4B8E3 /* Server */ = {
+			isa = PBXGroup;
+			children = (
+				9A47010A1B56D77A00A4B8E3 /* ServerManager.swift */,
+			);
+			name = Server;
+			sourceTree = "<group>";
+		};
+		9A47010C1B56E76400A4B8E3 /* Shops */ = {
+			isa = PBXGroup;
+			children = (
+				9A47010D1B56E76B00A4B8E3 /* Cell */,
+				9A4701031B56A99800A4B8E3 /* ShopListController.swift */,
+				9A4701101B56EB5A00A4B8E3 /* ShopDetailController.swift */,
+			);
+			name = Shops;
+			sourceTree = "<group>";
+		};
+		9A47010D1B56E76B00A4B8E3 /* Cell */ = {
+			isa = PBXGroup;
+			children = (
+				9A47010E1B56E77E00A4B8E3 /* ShopCell.swift */,
+			);
+			name = Cell;
 			sourceTree = "<group>";
 		};
 /* End PBXGroup section */
@@ -283,6 +319,7 @@
 			buildActionMask = 2147483647;
 			files = (
 				9A4566011B4D8B4500C40073 /* Main.storyboard in Resources */,
+				9A4701081B56CC6D00A4B8E3 /* FontAwesome.otf in Resources */,
 				9A4566061B4D8B4500C40073 /* LaunchScreen.xib in Resources */,
 				9A4566031B4D8B4500C40073 /* Images.xcassets in Resources */,
 				9A4566311B4D9E6000C40073 /* Lato-Light.ttf in Resources */,
@@ -351,12 +388,13 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				9A45662D1B4D9ACB00C40073 /* RESideMenu.m in Sources */,
+				9A47010B1B56D77A00A4B8E3 /* ServerManager.swift in Sources */,
+				9A47010F1B56E77E00A4B8E3 /* ShopCell.swift in Sources */,
 				9A45661C1B4D98B300C40073 /* MainRootController.swift in Sources */,
-				9A45662E1B4D9ACB00C40073 /* UIViewController+RESideMenu.m in Sources */,
-				9A45662C1B4D9ACB00C40073 /* RECommonFunctions.m in Sources */,
 				9A4565FC1B4D8B4500C40073 /* AppDelegate.swift in Sources */,
-				9A4566351B4DA2C600C40073 /* LeftMenuController.swift in Sources */,
+				9A4701041B56A99800A4B8E3 /* ShopListController.swift in Sources */,
+				9A4566351B4DA2C600C40073 /* MenuController.swift in Sources */,
+				9A4701111B56EB5A00A4B8E3 /* ShopDetailController.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};

@@ -2,5 +2,9 @@ platform :ios, '8.0'
 use_frameworks!
 
 pod 'Alamofire', '~> 1.2'
-pod 'DateTools'
 pod 'SwiftDate'
+pod 'FontAwesomeKit', '~> 2.1.0'
+pod 'SVProgressHUD'
+pod 'Spring', '~> 1.0.3'
+pod 'RESideMenu', '~> 4.0.4'
+pod 'SDWebImage', '~>3.7'

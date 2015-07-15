@@ -7,7 +7,7 @@
 //
 
 import UIKit
-
+import RESideMenu
 
 class MainRootController:  RESideMenu, RESideMenuDelegate {
     
@@ -16,7 +16,7 @@ class MainRootController:  RESideMenu, RESideMenuDelegate {
     override func awakeFromNib() {
 
        
-        
+
         self.menuPreferredStatusBarStyle = UIStatusBarStyle.LightContent
         self.contentViewShadowColor = UIColor.blackColor()
         self.contentViewShadowOffset = CGSizeMake(0,0)
@@ -27,9 +27,9 @@ class MainRootController:  RESideMenu, RESideMenuDelegate {
         self.delegate = self
         
         //setup controllers
-       self.contentViewController = self.storyboard!.instantiateViewControllerWithIdentifier("contentViewController") as! UIViewController
+       self.contentViewController = self.storyboard!.instantiateViewControllerWithIdentifier("NavShopListController") as! UIViewController
         
-        self.leftMenuViewController = self.storyboard!.instantiateViewControllerWithIdentifier("leftMenuViewController") as! UIViewController
+        self.leftMenuViewController = self.storyboard!.instantiateViewControllerWithIdentifier("MenuController") as! UIViewController
         
 //        self.rightMenuViewController =
 //            self.storyboard!.instantiateViewControllerWithIdentifier("rightMenuViewController") as! UIViewController
@@ -38,23 +38,5 @@ class MainRootController:  RESideMenu, RESideMenuDelegate {
     }
     
     
-    override func viewDidLoad() {
-        
-        super.viewDidLoad()
-        
-//        self.navigationController?.navigationBarHidden = true
-//        self.navigationController?.navigationBar.hidden = true
-       // self.navigationController?.hidesBarsOnSwipe = true
-        
-      
-        
-    }
-    
-    override func viewWillAppear(animated: Bool) {
-        super.viewWillAppear(animated)
-        
-        let vc = self.storyboard!.instantiateViewControllerWithIdentifier("secondViewController") as! UIViewController
-        
-        self.navigationController?.pushViewController(vc, animated: false)
-    }
+  
 }
