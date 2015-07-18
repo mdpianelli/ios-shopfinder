@@ -10,29 +10,43 @@ import UIKit
 import SVProgressHUD
 import FontAwesomeKit
 import SDWebImage
+import Spring
+import GoogleMobileAds
 
-class ShopListController: UIViewController {
+
+class ShopListController: UIViewController, GADInterstitialDelegate, ShopFilterOptionsControllerDelegate {
 
     
     @IBOutlet weak var table: UITableView!
-    var shops : NSArray = []
     
+    var adBannerFull : GADInterstitial?
+    var shops : NSArray = []
     
     //MARK: UIViewController Methods
 
     override func viewDidLoad() {
         
-        super.viewDidLoad()
+       super.viewDidLoad()
         
        initialSetup()
        fetchShops()
-        
+ 
     }
     
+ 
     override func viewWillAppear(animated: Bool) {
         super.viewWillAppear(animated)
 
-      
+        if(adBannerFull?.hasBeenUsed != true){
+         //   adBannerSetup()
+        }
+        
+    }
+    
+    override func viewDidAppear(animated: Bool) {
+        super.viewDidAppear(animated)
+        
+
     }
     
     override func viewWillDisappear(animated: Bool) {
@@ -41,38 +55,127 @@ class ShopListController: UIViewController {
 
     }
     
-    //MARK: Methods
+    //MARK: Setup Methods
     
     func initialSetup(){
+    
+        setupNavMenu()
+      //  adBannerSetup()
+    }
+    
+    
+    func setupNavMenu(){
         
-        //        self.navigationController?.navigationBar.hidden = true
-        // self.navigationController?.hidesBarsOnSwipe = true
+       // self.navigationController?.navigationBar.backgroundColor = UIColor(red: 0.3, green: 0.6, blue: 1, alpha: 0.3)
         
-        let cogIcon : FAKFontAwesome = FAKFontAwesome.naviconIconWithSize(20)
+        var cogIcon : FAKFontAwesome = FAKFontAwesome.naviconIconWithSize(20)
         
         cogIcon.addAttribute(NSForegroundColorAttributeName, value: UIColor.blackColor())
         
         cogIcon.iconFontSize = 20
         //cogIcon.drawingBackgroundColor = UIColor.whiteColor()
         
-        let image : UIImage = cogIcon.imageWithSize(CGSizeMake(30, 30))
+        var image : UIImage = cogIcon.imageWithSize(CGSizeMake(30, 30))
         
         self.navigationItem.leftBarButtonItem = UIBarButtonItem(image: image, landscapeImagePhone: nil, style:.Plain, target:self, action:"presentLeftMenuViewController:")
         
+        
+        
+        cogIcon  = FAKFontAwesome.sortIconWithSize(20)
+        
+        cogIcon.addAttribute(NSForegroundColorAttributeName, value: UIColor.blackColor())
+        
+        cogIcon.iconFontSize = 20
+        //cogIcon.drawingBackgroundColor = UIColor.whiteColor()
+        
+         image = cogIcon.imageWithSize(CGSizeMake(30, 30))
+        
+        self.navigationItem.rightBarButtonItem = UIBarButtonItem(image: image, landscapeImagePhone: nil, style:.Plain, target:self, action:"showFilterOptions")
+        
     }
     
+    func showFilterOptions()
+    {
+        self.performSegueWithIdentifier("showFilterSegue", sender: self)
+    }
+    
+  
+    override func prepareForSegue(segue: UIStoryboardSegue, sender: AnyObject?) {
+     
+        if let options = segue.destinationViewController as? ShopFilterOptionsController {
+            options.delegate = self
+        }
+    }
+    
+    func adBannerSetup(){
+
+        adBannerFull = GADInterstitial(adUnitID: Ads.fullscreenId)
+        adBannerFull?.delegate = self
+        adBannerFull?.loadRequest(GADRequest())
+
+    }
+    
+    //MARK: Receiver Methods
+    
+    
+    func minimizeView(sender: AnyObject) {
+      
+        
+        var view  = self.navigationController?.view!
+        
+        spring(0.7, {
+   
+            view?.transform = CGAffineTransformMakeScale(0.935, 0.935)
+            view?.alpha = 0.75
+
+        })
+        
+
+        UIApplication.sharedApplication().setStatusBarStyle(UIStatusBarStyle.LightContent, animated: true)
+    }
+    
+    func maximizeView(sender: AnyObject) {
+        
+
+        var view = self.navigationController?.view!
+
+        spring(0.7, {
+            
+             view?.transform = CGAffineTransformMakeScale(1, 1)
+             view?.alpha = 1
+        })
+        
+        
+        UIApplication.sharedApplication().setStatusBarStyle(UIStatusBarStyle.Default, animated: true)
+    }
+    
+
+    
+    //MARK:-  GADInterstitialDelegate
+    
+    
+    func interstitialDidReceiveAd(ad: GADInterstitial!)
+    {
+        adBannerFull?.presentFromRootViewController(self)
+    }
+    
+    
+    //MARK:- Methods
+
     func fetchShops(){
         
-        SVProgressHUD.show()
+        self.view.showLoading()
         
         //retrieve shops and reload table
         ServerManager.retrieveShops(){
             obj, error in
             
-            self.shops = obj as! NSArray
+            if obj != nil {
+                self.shops = obj as! NSArray
+            }
             self.table.reloadData()
             
-            SVProgressHUD.dismiss()
+            self.view.hideLoading()
             
         }
     }

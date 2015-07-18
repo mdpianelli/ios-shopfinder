@@ -21,6 +21,10 @@
 		9A47010F1B56E77E00A4B8E3 /* ShopCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9A47010E1B56E77E00A4B8E3 /* ShopCell.swift */; };
 		9A4701111B56EB5A00A4B8E3 /* ShopDetailController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9A4701101B56EB5A00A4B8E3 /* ShopDetailController.swift */; };
 		9A4701131B56ED7E00A4B8E3 /* MapKit.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 9A4701121B56ED7E00A4B8E3 /* MapKit.framework */; };
+		9A8CB5BB1B594F06005B9754 /* AppConfig.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9A8CB5BA1B594F06005B9754 /* AppConfig.swift */; };
+		9A8CB5BD1B59AA7E005B9754 /* ShopFilterOptionsController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9A8CB5BC1B59AA7E005B9754 /* ShopFilterOptionsController.swift */; };
+		9AD628D61B59C73D008A1AF7 /* UIView+VisualEffects.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9AD628D51B59C73D008A1AF7 /* UIView+VisualEffects.swift */; };
+		9AD628D81B59CA1D008A1AF7 /* UIButton+VisualEffects.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9AD628D71B59CA1D008A1AF7 /* UIButton+VisualEffects.swift */; };
 		E3EFD600EB3CCFE5FAA7711A /* Pods.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 381840E40228E8039A62F769 /* Pods.framework */; settings = {ATTRIBUTES = (Weak, ); }; };
 /* End PBXBuildFile section */
 
@@ -57,6 +61,11 @@
 		9A47010E1B56E77E00A4B8E3 /* ShopCell.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ShopCell.swift; sourceTree = "<group>"; };
 		9A4701101B56EB5A00A4B8E3 /* ShopDetailController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ShopDetailController.swift; sourceTree = "<group>"; };
 		9A4701121B56ED7E00A4B8E3 /* MapKit.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = MapKit.framework; path = System/Library/Frameworks/MapKit.framework; sourceTree = SDKROOT; };
+		9A8CB5B61B594D77005B9754 /* GoogleMobileAds.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = GoogleMobileAds.framework; path = "../../../../../Downloads/GoogleMobileAdsSdkiOS-7.3.1/GoogleMobileAds.framework"; sourceTree = "<group>"; };
+		9A8CB5BA1B594F06005B9754 /* AppConfig.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = AppConfig.swift; sourceTree = "<group>"; };
+		9A8CB5BC1B59AA7E005B9754 /* ShopFilterOptionsController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ShopFilterOptionsController.swift; sourceTree = "<group>"; };
+		9AD628D51B59C73D008A1AF7 /* UIView+VisualEffects.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = "UIView+VisualEffects.swift"; sourceTree = "<group>"; };
+		9AD628D71B59CA1D008A1AF7 /* UIButton+VisualEffects.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = "UIButton+VisualEffects.swift"; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -82,6 +91,7 @@
 		05EE43479FCE964C4014860C /* Frameworks */ = {
 			isa = PBXGroup;
 			children = (
+				9A8CB5B61B594D77005B9754 /* GoogleMobileAds.framework */,
 				9A4701121B56ED7E00A4B8E3 /* MapKit.framework */,
 				381840E40228E8039A62F769 /* Pods.framework */,
 			);
@@ -175,6 +185,7 @@
 		9A4566321B4DA28800C40073 /* Classes */ = {
 			isa = PBXGroup;
 			children = (
+				9AD628D41B59C711008A1AF7 /* Extensions */,
 				9A4701091B56D72E00A4B8E3 /* Server */,
 				9A4701051B56AB1600A4B8E3 /* Main */,
 				9A4701061B56AB2300A4B8E3 /* Features */,
@@ -197,6 +208,7 @@
 				9A4565FB1B4D8B4500C40073 /* AppDelegate.swift */,
 				9A45661B1B4D98B300C40073 /* MainRootController.swift */,
 				9A4566341B4DA2C600C40073 /* MenuController.swift */,
+				9A8CB5BA1B594F06005B9754 /* AppConfig.swift */,
 			);
 			name = Main;
 			sourceTree = "<group>";
@@ -223,6 +235,7 @@
 				9A47010D1B56E76B00A4B8E3 /* Cell */,
 				9A4701031B56A99800A4B8E3 /* ShopListController.swift */,
 				9A4701101B56EB5A00A4B8E3 /* ShopDetailController.swift */,
+				9A8CB5BC1B59AA7E005B9754 /* ShopFilterOptionsController.swift */,
 			);
 			name = Shops;
 			sourceTree = "<group>";
@@ -233,6 +246,15 @@
 				9A47010E1B56E77E00A4B8E3 /* ShopCell.swift */,
 			);
 			name = Cell;
+			sourceTree = "<group>";
+		};
+		9AD628D41B59C711008A1AF7 /* Extensions */ = {
+			isa = PBXGroup;
+			children = (
+				9AD628D51B59C73D008A1AF7 /* UIView+VisualEffects.swift */,
+				9AD628D71B59CA1D008A1AF7 /* UIButton+VisualEffects.swift */,
+			);
+			name = Extensions;
 			sourceTree = "<group>";
 		};
 /* End PBXGroup section */
@@ -388,10 +410,14 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				9A8CB5BD1B59AA7E005B9754 /* ShopFilterOptionsController.swift in Sources */,
 				9A47010B1B56D77A00A4B8E3 /* ServerManager.swift in Sources */,
+				9A8CB5BB1B594F06005B9754 /* AppConfig.swift in Sources */,
+				9AD628D61B59C73D008A1AF7 /* UIView+VisualEffects.swift in Sources */,
 				9A47010F1B56E77E00A4B8E3 /* ShopCell.swift in Sources */,
 				9A45661C1B4D98B300C40073 /* MainRootController.swift in Sources */,
 				9A4565FC1B4D8B4500C40073 /* AppDelegate.swift in Sources */,
+				9AD628D81B59CA1D008A1AF7 /* UIButton+VisualEffects.swift in Sources */,
 				9A4701041B56A99800A4B8E3 /* ShopListController.swift in Sources */,
 				9A4566351B4DA2C600C40073 /* MenuController.swift in Sources */,
 				9A4701111B56EB5A00A4B8E3 /* ShopDetailController.swift in Sources */,
@@ -525,6 +551,11 @@
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				CLANG_ENABLE_MODULES = YES;
+				FRAMEWORK_SEARCH_PATHS = (
+					"$(inherited)",
+					"/Users/marcospianelli/Downloads/GoogleMobileAdsSdkiOS-7.3.1",
+					"$(PROJECT_DIR)/ShopFinder",
+				);
 				INFOPLIST_FILE = ShopFinder/Info.plist;
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks";
 				PRODUCT_NAME = "$(TARGET_NAME)";
@@ -539,6 +570,11 @@
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				CLANG_ENABLE_MODULES = YES;
+				FRAMEWORK_SEARCH_PATHS = (
+					"$(inherited)",
+					"/Users/marcospianelli/Downloads/GoogleMobileAdsSdkiOS-7.3.1",
+					"$(PROJECT_DIR)/ShopFinder",
+				);
 				INFOPLIST_FILE = ShopFinder/Info.plist;
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks";
 				PRODUCT_NAME = "$(TARGET_NAME)";
