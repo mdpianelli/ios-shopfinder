@@ -29,6 +29,38 @@ extension UIView {
     }
     
     
+    func addExtraLightBlur(){
+        
+        self.backgroundColor = UIColor.clearColor()
+        
+        let extraLightBlur = UIBlurEffect(style: .ExtraLight)
+        let lightBlurView = UIVisualEffectView(effect: extraLightBlur)
+        
+        let lightVibrancyView = vibrancyEffectView(forBlurEffectView: lightBlurView)
+        lightBlurView.contentView.addSubview(lightVibrancyView)
+        lightBlurView.frame = CGRectMake(0, 0, self.frame.size.width, self.frame.size.height);
+        self.insertSubview(lightBlurView, atIndex: 0)
+        
+        
+    }
+    
+    func addDarkBlur(){
+        
+        self.backgroundColor = UIColor.clearColor()
+        
+        let darkBlur = UIBlurEffect(style: .Dark)
+        let lightBlurView = UIVisualEffectView(effect:darkBlur)
+        
+        let lightVibrancyView = vibrancyEffectView(forBlurEffectView: lightBlurView)
+        lightBlurView.contentView.addSubview(lightVibrancyView)
+        lightBlurView.frame = CGRectMake(0, 0, self.frame.size.width, self.frame.size.height);
+        self.insertSubview(lightBlurView, atIndex: 0)
+        
+        
+    }
+    
+    
+    
     private func vibrancyEffectView(forBlurEffectView blurEffectView:UIVisualEffectView) -> UIVisualEffectView {
         let vibrancy = UIVibrancyEffect(forBlurEffect: blurEffectView.effect as! UIBlurEffect)
         let vibrancyView = UIVisualEffectView(effect: vibrancy)

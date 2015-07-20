@@ -43,10 +43,11 @@ class ShopFilterOptionsController : UIViewController {
     
     override func viewDidAppear(animated: Bool) {
         super.viewDidAppear(true)
-        modalView.addLightBlur()
+      
+        modalView.addDarkBlur()
         //resetButton.makeTinted()
         modalView.insertSubview(resetButton, atIndex: 1)
-        self.view.addVibrantStatusBarBackground(UIBlurEffect(style: .Light))
+        //self.view.addVibrantStatusBarBackground(UIBlurEffect(style: .Light))
         
         UIApplication.sharedApplication().sendAction("minimizeView:", to:self.delegate, from: self, forEvent: nil)
 //        

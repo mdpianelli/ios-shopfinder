@@ -14,7 +14,7 @@ import Spring
 import GoogleMobileAds
 
 
-class ShopListController: UIViewController, GADInterstitialDelegate, ShopFilterOptionsControllerDelegate {
+class ShopListController: UIViewController, GADInterstitialDelegate, ShopFilterOptionsControllerDelegate, UIScrollViewDelegate {
 
     
     @IBOutlet weak var table: UITableView!
@@ -31,8 +31,14 @@ class ShopListController: UIViewController, GADInterstitialDelegate, ShopFilterO
        initialSetup()
        fetchShops()
  
+        
+       
+
     }
     
+    func viewForZoomingInScrollView(scrollView: UIScrollView) -> UIView? {
+        return self.view;
+    }
  
     override func viewWillAppear(animated: Bool) {
         super.viewWillAppear(animated)
@@ -41,6 +47,7 @@ class ShopListController: UIViewController, GADInterstitialDelegate, ShopFilterO
          //   adBannerSetup()
         }
         
+    
     }
     
     override func viewDidAppear(animated: Bool) {
@@ -51,7 +58,6 @@ class ShopListController: UIViewController, GADInterstitialDelegate, ShopFilterO
     
     override func viewWillDisappear(animated: Bool) {
         super.viewWillDisappear(animated)
-      //  self.navigationController?.navigationBarHidden = false
 
     }
     
@@ -66,8 +72,10 @@ class ShopListController: UIViewController, GADInterstitialDelegate, ShopFilterO
     
     func setupNavMenu(){
         
-       // self.navigationController?.navigationBar.backgroundColor = UIColor(red: 0.3, green: 0.6, blue: 1, alpha: 0.3)
+    
+  
         
+        // set left navBarIcon to open left menu
         var cogIcon : FAKFontAwesome = FAKFontAwesome.naviconIconWithSize(20)
         
         cogIcon.addAttribute(NSForegroundColorAttributeName, value: UIColor.blackColor())
@@ -79,18 +87,93 @@ class ShopListController: UIViewController, GADInterstitialDelegate, ShopFilterO
         
         self.navigationItem.leftBarButtonItem = UIBarButtonItem(image: image, landscapeImagePhone: nil, style:.Plain, target:self, action:"presentLeftMenuViewController:")
         
-        
-        
+        // set right navBarIcon to show Sorting Menu
         cogIcon  = FAKFontAwesome.sortIconWithSize(20)
         
         cogIcon.addAttribute(NSForegroundColorAttributeName, value: UIColor.blackColor())
         
         cogIcon.iconFontSize = 20
-        //cogIcon.drawingBackgroundColor = UIColor.whiteColor()
         
          image = cogIcon.imageWithSize(CGSizeMake(30, 30))
         
         self.navigationItem.rightBarButtonItem = UIBarButtonItem(image: image, landscapeImagePhone: nil, style:.Plain, target:self, action:"showFilterOptions")
+        
+        
+        let a = FADesignableIconButton()
+        a.imageType = 2
+        a.imageFontClass = 0
+        a.imageFontSize = 50
+        self.table.addSubview(a)
+      //  listAllFontsIntoImage()
+    }
+    
+    func listAllFontsIntoImage(){
+        
+        
+        let scroll = UIScrollView(frame: CGRectMake(0, 0,810,1500))
+        scroll.minimumZoomScale = 0.1
+        
+        
+        scroll.contentSize = CGSizeMake(810, 1500)
+        scroll.backgroundColor = UIColor.whiteColor()
+        
+        for index in 0...3{
+            
+            var inc = -1
+            
+            let b =  FADesignableIconLabel()
+            b.imageFontClass = index
+            var dic : [NSObject : AnyObject] = b.fontAllIcons()
+            
+            
+            for jindex in 0 ... dic.count{
+              
+                let a = FADesignableIconLabel()
+
+                if jindex%40 == 0{
+                   inc++
+                }
+                
+        
+                
+                a.imageFontClass = index
+                a.imageType = jindex
+                a.imageFontSize = 17
+                let x  = CGFloat((jindex%40)*20+5)
+                let y  = CGFloat((20+9)*inc + index*470)
+                a.frame = CGRectMake(0,0,20,20)
+                a.frame.origin = CGPointMake(x, y)
+                a.textColor = UIColor.blackColor()
+                scroll.addSubview(a)
+                
+                let l = UILabel(frame: CGRectMake(0,0,20,20))
+                l.center = a.center
+                l.center.y += 15
+                l.font = UIFont.systemFontOfSize(10)
+                l.textColor = UIColor.redColor()
+                l.text = "\(jindex)"
+                l.textAlignment = .Center
+                scroll.addSubview(l)
+                
+
+            }
+            
+            let fontClasses = ["FontAwesome","Foundation Icons","Ionicons","Zocial"]
+
+            let l = UILabel(frame: CGRectMake(0,0,280,100))
+            l.center = CGPointMake(scroll.center.x, CGFloat((index+1)*400))
+            l.font = UIFont.systemFontOfSize(20)
+            l.textColor = UIColor.redColor()
+            l.text = fontClasses[index]+"ClassType :\(index)"
+            l.textAlignment = .Center
+            scroll.addSubview(l)
+
+            
+            
+        }
+        
+        
+        self.view = scroll
         
     }
     
@@ -126,7 +209,7 @@ class ShopListController: UIViewController, GADInterstitialDelegate, ShopFilterO
         spring(0.7, {
    
             view?.transform = CGAffineTransformMakeScale(0.935, 0.935)
-            view?.alpha = 0.75
+            view?.alpha = 0.85
 
         })
         
@@ -135,7 +218,7 @@ class ShopListController: UIViewController, GADInterstitialDelegate, ShopFilterO
     }
     
     func maximizeView(sender: AnyObject) {
-        
+        //SpringButton
 
         var view = self.navigationController?.view!
 
@@ -164,7 +247,7 @@ class ShopListController: UIViewController, GADInterstitialDelegate, ShopFilterO
 
     func fetchShops(){
         
-        self.view.showLoading()
+       self.table.showLoading()
         
         //retrieve shops and reload table
         ServerManager.retrieveShops(){
@@ -175,7 +258,7 @@ class ShopListController: UIViewController, GADInterstitialDelegate, ShopFilterO
             }
             self.table.reloadData()
             
-            self.view.hideLoading()
+             self.table.hideLoading()
             
         }
     }

@@ -21,7 +21,7 @@ class ShopDetailController: UIViewController, MKMapViewDelegate, GADBannerViewDe
     
     var shop : NSDictionary?
 
-    @IBOutlet weak var imageView: UIImageView!
+    @IBOutlet weak var imageView: SpringImageView!
     @IBOutlet weak var titleLabel: UILabel!
     @IBOutlet weak var addressLabel: UILabel!
     @IBOutlet weak var mapView: MKMapView!
@@ -44,17 +44,18 @@ class ShopDetailController: UIViewController, MKMapViewDelegate, GADBannerViewDe
         
         self.navigationItem.title = NSLocalizedString("Shop", comment: "shop")
         
-        let backItem = UIBarButtonItem(title: "hkh", style: .Plain, target: nil, action: nil)
        
-      //  self.navigationItem.leftBarButtonItem?.title = "sdasda"
     }
     
     override func viewWillDisappear(animated: Bool) {
         super.viewWillDisappear(animated)
         
 
+        adBanner?.delegate = nil
         
     }
+    
+    
     
     //MARK: Methods
     
@@ -87,7 +88,8 @@ class ShopDetailController: UIViewController, MKMapViewDelegate, GADBannerViewDe
             mapView.selectAnnotation(annotation , animated: true)
         }
         
-       
+        imageView.animate()
+
         //mapView.anima
         //mapView.showLoading()
     
@@ -109,8 +111,8 @@ class ShopDetailController: UIViewController, MKMapViewDelegate, GADBannerViewDe
 
     func adBannerSetup(){
         
-        adBanner = GADBannerView(adSize: kGADAdSizeBanner)
-        adBanner?.adSize = kGADAdSizeBanner
+        adBanner = GADBannerView(adSize: kGADAdSizeSmartBannerPortrait)
+        adBanner?.adSize = kGADAdSizeSmartBannerPortrait
         adBanner?.adUnitID = Ads.bannerId
         adBanner?.rootViewController = self
         adBanner?.autoloadEnabled = true;
@@ -131,20 +133,19 @@ class ShopDetailController: UIViewController, MKMapViewDelegate, GADBannerViewDe
         self.view.addSubview(adBanner!)
 
         
-     //   adBanner?.layer.animation =  "squeezeDown"
-//        adBanner?.alpha = 0
-//
-//        
-//        UIView.animateWithDuration(1, delay: 0, options: nil , animations: { () -> Void in
-//            
-//            adBanner?.alpha = 1
-//            
-//        }, completion: nil)
+        //FadeIn banner
+        adBanner?.alpha = 0
+        
+        spring(1,{
+            adBanner?.alpha = 1
+        })
+        
+       
     }
     
     func adView(view: GADBannerView!, didFailToReceiveAdWithError error: GADRequestError!){
         
-        println(error)
+        //println(error)
     }
 
     
@@ -170,15 +171,16 @@ class ShopAnnotation : NSObject, MKAnnotation {
     var row: Int!
     
     
-    init(title:String!,subtitle:String!,lat:CLLocationDegrees!,lon:CLLocationDegrees!,row:Int!){
+    init(title:String!,subtitle:String!,lat:CLLocationDegrees!,lon:CLLocationDegrees!,row:Int!)
+        {
         
-        self.title = title
-        self.subtitle = subtitle
-        self.coordinate = CLLocationCoordinate2DMake(lat, lon)
-        self.row = row
+            self.title = title
+            self.subtitle = subtitle
+            self.coordinate = CLLocationCoordinate2DMake(lat, lon)
+            self.row = row
+            
+            super.init()
         
-        super.init()
-        
-    }
+        }
     
 }
