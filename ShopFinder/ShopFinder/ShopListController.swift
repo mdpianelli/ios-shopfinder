@@ -21,12 +21,19 @@ class ShopListController: UIViewController, GADInterstitialDelegate, ShopFilterO
     
     var adBannerFull : GADInterstitial?
     var shops : NSArray = []
+    var selectedShop : NSDictionary?
     let refreshControl = UIRefreshControl()
+    
+    
+    //Segues Identifiers
+    let  segueShowFilter  = "showFilter"
+    let  segueShowShopDetail  = "showShopDetail"
 
     
-    
-    
-    
+    let transition = PopAnimator()
+
+
+
     
     //MARK: UIViewController Methods
 
@@ -188,15 +195,29 @@ class ShopListController: UIViewController, GADInterstitialDelegate, ShopFilterO
     
     func showFilterOptions()
     {
-        self.performSegueWithIdentifier("showFilterSegue", sender: self)
+        self.performSegueWithIdentifier(segueShowFilter, sender: self)
     }
     
-  
+    
+    
     override func prepareForSegue(segue: UIStoryboardSegue, sender: AnyObject?) {
      
-        if let options = segue.destinationViewController as? ShopFilterOptionsController {
-            options.delegate = self
+       // self.transitioningDelegate = TransitionZoom()
+        if segue.identifier == segueShowFilter {
+            if let options = segue.destinationViewController as? ShopFilterOptionsController {
+                options.delegate = self
+            }
         }
+        
+        
+        if segue.identifier == segueShowShopDetail {
+            if let vc = segue.destinationViewController as? ShopDetailController {
+                vc.shop = selectedShop
+                vc.transitioningDelegate =  transition
+            }
+        }
+       
+        
     }
     
     func adBannerSetup(){
@@ -332,15 +353,11 @@ class ShopListController: UIViewController, GADInterstitialDelegate, ShopFilterO
         
         tableView.deselectRowAtIndexPath(indexPath, animated: true)
         
+        // set selected shop
+        selectedShop = shops[indexPath.row] as? NSDictionary
         
-        let shop = shops[indexPath.row] as! NSDictionary
+        self.performSegueWithIdentifier(segueShowShopDetail, sender: self)
 
-        let vc = self.storyboard!.instantiateViewControllerWithIdentifier("ShopDetailController") as! ShopDetailController
-        
-        vc.shop = shop
-        
-        self.navigationController?.pushViewController(vc, animated: true)
-        
     }
 
    

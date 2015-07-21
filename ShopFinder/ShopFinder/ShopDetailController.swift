@@ -31,6 +31,11 @@ class ShopDetailController: UIViewController, MKMapViewDelegate, GADBannerViewDe
     
     //MARK: UIViewController Methods
     
+    @IBAction func dismiss(sender: AnyObject) {
+        self.dismissViewControllerAnimated(true, completion: nil)
+    }
+    
+    
     override func viewDidLoad() {
         
         super.viewDidLoad()
@@ -47,10 +52,13 @@ class ShopDetailController: UIViewController, MKMapViewDelegate, GADBannerViewDe
        
     }
     
+    override func viewDidAppear(animated: Bool) {
+        super.viewDidAppear(animated)
+    }
+    
     override func viewWillDisappear(animated: Bool) {
         super.viewWillDisappear(animated)
-        
-
+    
         adBanner?.delegate = nil
 
     }
