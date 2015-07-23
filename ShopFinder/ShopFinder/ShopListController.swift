@@ -30,7 +30,8 @@ class ShopListController: UIViewController, GADInterstitialDelegate, ShopFilterO
     let  segueShowShopDetail  = "showShopDetail"
 
     
-    let transition = PopAnimator()
+    //Transition  manager
+    let transitionManager = ZoomAnimator()
 
 
 
@@ -81,7 +82,7 @@ class ShopListController: UIViewController, GADInterstitialDelegate, ShopFilterO
         
         refreshControl.addTarget(self, action: Selector("fetchShops"), forControlEvents: UIControlEvents.ValueChanged)
         
-        table.addSubview(refreshControl)
+     //   table.addSubview(refreshControl)
     }
     
     
@@ -95,25 +96,12 @@ class ShopListController: UIViewController, GADInterstitialDelegate, ShopFilterO
         self.view.showLoading()
         
         // set left navBarIcon to open left menu
-        var cogIcon : FAKFontAwesome = FAKFontAwesome.naviconIconWithSize(20)
-        
-        cogIcon.addAttribute(NSForegroundColorAttributeName, value: UIColor.blackColor())
-        
-        cogIcon.iconFontSize = 20
-        //cogIcon.drawingBackgroundColor = UIColor.whiteColor()
-        
-        var image : UIImage = cogIcon.imageWithSize(CGSizeMake(30, 30))
-        
-        self.navigationItem.leftBarButtonItem = UIBarButtonItem(image: image, landscapeImagePhone: nil, style:.Plain, target:self, action:"presentLeftMenuViewController:")
+        self.navigationItem.leftBarButtonItem = self.menuBtn()
         
         // set right navBarIcon to show Sorting Menu
-        cogIcon  = FAKFontAwesome.sortIconWithSize(20)
+        let cogIcon  = FAKFontAwesome.sortIconWithSize(20)
         
-        cogIcon.addAttribute(NSForegroundColorAttributeName, value: UIColor.blackColor())
-        
-        cogIcon.iconFontSize = 20
-        
-         image = cogIcon.imageWithSize(CGSizeMake(30, 30))
+        let  image = self.imageFromAFont(cogIcon)
         
         self.navigationItem.rightBarButtonItem = UIBarButtonItem(image: image, landscapeImagePhone: nil, style:.Plain, target:self, action:"showFilterOptions")
         
@@ -202,7 +190,7 @@ class ShopListController: UIViewController, GADInterstitialDelegate, ShopFilterO
     
     override func prepareForSegue(segue: UIStoryboardSegue, sender: AnyObject?) {
      
-       // self.transitioningDelegate = TransitionZoom()
+       // self.transitionManagerManageringDelegate = transitionManagerManagerZoom()
         if segue.identifier == segueShowFilter {
             if let options = segue.destinationViewController as? ShopFilterOptionsController {
                 options.delegate = self
@@ -213,7 +201,7 @@ class ShopListController: UIViewController, GADInterstitialDelegate, ShopFilterO
         if segue.identifier == segueShowShopDetail {
             if let vc = segue.destinationViewController as? ShopDetailController {
                 vc.shop = selectedShop
-                vc.transitioningDelegate =  transition
+                vc.transitioningDelegate =  transitionManager
             }
         }
        
@@ -236,10 +224,10 @@ class ShopListController: UIViewController, GADInterstitialDelegate, ShopFilterO
         
         var view  = self.navigationController?.view!
         
-        spring(0.7, {
+       springEaseOut(0.4, {
    
-            view?.transform = CGAffineTransformMakeScale(0.935, 0.935)
-            view?.alpha = 0.85
+            view?.transform = CGAffineTransformMakeScale(0.875, 0.875)
+            //view?.alpha = 0.85
 
         })
         
@@ -252,7 +240,7 @@ class ShopListController: UIViewController, GADInterstitialDelegate, ShopFilterO
 
         var view = self.navigationController?.view!
 
-        spring(0.7, {
+        springEaseIn(0.4, {
             
              view?.transform = CGAffineTransformMakeScale(1, 1)
              view?.alpha = 1
@@ -277,7 +265,8 @@ class ShopListController: UIViewController, GADInterstitialDelegate, ShopFilterO
 
     func fetchShops(){
         
-       self.table.showLoading()
+       //self.table.showLoading()
+        SVProgressHUD.show()
         
         //retrieve shops and reload table
         ServerManager.retrieveShops(){
@@ -286,9 +275,10 @@ class ShopListController: UIViewController, GADInterstitialDelegate, ShopFilterO
             if obj != nil {
                 self.shops = obj as! NSArray
             }
-            self.table.reloadData()
             
-            self.table.hideLoading()
+            self.table.reloadData()
+            //self.table.hideLoading()
+            SVProgressHUD.dismiss()
             self.refreshControl.endRefreshing()
         }
     }
@@ -324,6 +314,12 @@ class ShopListController: UIViewController, GADInterstitialDelegate, ShopFilterO
             cell.shopImageView!.sd_setImageWithURL(NSURL(string: imageURL), completed:{
                 (image, error, _, _) -> Void in
                 
+                cell.imageView?.alpha = 0
+                spring(0.4, {
+                   // cell.imageView?.image = image
+                    cell.imageView?.alpha = 1
+
+                })
                // self.table.reloadData()
             })
             

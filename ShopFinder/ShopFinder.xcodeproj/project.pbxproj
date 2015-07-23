@@ -8,7 +8,6 @@
 
 /* Begin PBXBuildFile section */
 		9A37A6471B6789AE0067B8DB /* JBParallaxCell.m in Sources */ = {isa = PBXBuildFile; fileRef = 9A37A6461B6789AE0067B8DB /* JBParallaxCell.m */; };
-		9A3AB27A1B5E943E00D87AD2 /* PopAnimator.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9A3AB2791B5E943E00D87AD2 /* PopAnimator.swift */; };
 		9A4565FC1B4D8B4500C40073 /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9A4565FB1B4D8B4500C40073 /* AppDelegate.swift */; };
 		9A4566011B4D8B4500C40073 /* Main.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 9A4565FF1B4D8B4500C40073 /* Main.storyboard */; };
 		9A4566031B4D8B4500C40073 /* Images.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 9A4566021B4D8B4500C40073 /* Images.xcassets */; };
@@ -21,15 +20,19 @@
 		9A47010F1B56E77E00A4B8E3 /* ShopCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9A47010E1B56E77E00A4B8E3 /* ShopCell.swift */; };
 		9A4701111B56EB5A00A4B8E3 /* ShopDetailController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9A4701101B56EB5A00A4B8E3 /* ShopDetailController.swift */; };
 		9A4701131B56ED7E00A4B8E3 /* MapKit.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 9A4701121B56ED7E00A4B8E3 /* MapKit.framework */; };
-		9A47A88E1B5C64050098E743 /* FADesignableIconButton.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9A47A88D1B5C64050098E743 /* FADesignableIconButton.swift */; };
 		9A47A8941B5D18D20098E743 /* FontAwesome.otf in Resources */ = {isa = PBXBuildFile; fileRef = 9A47A8901B5D18D20098E743 /* FontAwesome.otf */; };
 		9A47A8951B5D18D20098E743 /* foundation-icons.ttf in Resources */ = {isa = PBXBuildFile; fileRef = 9A47A8911B5D18D20098E743 /* foundation-icons.ttf */; };
 		9A47A8961B5D18D20098E743 /* ionicons.ttf in Resources */ = {isa = PBXBuildFile; fileRef = 9A47A8921B5D18D20098E743 /* ionicons.ttf */; };
 		9A47A8971B5D18D20098E743 /* zocial-regular-webfont.ttf in Resources */ = {isa = PBXBuildFile; fileRef = 9A47A8931B5D18D20098E743 /* zocial-regular-webfont.ttf */; };
 		9A8CB5BB1B594F06005B9754 /* AppConfig.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9A8CB5BA1B594F06005B9754 /* AppConfig.swift */; };
 		9A8CB5BD1B59AA7E005B9754 /* ShopFilterOptionsController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9A8CB5BC1B59AA7E005B9754 /* ShopFilterOptionsController.swift */; };
-		9AD628D61B59C73D008A1AF7 /* UIView+VisualEffects.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9AD628D51B59C73D008A1AF7 /* UIView+VisualEffects.swift */; };
-		9AD628DA1B5AA972008A1AF7 /* FADesignableIconLabel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9AD628D91B5AA972008A1AF7 /* FADesignableIconLabel.swift */; };
+		9AD808FB1B5FDA780077DFD1 /* FADesignableIconButton.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9AD808F61B5FDA780077DFD1 /* FADesignableIconButton.swift */; };
+		9AD808FC1B5FDA780077DFD1 /* FADesignableIconLabel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9AD808F71B5FDA780077DFD1 /* FADesignableIconLabel.swift */; };
+		9AD808FD1B5FDA780077DFD1 /* PopAnimator.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9AD808F81B5FDA780077DFD1 /* PopAnimator.swift */; };
+		9AD808FE1B5FDA780077DFD1 /* UIView+VisualEffects.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9AD808F91B5FDA780077DFD1 /* UIView+VisualEffects.swift */; };
+		9AD808FF1B5FDA780077DFD1 /* ZoomAnimator.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9AD808FA1B5FDA780077DFD1 /* ZoomAnimator.swift */; };
+		9AD809051B5FE8DF0077DFD1 /* SettingsController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9AD809041B5FE8DF0077DFD1 /* SettingsController.swift */; };
+		9AD809071B60F3D60077DFD1 /* UIViewController+Style.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9AD809061B60F3D60077DFD1 /* UIViewController+Style.swift */; };
 		E3EFD600EB3CCFE5FAA7711A /* Pods.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 381840E40228E8039A62F769 /* Pods.framework */; settings = {ATTRIBUTES = (Weak, ); }; };
 /* End PBXBuildFile section */
 
@@ -49,7 +52,6 @@
 		8B29ED826246084DC28B7E2D /* Pods.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = Pods.debug.xcconfig; path = "Pods/Target Support Files/Pods/Pods.debug.xcconfig"; sourceTree = "<group>"; };
 		9A37A6451B6789AE0067B8DB /* JBParallaxCell.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = JBParallaxCell.h; sourceTree = "<group>"; };
 		9A37A6461B6789AE0067B8DB /* JBParallaxCell.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = JBParallaxCell.m; sourceTree = "<group>"; };
-		9A3AB2791B5E943E00D87AD2 /* PopAnimator.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = PopAnimator.swift; sourceTree = "<group>"; };
 		9A4565F61B4D8B4400C40073 /* ShopFinder.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = ShopFinder.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		9A4565FA1B4D8B4500C40073 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
 		9A4565FB1B4D8B4500C40073 /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
@@ -67,7 +69,6 @@
 		9A47010E1B56E77E00A4B8E3 /* ShopCell.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ShopCell.swift; sourceTree = "<group>"; };
 		9A4701101B56EB5A00A4B8E3 /* ShopDetailController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ShopDetailController.swift; sourceTree = "<group>"; };
 		9A4701121B56ED7E00A4B8E3 /* MapKit.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = MapKit.framework; path = System/Library/Frameworks/MapKit.framework; sourceTree = SDKROOT; };
-		9A47A88D1B5C64050098E743 /* FADesignableIconButton.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = FADesignableIconButton.swift; sourceTree = "<group>"; };
 		9A47A8901B5D18D20098E743 /* FontAwesome.otf */ = {isa = PBXFileReference; lastKnownFileType = file; path = FontAwesome.otf; sourceTree = "<group>"; };
 		9A47A8911B5D18D20098E743 /* foundation-icons.ttf */ = {isa = PBXFileReference; lastKnownFileType = file; path = "foundation-icons.ttf"; sourceTree = "<group>"; };
 		9A47A8921B5D18D20098E743 /* ionicons.ttf */ = {isa = PBXFileReference; lastKnownFileType = file; path = ionicons.ttf; sourceTree = "<group>"; };
@@ -75,8 +76,13 @@
 		9A8CB5B61B594D77005B9754 /* GoogleMobileAds.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = GoogleMobileAds.framework; path = "../../../../../Downloads/GoogleMobileAdsSdkiOS-7.3.1/GoogleMobileAds.framework"; sourceTree = "<group>"; };
 		9A8CB5BA1B594F06005B9754 /* AppConfig.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = AppConfig.swift; sourceTree = "<group>"; };
 		9A8CB5BC1B59AA7E005B9754 /* ShopFilterOptionsController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ShopFilterOptionsController.swift; sourceTree = "<group>"; };
-		9AD628D51B59C73D008A1AF7 /* UIView+VisualEffects.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = "UIView+VisualEffects.swift"; sourceTree = "<group>"; };
-		9AD628D91B5AA972008A1AF7 /* FADesignableIconLabel.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = FADesignableIconLabel.swift; sourceTree = "<group>"; };
+		9AD808F61B5FDA780077DFD1 /* FADesignableIconButton.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = FADesignableIconButton.swift; sourceTree = "<group>"; };
+		9AD808F71B5FDA780077DFD1 /* FADesignableIconLabel.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = FADesignableIconLabel.swift; sourceTree = "<group>"; };
+		9AD808F81B5FDA780077DFD1 /* PopAnimator.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = PopAnimator.swift; sourceTree = "<group>"; };
+		9AD808F91B5FDA780077DFD1 /* UIView+VisualEffects.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = "UIView+VisualEffects.swift"; sourceTree = "<group>"; };
+		9AD808FA1B5FDA780077DFD1 /* ZoomAnimator.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ZoomAnimator.swift; sourceTree = "<group>"; };
+		9AD809041B5FE8DF0077DFD1 /* SettingsController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = SettingsController.swift; sourceTree = "<group>"; };
+		9AD809061B60F3D60077DFD1 /* UIViewController+Style.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = "UIViewController+Style.swift"; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -197,7 +203,7 @@
 		9A4566321B4DA28800C40073 /* Classes */ = {
 			isa = PBXGroup;
 			children = (
-				9AD628D41B59C711008A1AF7 /* Extensions */,
+				9AD808F51B5FDA5A0077DFD1 /* Extensions */,
 				9A4701091B56D72E00A4B8E3 /* Server */,
 				9A4701051B56AB1600A4B8E3 /* Main */,
 				9A4701061B56AB2300A4B8E3 /* Features */,
@@ -218,9 +224,9 @@
 			isa = PBXGroup;
 			children = (
 				9A4565FB1B4D8B4500C40073 /* AppDelegate.swift */,
+				9A8CB5BA1B594F06005B9754 /* AppConfig.swift */,
 				9A45661B1B4D98B300C40073 /* MainRootController.swift */,
 				9A4566341B4DA2C600C40073 /* MenuController.swift */,
-				9A8CB5BA1B594F06005B9754 /* AppConfig.swift */,
 			);
 			name = Main;
 			sourceTree = "<group>";
@@ -228,6 +234,7 @@
 		9A4701061B56AB2300A4B8E3 /* Features */ = {
 			isa = PBXGroup;
 			children = (
+				9AD809031B5FE8B20077DFD1 /* Settings */,
 				9A47010C1B56E76400A4B8E3 /* Shops */,
 			);
 			name = Features;
@@ -271,15 +278,41 @@
 			path = Fonts;
 			sourceTree = "<group>";
 		};
-		9AD628D41B59C711008A1AF7 /* Extensions */ = {
+		9AD808F51B5FDA5A0077DFD1 /* Extensions */ = {
 			isa = PBXGroup;
 			children = (
-				9AD628D51B59C73D008A1AF7 /* UIView+VisualEffects.swift */,
-				9AD628D91B5AA972008A1AF7 /* FADesignableIconLabel.swift */,
-				9A47A88D1B5C64050098E743 /* FADesignableIconButton.swift */,
-				9A3AB2791B5E943E00D87AD2 /* PopAnimator.swift */,
+				9AD809011B5FDA9B0077DFD1 /* Designables */,
+				9AD809001B5FDA930077DFD1 /* Animators */,
+				9AD808F91B5FDA780077DFD1 /* UIView+VisualEffects.swift */,
+				9AD809061B60F3D60077DFD1 /* UIViewController+Style.swift */,
 			);
 			name = Extensions;
+			sourceTree = "<group>";
+		};
+		9AD809001B5FDA930077DFD1 /* Animators */ = {
+			isa = PBXGroup;
+			children = (
+				9AD808F81B5FDA780077DFD1 /* PopAnimator.swift */,
+				9AD808FA1B5FDA780077DFD1 /* ZoomAnimator.swift */,
+			);
+			name = Animators;
+			sourceTree = "<group>";
+		};
+		9AD809011B5FDA9B0077DFD1 /* Designables */ = {
+			isa = PBXGroup;
+			children = (
+				9AD808F61B5FDA780077DFD1 /* FADesignableIconButton.swift */,
+				9AD808F71B5FDA780077DFD1 /* FADesignableIconLabel.swift */,
+			);
+			name = Designables;
+			sourceTree = "<group>";
+		};
+		9AD809031B5FE8B20077DFD1 /* Settings */ = {
+			isa = PBXGroup;
+			children = (
+				9AD809041B5FE8DF0077DFD1 /* SettingsController.swift */,
+			);
+			name = Settings;
 			sourceTree = "<group>";
 		};
 /* End PBXGroup section */
@@ -295,6 +328,7 @@
 				9A4565F41B4D8B4400C40073 /* Resources */,
 				DEFF06777538F18C64CE71EA /* Embed Pods Frameworks */,
 				D48AA2473828A1C602EE1086 /* Copy Pods Resources */,
+				9AD809021B5FE85E0077DFD1 /* ShellScript */,
 			);
 			buildRules = (
 			);
@@ -400,6 +434,19 @@
 			shellScript = "diff \"${PODS_ROOT}/../Podfile.lock\" \"${PODS_ROOT}/Manifest.lock\" > /dev/null\nif [[ $? != 0 ]] ; then\n    cat << EOM\nerror: The sandbox is not in sync with the Podfile.lock. Run 'pod install' or update your CocoaPods installation.\nEOM\n    exit 1\nfi\n";
 			showEnvVarsInLog = 0;
 		};
+		9AD809021B5FE85E0077DFD1 /* ShellScript */ = {
+			isa = PBXShellScriptBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			inputPaths = (
+			);
+			outputPaths = (
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+			shellPath = /bin/sh;
+			shellScript = "#!/bin/bash\nbuildNumber=$(/usr/libexec/PlistBuddy -c \"Print CFBundleVersion\" \"$INFOPLIST_FILE\")\nbuildNumber=$(($buildNumber + 1))\n/usr/libexec/PlistBuddy -c \"Set :CFBundleVersion $buildNumber\" \"$INFOPLIST_FILE\"";
+		};
 		D48AA2473828A1C602EE1086 /* Copy Pods Resources */ = {
 			isa = PBXShellScriptBuildPhase;
 			buildActionMask = 2147483647;
@@ -437,18 +484,21 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				9A3AB27A1B5E943E00D87AD2 /* PopAnimator.swift in Sources */,
 				9A8CB5BD1B59AA7E005B9754 /* ShopFilterOptionsController.swift in Sources */,
 				9A47010B1B56D77A00A4B8E3 /* ServerManager.swift in Sources */,
+				9AD808FB1B5FDA780077DFD1 /* FADesignableIconButton.swift in Sources */,
 				9A8CB5BB1B594F06005B9754 /* AppConfig.swift in Sources */,
-				9AD628D61B59C73D008A1AF7 /* UIView+VisualEffects.swift in Sources */,
 				9A47010F1B56E77E00A4B8E3 /* ShopCell.swift in Sources */,
 				9A45661C1B4D98B300C40073 /* MainRootController.swift in Sources */,
 				9A4565FC1B4D8B4500C40073 /* AppDelegate.swift in Sources */,
 				9A37A6471B6789AE0067B8DB /* JBParallaxCell.m in Sources */,
-				9AD628DA1B5AA972008A1AF7 /* FADesignableIconLabel.swift in Sources */,
+				9AD809051B5FE8DF0077DFD1 /* SettingsController.swift in Sources */,
+				9AD809071B60F3D60077DFD1 /* UIViewController+Style.swift in Sources */,
+				9AD808FF1B5FDA780077DFD1 /* ZoomAnimator.swift in Sources */,
+				9AD808FC1B5FDA780077DFD1 /* FADesignableIconLabel.swift in Sources */,
+				9AD808FE1B5FDA780077DFD1 /* UIView+VisualEffects.swift in Sources */,
 				9A4701041B56A99800A4B8E3 /* ShopListController.swift in Sources */,
-				9A47A88E1B5C64050098E743 /* FADesignableIconButton.swift in Sources */,
+				9AD808FD1B5FDA780077DFD1 /* PopAnimator.swift in Sources */,
 				9A4566351B4DA2C600C40073 /* MenuController.swift in Sources */,
 				9A4701111B56EB5A00A4B8E3 /* ShopDetailController.swift in Sources */,
 			);

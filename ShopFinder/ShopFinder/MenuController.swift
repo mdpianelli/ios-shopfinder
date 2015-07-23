@@ -9,6 +9,7 @@
 import UIKit
 import RESideMenu
 
+
 class MenuController: UIViewController, RESideMenuDelegate, UITableViewDataSource, UITableViewDelegate {
 
     
@@ -60,8 +61,8 @@ class MenuController: UIViewController, RESideMenuDelegate, UITableViewDataSourc
             case 0 :
                 self.sideMenuViewController.setContentViewController(self.storyboard!.instantiateViewControllerWithIdentifier("NavShopListController") as! UIViewController, animated: true)
                 
-            case 1:
-                self.sideMenuViewController.setContentViewController(self.storyboard!.instantiateViewControllerWithIdentifier("secondViewController") as! UIViewController, animated: true)
+            case 3:
+                self.sideMenuViewController.setContentViewController(self.storyboard!.instantiateViewControllerWithIdentifier("NavSettingsController") as! UIViewController, animated: true)
                 
             default:break;
         }

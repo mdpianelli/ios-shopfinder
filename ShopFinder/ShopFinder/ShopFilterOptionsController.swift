@@ -28,7 +28,7 @@ class ShopFilterOptionsController : UIViewController {
     override func viewDidLoad() {
         super.viewDidLoad()
         
-       modalView.transform = CGAffineTransformMakeTranslation(0, 300)
+      modalView.transform = CGAffineTransformMakeTranslation(0, 300)
     
     }
 
@@ -46,7 +46,7 @@ class ShopFilterOptionsController : UIViewController {
       
         modalView.addDarkBlur()
         //resetButton.makeTinted()
-        modalView.insertSubview(resetButton, atIndex: 1)
+        //modalView.insertSubview(resetButton, atIndex: 1)
         //self.view.addVibrantStatusBarBackground(UIBlurEffect(style: .Light))
         
         UIApplication.sharedApplication().sendAction("minimizeView:", to:self.delegate, from: self, forEvent: nil)
