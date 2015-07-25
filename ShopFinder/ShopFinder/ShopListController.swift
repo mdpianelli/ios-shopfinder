@@ -22,7 +22,8 @@ class ShopListController: UIViewController, GADInterstitialDelegate, ShopFilterO
     var adBannerFull : GADInterstitial?
     var shops : NSArray = []
     var selectedShop : NSDictionary?
-    let refreshControl = UIRefreshControl()
+    var refreshControl : YALSunnyRefreshControl?  //UIRefreshControl()
+    
     
     
     //Segues Identifiers
@@ -80,15 +81,13 @@ class ShopListController: UIViewController, GADInterstitialDelegate, ShopFilterO
         setupNavMenu()
       // adBannerSetup()
         
-        refreshControl.addTarget(self, action: Selector("fetchShops"), forControlEvents: UIControlEvents.ValueChanged)
+        table.contentInset = UIEdgeInsetsMake(100, 0, 0, 0)
+        table.scrollIndicatorInsets = table.contentInset
         
-     //   table.addSubview(refreshControl)
+        refreshControl = YALSunnyRefreshControl.attachToScrollView(self.table, target: self, refreshAction: Selector("fetchShops"))
     }
     
     
-    func viewForZoomingInScrollView(scrollView: UIScrollView) -> UIView? {
-        return self.view;
-    }
     
     func setupNavMenu(){
         
@@ -107,79 +106,6 @@ class ShopListController: UIViewController, GADInterstitialDelegate, ShopFilterO
         
         }
     
-    
-    
-//    func saveImageWithView(view : UIView)
-//    {
-//        UIGraphicsBeginImageContextWithOptions(view.bounds.size, view.opaque, 0.0);
-//        view.layer.renderInContext(UIGraphicsGetCurrentContext())
-//        
-//        let img = UIGraphicsGetImageFromCurrentImageContext();
-//        
-//        UIGraphicsEndImageContext();
-//        UIImageWriteToSavedPhotosAlbum(img, nil, nil, nil);
-//
-//    }
-    
-//    func listAllFontsIntoImage(){
-//        
-//        
-//        let scroll = UIScrollView(frame: CGRectMake(0, 0,810,1500))
-//        scroll.minimumZoomScale = 0.1
-//        
-//        
-//        scroll.contentSize = CGSizeMake(810, 1500)
-//        scroll.backgroundColor = UIColor.whiteColor()
-//        
-//        for index in 0...3{
-//            
-//            var inc = -1
-//            
-//            let b =  FADesignableIconLabel()
-//            b.imageFontClass = index
-//            var dic : [NSObject : AnyObject] = b.fontAllIcons()
-//            
-//            
-//            for jindex in 0 ... dic.count{
-//              
-//                let a = FADesignableIconLabel()
-//
-//                if jindex%40 == 0{
-//                   inc++
-//                }
-//                
-//        
-//                
-//                a.imageFontClass = index
-//                a.imageType = jindex
-//                a.imageFontSize = 15
-//                let x  = CGFloat((jindex%40)*20+5)
-//                let y  = CGFloat((20+9)*inc + index*470)
-//                a.frame = CGRectMake(0,0,20,20)
-//                a.frame.origin = CGPointMake(x, y)
-//                a.textColor = UIColor.blackColor()
-//                scroll.addSubview(a)
-//                
-//                let l = UILabel(frame: CGRectMake(0,0,20,20))
-//                l.center = a.center
-//                l.center.y += 15
-//                l.font = UIFont.systemFontOfSize(10)
-//                l.textColor = UIColor.redColor()
-//                l.text = "\(jindex)"
-//                l.textAlignment = .Center
-//                scroll.addSubview(l)
-//                
-//
-//            }
-//
-//            
-//        }
-//        
-//        
-//        self.view = scroll
-//        
-//        self.saveImageWithView(scroll)
-//    }
     
     func showFilterOptions()
     {
@@ -265,21 +191,24 @@ class ShopListController: UIViewController, GADInterstitialDelegate, ShopFilterO
 
     func fetchShops(){
         
-       //self.table.showLoading()
-        SVProgressHUD.show()
+       // SVProgressHUD.show()
         
         //retrieve shops and reload table
         ServerManager.retrieveShops(){
             obj, error in
+            
+            if error != nil {
+                println(error)
+                return
+            }
             
             if obj != nil {
                 self.shops = obj as! NSArray
             }
             
             self.table.reloadData()
-            //self.table.hideLoading()
-            SVProgressHUD.dismiss()
-            self.refreshControl.endRefreshing()
+         //   SVProgressHUD.dismiss()
+            self.refreshControl?.endRefreshing()
         }
     }
     
@@ -356,7 +285,84 @@ class ShopListController: UIViewController, GADInterstitialDelegate, ShopFilterO
 
     }
 
-   
+
+    
+    
+    
+    //    func saveImageWithView(view : UIView)
+    //    {
+    //        UIGraphicsBeginImageContextWithOptions(view.bounds.size, view.opaque, 0.0);
+    //        view.layer.renderInContext(UIGraphicsGetCurrentContext())
+    //
+    //        let img = UIGraphicsGetImageFromCurrentImageContext();
+    //
+    //        UIGraphicsEndImageContext();
+    //        UIImageWriteToSavedPhotosAlbum(img, nil, nil, nil);
+    //
+    //    }
+    
+    //    func listAllFontsIntoImage(){
+    //
+    //
+    //        let scroll = UIScrollView(frame: CGRectMake(0, 0,810,1500))
+    //        scroll.minimumZoomScale = 0.1
+    //
+    //
+    //        scroll.contentSize = CGSizeMake(810, 1500)
+    //        scroll.backgroundColor = UIColor.whiteColor()
+    //
+    //        for index in 0...3{
+    //
+    //            var inc = -1
+    //
+    //            let b =  FADesignableIconLabel()
+    //            b.imageFontClass = index
+    //            var dic : [NSObject : AnyObject] = b.fontAllIcons()
+    //
+    //
+    //            for jindex in 0 ... dic.count{
+    //
+    //                let a = FADesignableIconLabel()
+    //
+    //                if jindex%40 == 0{
+    //                   inc++
+    //                }
+    //
+    //
+    //
+    //                a.imageFontClass = index
+    //                a.imageType = jindex
+    //                a.imageFontSize = 15
+    //                let x  = CGFloat((jindex%40)*20+5)
+    //                let y  = CGFloat((20+9)*inc + index*470)
+    //                a.frame = CGRectMake(0,0,20,20)
+    //                a.frame.origin = CGPointMake(x, y)
+    //                a.textColor = UIColor.blackColor()
+    //                scroll.addSubview(a)
+    //
+    //                let l = UILabel(frame: CGRectMake(0,0,20,20))
+    //                l.center = a.center
+    //                l.center.y += 15
+    //                l.font = UIFont.systemFontOfSize(10)
+    //                l.textColor = UIColor.redColor()
+    //                l.text = "\(jindex)"
+    //                l.textAlignment = .Center
+    //                scroll.addSubview(l)
+    //                
+    //
+    //            }
+    //
+    //            
+    //        }
+    //        
+    //        
+    //        self.view = scroll
+    //        
+    //        self.saveImageWithView(scroll)
+    //    }
+
 
 }
+
+
 

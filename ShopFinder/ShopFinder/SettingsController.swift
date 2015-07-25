@@ -38,10 +38,9 @@ class SettingsController : UIViewController, UITableViewDelegate, UITableViewDat
             
             TableData(title: NSLocalizedString("Email Us",comment:""), icon:(1,2,UIColor.orangeColor()))]),
         
-        
-        
+
         TableSection(sectionName: "", data:[
-            TableData(title: NSLocalizedString("Rate this App",comment:""), icon:(1,3,UIColor.blueColor())),
+            TableData(title: NSLocalizedString("Rate this App",comment:""), icon:(1,3,UIColor(hex: "2CA390"))),
             TableData(title: NSLocalizedString("Follow Us on Twitter",comment:""), icon:(1,4,UIColor.redColor())),
             TableData(title: NSLocalizedString("Like Us on Facebook",comment:""), icon:(1,5,UIColor.greenColor())),
             TableData(title: NSLocalizedString("Terms of Service",comment:""), icon:(1,6,UIColor.grayColor())),

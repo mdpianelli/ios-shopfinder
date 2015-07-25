@@ -33,6 +33,8 @@
 		9AD808FF1B5FDA780077DFD1 /* ZoomAnimator.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9AD808FA1B5FDA780077DFD1 /* ZoomAnimator.swift */; };
 		9AD809051B5FE8DF0077DFD1 /* SettingsController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9AD809041B5FE8DF0077DFD1 /* SettingsController.swift */; };
 		9AD809071B60F3D60077DFD1 /* UIViewController+Style.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9AD809061B60F3D60077DFD1 /* UIViewController+Style.swift */; };
+		9AD8090C1B643E8A0077DFD1 /* YALSunnyRefreshControl.m in Sources */ = {isa = PBXBuildFile; fileRef = 9AD8090A1B643E8A0077DFD1 /* YALSunnyRefreshControl.m */; };
+		9AD8090D1B643E8A0077DFD1 /* YALSunnyRefreshControl.xib in Resources */ = {isa = PBXBuildFile; fileRef = 9AD8090B1B643E8A0077DFD1 /* YALSunnyRefreshControl.xib */; };
 		E3EFD600EB3CCFE5FAA7711A /* Pods.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 381840E40228E8039A62F769 /* Pods.framework */; settings = {ATTRIBUTES = (Weak, ); }; };
 /* End PBXBuildFile section */
 
@@ -83,6 +85,9 @@
 		9AD808FA1B5FDA780077DFD1 /* ZoomAnimator.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ZoomAnimator.swift; sourceTree = "<group>"; };
 		9AD809041B5FE8DF0077DFD1 /* SettingsController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = SettingsController.swift; sourceTree = "<group>"; };
 		9AD809061B60F3D60077DFD1 /* UIViewController+Style.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = "UIViewController+Style.swift"; sourceTree = "<group>"; };
+		9AD809091B643E8A0077DFD1 /* YALSunnyRefreshControl.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = YALSunnyRefreshControl.h; sourceTree = "<group>"; };
+		9AD8090A1B643E8A0077DFD1 /* YALSunnyRefreshControl.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = YALSunnyRefreshControl.m; sourceTree = "<group>"; };
+		9AD8090B1B643E8A0077DFD1 /* YALSunnyRefreshControl.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = YALSunnyRefreshControl.xib; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -195,6 +200,7 @@
 		9A45661D1B4D990D00C40073 /* ThirdParty */ = {
 			isa = PBXGroup;
 			children = (
+				9AD809081B643E8A0077DFD1 /* YALSunnyRefreshControll */,
 				9A37A6441B6789A20067B8DB /* ParallaxCell */,
 			);
 			name = ThirdParty;
@@ -315,6 +321,16 @@
 			name = Settings;
 			sourceTree = "<group>";
 		};
+		9AD809081B643E8A0077DFD1 /* YALSunnyRefreshControll */ = {
+			isa = PBXGroup;
+			children = (
+				9AD809091B643E8A0077DFD1 /* YALSunnyRefreshControl.h */,
+				9AD8090A1B643E8A0077DFD1 /* YALSunnyRefreshControl.m */,
+				9AD8090B1B643E8A0077DFD1 /* YALSunnyRefreshControl.xib */,
+			);
+			path = YALSunnyRefreshControll;
+			sourceTree = "<group>";
+		};
 /* End PBXGroup section */
 
 /* Begin PBXNativeTarget section */
@@ -405,6 +421,7 @@
 				9A47A8971B5D18D20098E743 /* zocial-regular-webfont.ttf in Resources */,
 				9A47A8941B5D18D20098E743 /* FontAwesome.otf in Resources */,
 				9A4566031B4D8B4500C40073 /* Images.xcassets in Resources */,
+				9AD8090D1B643E8A0077DFD1 /* YALSunnyRefreshControl.xib in Resources */,
 				9A47A8951B5D18D20098E743 /* foundation-icons.ttf in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
@@ -486,6 +503,7 @@
 			files = (
 				9A8CB5BD1B59AA7E005B9754 /* ShopFilterOptionsController.swift in Sources */,
 				9A47010B1B56D77A00A4B8E3 /* ServerManager.swift in Sources */,
+				9AD8090C1B643E8A0077DFD1 /* YALSunnyRefreshControl.m in Sources */,
 				9AD808FB1B5FDA780077DFD1 /* FADesignableIconButton.swift in Sources */,
 				9A8CB5BB1B594F06005B9754 /* AppConfig.swift in Sources */,
 				9A47010F1B56E77E00A4B8E3 /* ShopCell.swift in Sources */,

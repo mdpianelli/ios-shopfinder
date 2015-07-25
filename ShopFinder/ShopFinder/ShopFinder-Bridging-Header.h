@@ -9,4 +9,5 @@
 #import <SVProgressHUD/SVProgressHUD.h>
 #import <SDWebImage/UIImageView+WebCache.h>
 
+#import "YALSunnyRefreshControl.h"
 #import "JBParallaxCell.h"
