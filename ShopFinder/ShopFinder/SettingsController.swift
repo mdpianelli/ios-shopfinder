@@ -12,7 +12,7 @@ import UIKit
 struct TableData {
     
     let title : String
-    let icon : (iconClass: Int,iconType: Int,fontSize: CGFloat)
+    let icon : (iconClass: Int,iconType: Int,color : UIColor)
     
 }
 
@@ -33,15 +33,19 @@ class SettingsController : UIViewController, UITableViewDelegate, UITableViewDat
     
     let sections = [
         TableSection(sectionName: "SUPPORT", data:[
-            TableData(title: NSLocalizedString("Help and Feedback",comment:""), icon:(1,1,25)),
-            TableData(title: NSLocalizedString("Email Us",comment:""), icon:(1,2,20))]),
+            TableData(title: NSLocalizedString("Help and Feedback",comment:""),
+                icon:(1,1,UIColor.cyanColor())),
+            
+            TableData(title: NSLocalizedString("Email Us",comment:""), icon:(1,2,UIColor.orangeColor()))]),
+        
+        
         
         TableSection(sectionName: "", data:[
-            TableData(title: NSLocalizedString("Rate this App",comment:""), icon:(1,3,20)),
-            TableData(title: NSLocalizedString("Follow Us on Twitter",comment:""), icon:(1,4,20)),
-            TableData(title: NSLocalizedString("Like Us on Facebook",comment:""), icon:(1,5,20)),
-            TableData(title: NSLocalizedString("Terms of Service",comment:""), icon:(1,6,20)),
-            TableData(title: NSLocalizedString("Privacy Policy",comment:""), icon:(1,7,20))])
+            TableData(title: NSLocalizedString("Rate this App",comment:""), icon:(1,3,UIColor.blueColor())),
+            TableData(title: NSLocalizedString("Follow Us on Twitter",comment:""), icon:(1,4,UIColor.redColor())),
+            TableData(title: NSLocalizedString("Like Us on Facebook",comment:""), icon:(1,5,UIColor.greenColor())),
+            TableData(title: NSLocalizedString("Terms of Service",comment:""), icon:(1,6,UIColor.grayColor())),
+            TableData(title: NSLocalizedString("Privacy Policy",comment:""), icon:(1,7,UIColor.blackColor()))])
         ]
 
 
@@ -108,6 +112,7 @@ class SettingsController : UIViewController, UITableViewDelegate, UITableViewDat
         //cell.iconBtn.imageFontSize = itemData.icon.fontSize
         cell.iconBtn.imageFontClass = itemData.icon.iconClass
         cell.iconBtn.imageType = itemData.icon.iconType
+        cell.iconBtn.tintColor = itemData.icon.color
 
         
         return cell

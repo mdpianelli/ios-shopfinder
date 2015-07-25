@@ -13,6 +13,13 @@ import FontAwesomeKit
 @IBDesignable public class FADesignableIconButton : DesignableButton {
     
     
+    public override var tintColor : UIColor? {
+        
+        didSet{
+            self.borderColor = tintColor!
+            self.titleLabel?.textColor = tintColor!
+        }
+    }
     
     @IBInspectable public var imageFontClass: Int = 0 {
         
@@ -35,35 +42,22 @@ import FontAwesomeKit
     @IBInspectable public var imageType: Int = 0 {
         didSet {
             
-            //            //Helper to list font names
-            //            let names = UIFont.familyNames()
-            //
-            //            for  eachName in names {
-            //                let n = UIFont.fontNamesForFamilyName(eachName as! String)
-            //                println(eachName)
-            //
-            //                for newName in n {
-            //                    println("----"+(newName as! String))
-            //                }
-            //            }
+//            //Helper to list font names
+//            let names = UIFont.familyNames()
+//
+//            for  eachName in names {
+//                let n = UIFont.fontNamesForFamilyName(eachName as! String)
+//                println(eachName)
+//
+//                for newName in n {
+//                    println("----"+(newName as! String))
+//                }
+//            }
             
             
             if imageType < 0{
                 imageType = 0
             }
-            
-//            self.backgroundColor = UIColor.clearColor()
-//            
-//            let lightBlur = UIBlurEffect(style: .Dark)
-//            let lightBlurView = UIVisualEffectView(effect: lightBlur)
-//            
-//            let lightVibrancyView = vibrancyEffectView(forBlurEffectView: lightBlurView)
-//            
-//            lightVibrancyView.frame = CGRectMake(0, 0, self.frame.size.width,self.frame.size.height);
-//             self.insertSubview(lightVibrancyView, atIndex: 0)
-//            //self.addSubview(lightVibrancyView)
-
-           // self.titleLabel!.textAlignment = NSTextAlignment.Center
             
             let font = UIFont(name:self.fontClassName(), size: self.imageFontSize)
             self.titleLabel?.font = font
@@ -112,9 +106,8 @@ import FontAwesomeKit
         }
         
         return dic
-        
-        
     }
+    
     private func fontClassName() -> String {
         
         
