@@ -8,10 +8,8 @@
 
 import UIKit
 
-class ShopCell : UITableViewCell{
+class ShopCell : JBParallaxCell {
     
-    
-    @IBOutlet weak var titleLabel: UILabel!
-    @IBOutlet weak var shopImageView: UIImageView!
+        @IBOutlet weak var shopImageView: UIImageView!
     
 }

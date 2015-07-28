@@ -21,6 +21,12 @@ class ShopListController: UIViewController, GADInterstitialDelegate, ShopFilterO
     
     var adBannerFull : GADInterstitial?
     var shops : NSArray = []
+    let refreshControl = UIRefreshControl()
+
+    
+    
+    
+    
     
     //MARK: UIViewController Methods
 
@@ -30,7 +36,6 @@ class ShopListController: UIViewController, GADInterstitialDelegate, ShopFilterO
         
        initialSetup()
        fetchShops()
- 
         
        
 
@@ -61,10 +66,15 @@ class ShopListController: UIViewController, GADInterstitialDelegate, ShopFilterO
     
     //MARK: Setup Methods
     
-    func initialSetup(){
+    func initialSetup()
+    {
     
         setupNavMenu()
-      //  adBannerSetup()
+      // adBannerSetup()
+        
+        refreshControl.addTarget(self, action: Selector("fetchShops"), forControlEvents: UIControlEvents.ValueChanged)
+        
+        table.addSubview(refreshControl)
     }
     
     
@@ -257,8 +267,8 @@ class ShopListController: UIViewController, GADInterstitialDelegate, ShopFilterO
             }
             self.table.reloadData()
             
-             self.table.hideLoading()
-            
+            self.table.hideLoading()
+            self.refreshControl.endRefreshing()
         }
     }
     
@@ -305,6 +315,18 @@ class ShopListController: UIViewController, GADInterstitialDelegate, ShopFilterO
     
     
     //MARK: - UITableViewDelegate
+    
+    func scrollViewDidScroll(scrollView: UIScrollView) {
+     
+        // Get visible cells on table view.
+        let visibleCells = self.table.visibleCells() as! [JBParallaxCell]
+        
+        for cell : JBParallaxCell in visibleCells {
+            cell.cellOnTableView(self.table, didScrollOnView: self.view)
+        }
+        
+    }
+    
     
     func tableView(tableView: UITableView, didSelectRowAtIndexPath indexPath: NSIndexPath) {
         

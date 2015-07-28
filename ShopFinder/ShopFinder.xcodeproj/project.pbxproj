@@ -7,6 +7,7 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
+		9A37A6471B6789AE0067B8DB /* JBParallaxCell.m in Sources */ = {isa = PBXBuildFile; fileRef = 9A37A6461B6789AE0067B8DB /* JBParallaxCell.m */; };
 		9A4565FC1B4D8B4500C40073 /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9A4565FB1B4D8B4500C40073 /* AppDelegate.swift */; };
 		9A4566011B4D8B4500C40073 /* Main.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 9A4565FF1B4D8B4500C40073 /* Main.storyboard */; };
 		9A4566031B4D8B4500C40073 /* Images.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 9A4566021B4D8B4500C40073 /* Images.xcassets */; };
@@ -45,6 +46,8 @@
 		182D109AC3AA1CD2F75BDABF /* Pods.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = Pods.release.xcconfig; path = "Pods/Target Support Files/Pods/Pods.release.xcconfig"; sourceTree = "<group>"; };
 		381840E40228E8039A62F769 /* Pods.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Pods.framework; sourceTree = BUILT_PRODUCTS_DIR; };
 		8B29ED826246084DC28B7E2D /* Pods.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = Pods.debug.xcconfig; path = "Pods/Target Support Files/Pods/Pods.debug.xcconfig"; sourceTree = "<group>"; };
+		9A37A6451B6789AE0067B8DB /* JBParallaxCell.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = JBParallaxCell.h; sourceTree = "<group>"; };
+		9A37A6461B6789AE0067B8DB /* JBParallaxCell.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = JBParallaxCell.m; sourceTree = "<group>"; };
 		9A4565F61B4D8B4400C40073 /* ShopFinder.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = ShopFinder.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		9A4565FA1B4D8B4500C40073 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
 		9A4565FB1B4D8B4500C40073 /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
@@ -113,6 +116,15 @@
 			name = Pods;
 			sourceTree = "<group>";
 		};
+		9A37A6441B6789A20067B8DB /* ParallaxCell */ = {
+			isa = PBXGroup;
+			children = (
+				9A37A6451B6789AE0067B8DB /* JBParallaxCell.h */,
+				9A37A6461B6789AE0067B8DB /* JBParallaxCell.m */,
+			);
+			name = ParallaxCell;
+			sourceTree = "<group>";
+		};
 		9A4565ED1B4D8B4400C40073 = {
 			isa = PBXGroup;
 			children = (
@@ -175,6 +187,7 @@
 		9A45661D1B4D990D00C40073 /* ThirdParty */ = {
 			isa = PBXGroup;
 			children = (
+				9A37A6441B6789A20067B8DB /* ParallaxCell */,
 			);
 			name = ThirdParty;
 			sourceTree = "<group>";
@@ -428,6 +441,7 @@
 				9A47010F1B56E77E00A4B8E3 /* ShopCell.swift in Sources */,
 				9A45661C1B4D98B300C40073 /* MainRootController.swift in Sources */,
 				9A4565FC1B4D8B4500C40073 /* AppDelegate.swift in Sources */,
+				9A37A6471B6789AE0067B8DB /* JBParallaxCell.m in Sources */,
 				9AD628DA1B5AA972008A1AF7 /* FADesignableIconLabel.swift in Sources */,
 				9A4701041B56A99800A4B8E3 /* ShopListController.swift in Sources */,
 				9A47A88E1B5C64050098E743 /* FADesignableIconButton.swift in Sources */,
