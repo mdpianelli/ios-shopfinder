@@ -93,9 +93,6 @@ import FontAwesomeKit
         var dic : [NSObject : AnyObject]
         
         
-     
-
-        
         switch(imageFontClass){
             
         case 0 :
