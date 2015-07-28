@@ -52,7 +52,7 @@ class ShopDetailController: UIViewController, MKMapViewDelegate, GADBannerViewDe
         
 
         adBanner?.delegate = nil
-        
+
     }
     
     
