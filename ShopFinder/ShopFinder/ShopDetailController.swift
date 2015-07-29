@@ -76,7 +76,7 @@ class ShopDetailController: UIViewController, MKMapViewDelegate, GADBannerViewDe
         
         titleLabel.text = shop!.objectForKey("name") as? String
         let address = shop!.objectForKey("address") as? String
-        addressLabel.text = address
+       // addressLabel.text = address
         
         if let photos: AnyObject = shop!.objectForKey("photos")
         {

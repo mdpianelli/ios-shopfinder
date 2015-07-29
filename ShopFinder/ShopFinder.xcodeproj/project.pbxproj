@@ -7,6 +7,7 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
+		9A2388DE1B67A3420090927F /* WebController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9A2388DD1B67A3420090927F /* WebController.swift */; };
 		9A37A6471B6789AE0067B8DB /* JBParallaxCell.m in Sources */ = {isa = PBXBuildFile; fileRef = 9A37A6461B6789AE0067B8DB /* JBParallaxCell.m */; };
 		9A4565FC1B4D8B4500C40073 /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9A4565FB1B4D8B4500C40073 /* AppDelegate.swift */; };
 		9A4566011B4D8B4500C40073 /* Main.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 9A4565FF1B4D8B4500C40073 /* Main.storyboard */; };
@@ -52,6 +53,7 @@
 		182D109AC3AA1CD2F75BDABF /* Pods.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = Pods.release.xcconfig; path = "Pods/Target Support Files/Pods/Pods.release.xcconfig"; sourceTree = "<group>"; };
 		381840E40228E8039A62F769 /* Pods.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Pods.framework; sourceTree = BUILT_PRODUCTS_DIR; };
 		8B29ED826246084DC28B7E2D /* Pods.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = Pods.debug.xcconfig; path = "Pods/Target Support Files/Pods/Pods.debug.xcconfig"; sourceTree = "<group>"; };
+		9A2388DD1B67A3420090927F /* WebController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = WebController.swift; sourceTree = "<group>"; };
 		9A37A6451B6789AE0067B8DB /* JBParallaxCell.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = JBParallaxCell.h; sourceTree = "<group>"; };
 		9A37A6461B6789AE0067B8DB /* JBParallaxCell.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = JBParallaxCell.m; sourceTree = "<group>"; };
 		9A4565F61B4D8B4400C40073 /* ShopFinder.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = ShopFinder.app; sourceTree = BUILT_PRODUCTS_DIR; };
@@ -317,6 +319,7 @@
 			isa = PBXGroup;
 			children = (
 				9AD809041B5FE8DF0077DFD1 /* SettingsController.swift */,
+				9A2388DD1B67A3420090927F /* WebController.swift */,
 			);
 			name = Settings;
 			sourceTree = "<group>";
@@ -514,6 +517,7 @@
 				9AD809071B60F3D60077DFD1 /* UIViewController+Style.swift in Sources */,
 				9AD808FF1B5FDA780077DFD1 /* ZoomAnimator.swift in Sources */,
 				9AD808FC1B5FDA780077DFD1 /* FADesignableIconLabel.swift in Sources */,
+				9A2388DE1B67A3420090927F /* WebController.swift in Sources */,
 				9AD808FE1B5FDA780077DFD1 /* UIView+VisualEffects.swift in Sources */,
 				9A4701041B56A99800A4B8E3 /* ShopListController.swift in Sources */,
 				9AD808FD1B5FDA780077DFD1 /* PopAnimator.swift in Sources */,
