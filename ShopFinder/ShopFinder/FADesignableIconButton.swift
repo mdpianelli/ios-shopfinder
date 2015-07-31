@@ -10,8 +10,18 @@ import UIKit
 import Spring
 import FontAwesomeKit
 
+
 @IBDesignable public class FADesignableIconButton : DesignableButton {
     
+
+    var icon : Icon? {
+        didSet{
+            self.imageFontClass = icon!.type
+            self.imageType = icon!.index
+            self.tintColor = icon!.color
+
+        }
+    }
     
     public override var tintColor : UIColor? {
         

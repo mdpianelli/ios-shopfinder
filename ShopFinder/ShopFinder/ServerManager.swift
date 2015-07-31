@@ -10,7 +10,6 @@ import Foundation
 import Alamofire
 
 
-let API_URL = "http://shop-finder.eu01.aws.af.cm/api/shops"
 
 
 
@@ -20,11 +19,21 @@ class ServerManager : NSObject {
     
     class func retrieveShops(completionHandler: (AnyObject?, NSError?) -> Void) -> Void {
         
-        Alamofire.request(.GET, API_URL)
+        Alamofire.request(.GET, API.shops )
             .responseJSON { (_, _, obj, error) in
                 completionHandler(obj,error)
         }
               
+    }
+    
+    
+    class func fetchSettings(completionHandler: (AnyObject?, NSError?) -> Void) -> Void {
+        
+        Alamofire.request(.GET, API.settings )
+            .responseJSON { (_, _, obj, error) in
+                completionHandler(obj,error)
+        }
+        
     }
     
 }

@@ -901,45 +901,49 @@
                             <webView contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="vbi-Bd-s8U">
                                 <rect key="frame" x="0.0" y="0.0" width="240" height="128"/>
                                 <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
-                                <variation key="heightClass=regular-widthClass=compact" fixedFrame="YES">
-                                    <rect key="frame" x="0.0" y="64" width="400" height="736"/>
-                                </variation>
                                 <connections>
                                     <outlet property="delegate" destination="4K1-Iv-qWo" id="imX-Xl-aXp"/>
                                 </connections>
                             </webView>
-                            <navigationBar contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="ioV-WN-Cbk">
-                                <rect key="frame" x="0.0" y="0.0" width="320" height="44"/>
-                                <items>
-                                    <navigationItem title="Title" id="bx0-wr-suk"/>
-                                </items>
-                                <variation key="heightClass=regular-widthClass=compact" fixedFrame="YES">
-                                    <rect key="frame" x="0.0" y="20" width="400" height="44"/>
-                                </variation>
-                            </navigationBar>
                         </subviews>
                         <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
+                        <constraints>
+                            <constraint firstItem="vbi-Bd-s8U" firstAttribute="bottom" secondItem="a9r-Zb-wa6" secondAttribute="top" id="3nF-5X-W8b"/>
+                            <constraint firstItem="vbi-Bd-s8U" firstAttribute="leading" secondItem="qFH-NH-7gG" secondAttribute="leading" id="Kbz-4Y-iAb"/>
+                            <constraint firstItem="vbi-Bd-s8U" firstAttribute="top" secondItem="qFH-NH-7gG" secondAttribute="top" id="a3E-z7-ZdW"/>
+                            <constraint firstAttribute="trailing" secondItem="vbi-Bd-s8U" secondAttribute="trailing" id="ikM-Ku-7mX"/>
+                        </constraints>
                         <variation key="default">
                             <mask key="subviews">
                                 <exclude reference="vbi-Bd-s8U"/>
-                                <exclude reference="ioV-WN-Cbk"/>
+                            </mask>
+                            <mask key="constraints">
+                                <exclude reference="3nF-5X-W8b"/>
+                                <exclude reference="Kbz-4Y-iAb"/>
+                                <exclude reference="a3E-z7-ZdW"/>
+                                <exclude reference="ikM-Ku-7mX"/>
                             </mask>
                         </variation>
                         <variation key="heightClass=regular-widthClass=compact">
                             <mask key="subviews">
                                 <include reference="vbi-Bd-s8U"/>
-                                <include reference="ioV-WN-Cbk"/>
+                            </mask>
+                            <mask key="constraints">
+                                <include reference="3nF-5X-W8b"/>
+                                <include reference="Kbz-4Y-iAb"/>
+                                <include reference="a3E-z7-ZdW"/>
+                                <include reference="ikM-Ku-7mX"/>
                             </mask>
                         </variation>
                     </view>
-                    <nil key="simulatedTopBarMetrics"/>
+                    <navigationItem key="navigationItem" id="zOK-nG-yDX"/>
                     <connections>
                         <outlet property="webView" destination="vbi-Bd-s8U" id="bGG-Dh-yLe"/>
                     </connections>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="Cd7-HA-zsa" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="3748.5" y="786.75"/>
+            <point key="canvasLocation" x="5160" y="1005.75"/>
         </scene>
         <!--Shop Filter Options Controller-->
         <scene sceneID="2Uu-Em-5lZ">
@@ -1198,6 +1202,24 @@
                 <placeholder placeholderIdentifier="IBFirstResponder" id="O0t-j3-Fti" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
             <point key="canvasLocation" x="1438.5" y="824.25"/>
+        </scene>
+        <!--Navigation Controller-->
+        <scene sceneID="WnF-uZ-Kr5">
+            <objects>
+                <navigationController storyboardIdentifier="NavWebController" automaticallyAdjustsScrollViewInsets="NO" id="gri-9Q-OOV" sceneMemberID="viewController">
+                    <toolbarItems/>
+                    <navigationBar key="navigationBar" contentMode="scaleToFill" id="3RL-ix-JcO">
+                        <rect key="frame" x="0.0" y="0.0" width="320" height="44"/>
+                        <autoresizingMask key="autoresizingMask"/>
+                    </navigationBar>
+                    <nil name="viewControllers"/>
+                    <connections>
+                        <segue destination="4K1-Iv-qWo" kind="relationship" relationship="rootViewController" id="rG1-Xi-07o"/>
+                    </connections>
+                </navigationController>
+                <placeholder placeholderIdentifier="IBFirstResponder" id="ZrQ-uN-Rmv" userLabel="First Responder" sceneMemberID="firstResponder"/>
+            </objects>
+            <point key="canvasLocation" x="4428" y="1011.75"/>
         </scene>
     </scenes>
 </document>

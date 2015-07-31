@@ -11,6 +11,9 @@ import UIKit
 class WebController : UIViewController, UIWebViewDelegate {
     
     @IBOutlet weak var webView: UIWebView!
+    var link : NSURL?
+    
+    
     
     
     
