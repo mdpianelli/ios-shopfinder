@@ -14,7 +14,15 @@ class WebController : UIViewController, UIWebViewDelegate {
     var link : NSURL?
     
     
+    override func viewDidLoad() {
+        super.viewDidLoad()
+        
+        webView.loadRequest(NSURLRequest(URL: link!))
+    }
+
     
-    
+    @IBAction func dismiss(sender: AnyObject) {
+        self.dismissViewControllerAnimated(true, completion: nil)
+    }
     
 }

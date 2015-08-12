@@ -724,7 +724,8 @@
                             <imageView userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" translatesAutoresizingMaskIntoConstraints="NO" id="XQH-XC-FRv" customClass="SpringImageView" customModule="Spring">
                                 <rect key="frame" x="0.0" y="0.0" width="240" height="128"/>
                                 <constraints>
-                                    <constraint firstAttribute="height" constant="151" id="dwu-XP-Eiv"/>
+                                    <constraint firstAttribute="height" constant="151" id="dcQ-dp-ZcV"/>
+                                    <constraint firstAttribute="height" relation="greaterThanOrEqual" constant="151" id="enp-9i-vs6"/>
                                 </constraints>
                                 <userDefinedRuntimeAttributes>
                                     <userDefinedRuntimeAttribute type="string" keyPath="animation" value="fadeIn"/>
@@ -737,12 +738,14 @@
                                 </userDefinedRuntimeAttributes>
                                 <variation key="default">
                                     <mask key="constraints">
-                                        <exclude reference="dwu-XP-Eiv"/>
+                                        <exclude reference="dcQ-dp-ZcV"/>
+                                        <exclude reference="enp-9i-vs6"/>
                                     </mask>
                                 </variation>
                                 <variation key="heightClass=regular-widthClass=compact">
                                     <mask key="constraints">
-                                        <include reference="dwu-XP-Eiv"/>
+                                        <include reference="dcQ-dp-ZcV"/>
+                                        <include reference="enp-9i-vs6"/>
                                     </mask>
                                 </variation>
                             </imageView>
@@ -804,21 +807,21 @@
                         <color key="backgroundColor" red="0.98431372549999996" green="0.99607843139999996" blue="1" alpha="1" colorSpace="calibratedRGB"/>
                         <constraints>
                             <constraint firstItem="1nU-Zq-IPW" firstAttribute="trailing" secondItem="cgE-TV-M8a" secondAttribute="trailing" id="5Eh-db-zkP"/>
+                            <constraint firstItem="XQH-XC-FRv" firstAttribute="leading" secondItem="1nU-Zq-IPW" secondAttribute="leading" id="6qB-DJ-HPF"/>
                             <constraint firstItem="cgE-TV-M8a" firstAttribute="bottom" secondItem="Sg2-xy-9Ag" secondAttribute="top" id="72A-y6-Gr0"/>
                             <constraint firstItem="KIu-zy-qBu" firstAttribute="top" secondItem="lm2-wJ-U1I" secondAttribute="bottom" constant="81" id="Ah8-vY-5cR"/>
-                            <constraint firstItem="XQH-XC-FRv" firstAttribute="leading" secondItem="Cl6-QF-Diz" secondAttribute="leading" id="Dwi-hC-odg"/>
                             <constraint firstItem="Cl6-QF-Diz" firstAttribute="top" secondItem="lm2-wJ-U1I" secondAttribute="bottom" id="ERb-3K-6ce"/>
                             <constraint firstAttribute="trailing" secondItem="1nU-Zq-IPW" secondAttribute="trailing" id="EYv-yK-obD"/>
+                            <constraint firstItem="XQH-XC-FRv" firstAttribute="top" secondItem="Cl6-QF-Diz" secondAttribute="top" id="EfD-8k-T38"/>
                             <constraint firstItem="cgE-TV-M8a" firstAttribute="top" secondItem="1nU-Zq-IPW" secondAttribute="bottom" id="GrR-bg-043"/>
                             <constraint firstItem="cgE-TV-M8a" firstAttribute="leading" secondItem="1nU-Zq-IPW" secondAttribute="leading" id="L1j-jX-c2e"/>
-                            <constraint firstItem="Cl6-QF-Diz" firstAttribute="top" secondItem="XQH-XC-FRv" secondAttribute="top" id="OMU-2k-OlO"/>
-                            <constraint firstItem="XQH-XC-FRv" firstAttribute="centerX" secondItem="KIu-zy-qBu" secondAttribute="centerX" id="Qry-5O-q3F"/>
+                            <constraint firstItem="XQH-XC-FRv" firstAttribute="leading" secondItem="vNH-VS-Wz8" secondAttribute="leading" id="TNS-nn-6Cp"/>
                             <constraint firstItem="1nU-Zq-IPW" firstAttribute="trailing" secondItem="Cl6-QF-Diz" secondAttribute="trailing" id="Zym-5b-9u2"/>
-                            <constraint firstItem="XQH-XC-FRv" firstAttribute="leading" secondItem="vNH-VS-Wz8" secondAttribute="leading" id="bHh-BL-afR"/>
-                            <constraint firstItem="XQH-XC-FRv" firstAttribute="bottom" secondItem="Cl6-QF-Diz" secondAttribute="bottom" id="n2j-ZE-DwM"/>
-                            <constraint firstItem="XQH-XC-FRv" firstAttribute="leading" secondItem="1nU-Zq-IPW" secondAttribute="leading" id="rsC-Uo-6Wm"/>
-                            <constraint firstItem="XQH-XC-FRv" firstAttribute="trailing" secondItem="Cl6-QF-Diz" secondAttribute="trailing" id="t38-pB-2fm"/>
+                            <constraint firstItem="XQH-XC-FRv" firstAttribute="leading" secondItem="Cl6-QF-Diz" secondAttribute="leading" id="hsd-gG-ZOO"/>
+                            <constraint firstItem="XQH-XC-FRv" firstAttribute="trailing" secondItem="Cl6-QF-Diz" secondAttribute="trailing" id="kyj-2F-5fZ"/>
+                            <constraint firstItem="XQH-XC-FRv" firstAttribute="bottom" secondItem="Cl6-QF-Diz" secondAttribute="bottom" id="mwt-bs-2Xn"/>
                             <constraint firstItem="KIu-zy-qBu" firstAttribute="leading" secondItem="vNH-VS-Wz8" secondAttribute="leadingMargin" constant="-1" id="ylx-J1-W2k"/>
+                            <constraint firstItem="XQH-XC-FRv" firstAttribute="centerX" secondItem="KIu-zy-qBu" secondAttribute="centerX" id="zm4-r8-TOp"/>
                         </constraints>
                         <variation key="default">
                             <mask key="subviews">
@@ -829,22 +832,22 @@
                                 <exclude reference="1nU-Zq-IPW"/>
                             </mask>
                             <mask key="constraints">
+                                <exclude reference="ERb-3K-6ce"/>
+                                <exclude reference="6qB-DJ-HPF"/>
+                                <exclude reference="EfD-8k-T38"/>
+                                <exclude reference="TNS-nn-6Cp"/>
+                                <exclude reference="hsd-gG-ZOO"/>
+                                <exclude reference="kyj-2F-5fZ"/>
+                                <exclude reference="mwt-bs-2Xn"/>
+                                <exclude reference="zm4-r8-TOp"/>
                                 <exclude reference="Ah8-vY-5cR"/>
                                 <exclude reference="ylx-J1-W2k"/>
                                 <exclude reference="5Eh-db-zkP"/>
                                 <exclude reference="EYv-yK-obD"/>
                                 <exclude reference="Zym-5b-9u2"/>
-                                <exclude reference="Dwi-hC-odg"/>
-                                <exclude reference="Qry-5O-q3F"/>
-                                <exclude reference="bHh-BL-afR"/>
-                                <exclude reference="n2j-ZE-DwM"/>
-                                <exclude reference="rsC-Uo-6Wm"/>
-                                <exclude reference="t38-pB-2fm"/>
                                 <exclude reference="72A-y6-Gr0"/>
                                 <exclude reference="GrR-bg-043"/>
                                 <exclude reference="L1j-jX-c2e"/>
-                                <exclude reference="ERb-3K-6ce"/>
-                                <exclude reference="OMU-2k-OlO"/>
                             </mask>
                         </variation>
                         <variation key="heightClass=regular-widthClass=compact">
@@ -856,22 +859,22 @@
                                 <include reference="1nU-Zq-IPW"/>
                             </mask>
                             <mask key="constraints">
+                                <include reference="ERb-3K-6ce"/>
+                                <include reference="6qB-DJ-HPF"/>
+                                <include reference="EfD-8k-T38"/>
+                                <include reference="TNS-nn-6Cp"/>
+                                <include reference="hsd-gG-ZOO"/>
+                                <include reference="kyj-2F-5fZ"/>
+                                <include reference="mwt-bs-2Xn"/>
+                                <include reference="zm4-r8-TOp"/>
                                 <include reference="Ah8-vY-5cR"/>
                                 <include reference="ylx-J1-W2k"/>
                                 <include reference="5Eh-db-zkP"/>
                                 <include reference="EYv-yK-obD"/>
                                 <include reference="Zym-5b-9u2"/>
-                                <include reference="Dwi-hC-odg"/>
-                                <include reference="Qry-5O-q3F"/>
-                                <include reference="bHh-BL-afR"/>
-                                <include reference="n2j-ZE-DwM"/>
-                                <include reference="rsC-Uo-6Wm"/>
-                                <include reference="t38-pB-2fm"/>
                                 <include reference="72A-y6-Gr0"/>
                                 <include reference="GrR-bg-043"/>
                                 <include reference="L1j-jX-c2e"/>
-                                <include reference="ERb-3K-6ce"/>
-                                <include reference="OMU-2k-OlO"/>
                             </mask>
                         </variation>
                     </view>
@@ -886,10 +889,10 @@
             </objects>
             <point key="canvasLocation" x="3450" y="18.75"/>
         </scene>
-        <!--Web Controller-->
+        <!--Privacy Policy-->
         <scene sceneID="MhH-lb-2ym">
             <objects>
-                <viewController id="4K1-Iv-qWo" customClass="WebController" customModule="ShopFinder" customModuleProvider="target" sceneMemberID="viewController">
+                <viewController storyboardIdentifier="WebController" id="4K1-Iv-qWo" customClass="WebController" customModule="ShopFinder" customModuleProvider="target" sceneMemberID="viewController">
                     <layoutGuides>
                         <viewControllerLayoutGuide type="top" id="zpf-7q-OFE"/>
                         <viewControllerLayoutGuide type="bottom" id="a9r-Zb-wa6"/>
@@ -910,7 +913,9 @@
                         <constraints>
                             <constraint firstItem="vbi-Bd-s8U" firstAttribute="bottom" secondItem="a9r-Zb-wa6" secondAttribute="top" id="3nF-5X-W8b"/>
                             <constraint firstItem="vbi-Bd-s8U" firstAttribute="leading" secondItem="qFH-NH-7gG" secondAttribute="leading" id="Kbz-4Y-iAb"/>
-                            <constraint firstItem="vbi-Bd-s8U" firstAttribute="top" secondItem="qFH-NH-7gG" secondAttribute="top" id="a3E-z7-ZdW"/>
+                            <constraint firstItem="vbi-Bd-s8U" firstAttribute="top" secondItem="qFH-NH-7gG" secondAttribute="top" id="a3E-z7-ZdW">
+                                <variation key="heightClass=regular-widthClass=compact" constant="0.0"/>
+                            </constraint>
                             <constraint firstAttribute="trailing" secondItem="vbi-Bd-s8U" secondAttribute="trailing" id="ikM-Ku-7mX"/>
                         </constraints>
                         <variation key="default">
@@ -936,14 +941,20 @@
                             </mask>
                         </variation>
                     </view>
-                    <navigationItem key="navigationItem" id="zOK-nG-yDX"/>
+                    <navigationItem key="navigationItem" title="Privacy Policy" id="CiO-Fi-wvW">
+                        <barButtonItem key="rightBarButtonItem" systemItem="stop" id="Z6W-bf-uNT">
+                            <connections>
+                                <action selector="dismiss:" destination="4K1-Iv-qWo" id="7kd-gs-cHv"/>
+                            </connections>
+                        </barButtonItem>
+                    </navigationItem>
                     <connections>
                         <outlet property="webView" destination="vbi-Bd-s8U" id="bGG-Dh-yLe"/>
                     </connections>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="Cd7-HA-zsa" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="5160" y="1005.75"/>
+            <point key="canvasLocation" x="6078" y="1005.75"/>
         </scene>
         <!--Shop Filter Options Controller-->
         <scene sceneID="2Uu-Em-5lZ">
@@ -1204,22 +1215,22 @@
             <point key="canvasLocation" x="1438.5" y="824.25"/>
         </scene>
         <!--Navigation Controller-->
-        <scene sceneID="WnF-uZ-Kr5">
+        <scene sceneID="IjM-Ge-cRs">
             <objects>
-                <navigationController storyboardIdentifier="NavWebController" automaticallyAdjustsScrollViewInsets="NO" id="gri-9Q-OOV" sceneMemberID="viewController">
+                <navigationController storyboardIdentifier="NavWebController" automaticallyAdjustsScrollViewInsets="NO" id="euh-wl-EvE" sceneMemberID="viewController">
                     <toolbarItems/>
-                    <navigationBar key="navigationBar" contentMode="scaleToFill" id="3RL-ix-JcO">
+                    <navigationBar key="navigationBar" contentMode="scaleToFill" id="jKB-a2-IJM">
                         <rect key="frame" x="0.0" y="0.0" width="320" height="44"/>
                         <autoresizingMask key="autoresizingMask"/>
                     </navigationBar>
                     <nil name="viewControllers"/>
                     <connections>
-                        <segue destination="4K1-Iv-qWo" kind="relationship" relationship="rootViewController" id="rG1-Xi-07o"/>
+                        <segue destination="4K1-Iv-qWo" kind="relationship" relationship="rootViewController" id="TYo-Xx-Hg5"/>
                     </connections>
                 </navigationController>
-                <placeholder placeholderIdentifier="IBFirstResponder" id="ZrQ-uN-Rmv" userLabel="First Responder" sceneMemberID="firstResponder"/>
+                <placeholder placeholderIdentifier="IBFirstResponder" id="Vzf-og-lbf" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="4428" y="1011.75"/>
+            <point key="canvasLocation" x="5160" y="1005.75"/>
         </scene>
     </scenes>
 </document>

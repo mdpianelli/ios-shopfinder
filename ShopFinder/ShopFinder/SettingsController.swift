@@ -10,11 +10,13 @@ import UIKit
 import SVProgressHUD
 import Spring
 
+
+//Table Struct
+
 struct Icon {
     let type : Int
     let index : Int
     let color : UIColor
-    
 }
 
 struct Action {
@@ -36,8 +38,26 @@ struct TableSection {
     
 }
 
+// Social Network Struct
+
+struct SocialNetworkUrl {
+    let scheme: String
+    let page: String
+}
+
+enum SocialNetwork {
+    case Facebook, GooglePlus, Twitter
+    func url() -> SocialNetworkUrl {
+        switch self {
+        case .Facebook: return SocialNetworkUrl(scheme: "fb://profile/PageId", page: "https://www.facebook.com/PageName")
+        case .Twitter: return SocialNetworkUrl(scheme: "twitter:///user?screen_name=USERNAME", page: "https://twitter.com/USERNAME")
+        case .GooglePlus: return SocialNetworkUrl(scheme: "gplus://plus.google.com/u/0/PageId", page: "https://plus.google.com/PageId")
+        }
+    }
+}
+
+
 class SettingsController : UIViewController, UITableViewDelegate, UITableViewDataSource {
-    
     
     @IBOutlet weak var table: UITableView!
     @IBOutlet weak var versionBuildLabel: UILabel!
@@ -136,6 +156,7 @@ class SettingsController : UIViewController, UITableViewDelegate, UITableViewDat
                 }
             }
             
+            self.table.reloadData()
         }
         
     
@@ -190,6 +211,9 @@ class SettingsController : UIViewController, UITableViewDelegate, UITableViewDat
             case "link":
                         openLinkAction(rowItem)
             
+            case "dlink":
+                        openDlinkAction(rowItem)
+
             
             default : break;
             
@@ -204,39 +228,57 @@ class SettingsController : UIViewController, UITableViewDelegate, UITableViewDat
     
     
     func mailAction(item : TableRow){
+       
         
+        
+    }
+    
+    func openDlinkAction(item: TableRow){
+      
+        //open deepLink
+        
+        if let dic = item.action.data as? NSDictionary{
+
+            
+            let dlink  = NSURL(string:dic.objectForKey("dlink") as! String)
+            
+           
+            var link : NSURL?
+            if let lStr = dic.objectForKey("link") as? String {
+                link  = NSURL(string:lStr)
+            }
+            
+            if UIApplication.sharedApplication().canOpenURL(dlink!) {
+                UIApplication.sharedApplication().openURL(dlink!)
+            }else{
+                if link != nil {
+                UIApplication.sharedApplication().openURL(link!)
+                }
+            }
+            
+        }
+
         
     }
     
     func openLinkAction(item: TableRow){
   
-        let link = item.action.data as! String
+    
         
-        
-        if link.hasPrefix("http") {
-            //open normal link
-            let wc = self.storyboard?.instantiateViewControllerWithIdentifier("NavWebController") as! WebController
+        if let link = item.action.data as? String {
             
-            wc.link = NSURL(string: link)
-            wc.title = item.title
-            
-            self.presentViewController(wc, animated: true, completion: nil)
-            
-        }else{
-            //open deepLink
-            
-            var fileURL  = NSURL(fileURLWithPath: link)
-            
-            
-            if UIApplication.sharedApplication().canOpenURL(fileURL!) {
-                UIApplication.sharedApplication().openURL(fileURL!)
-            }else{
-                //Notify deepLink App not installed
-                SVProgressHUD.showErrorWithStatus(NSLocalizedString("This App is not installed on your phone. Install it and try again later",comment:""))
+            if link.hasPrefix("http") {
+                //open normal link
+                let nav = self.storyboard?.instantiateViewControllerWithIdentifier("NavWebController") as! UINavigationController
+               let wc = nav.topViewController as! WebController
+                
+                wc.link = NSURL(string: link)
+                wc.title = item.title
+                
+                self.presentViewController(nav, animated: true, completion: nil)
                 
             }
         }
-        
     }
 
     

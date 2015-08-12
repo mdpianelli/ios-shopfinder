@@ -84,16 +84,17 @@ class ShopDetailController: UIViewController, MKMapViewDelegate, GADBannerViewDe
             imageView!.sd_setImageWithURL(NSURL(string: imageURL))
         }
         
-        if let geoloc: AnyObject = shop!.objectForKey("geolocation"){
-            
-            let lat = geoloc.objectForKey("lat") as! Double
-            let long = geoloc.objectForKey("lng") as! Double
-
-            let annotation = ShopAnnotation(title: titleLabel.text, subtitle: address, lat: lat, lon: long, row: 0)
-            
-            mapView.addAnnotation(annotation)
-            mapView.showAnnotations(mapView.annotations, animated: true)
-            mapView.selectAnnotation(annotation , animated: true)
+        if let loc: AnyObject = shop!.objectForKey("geolocation"){
+                if let geoloc : AnyObject = loc.objectForKey("location"){
+                let lat = geoloc.objectForKey("lat") as! Double
+                let long = geoloc.objectForKey("lng") as! Double
+                
+                let annotation = ShopAnnotation(title: titleLabel.text, subtitle: address, lat: lat, lon: long, row: 0)
+                
+                mapView.addAnnotation(annotation)
+                mapView.showAnnotations(mapView.annotations, animated: true)
+                mapView.selectAnnotation(annotation , animated: true)
+            }
         }
         
         imageView.animate()
