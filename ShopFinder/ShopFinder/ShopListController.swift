@@ -12,9 +12,9 @@ import FontAwesomeKit
 import SDWebImage
 import Spring
 import GoogleMobileAds
+import CoreLocation
 
-
-class ShopListController: UIViewController, GADInterstitialDelegate, ShopFilterOptionsControllerDelegate, UIScrollViewDelegate {
+class ShopListController: UIViewController, GADInterstitialDelegate, ShopFilterOptionsControllerDelegate, UIScrollViewDelegate,CLLocationManagerDelegate {
 
     
     @IBOutlet weak var table: UITableView!
@@ -23,7 +23,8 @@ class ShopListController: UIViewController, GADInterstitialDelegate, ShopFilterO
     var shops : NSArray = []
     var selectedShop : NSDictionary?
     var refreshControl : YALSunnyRefreshControl?  //UIRefreshControl()
-    
+    var locManager : CLLocationManager?
+    var currentLocation : CLLocation?
     
     
     //Segues Identifiers
@@ -40,14 +41,23 @@ class ShopListController: UIViewController, GADInterstitialDelegate, ShopFilterO
     //MARK: UIViewController Methods
 
     override func viewDidLoad() {
+        super.viewDidLoad()
         
-       super.viewDidLoad()
+        initialSetup()
         
-       initialSetup()
-       fetchShops()
+        if locManager == nil {
+            locManager =  CLLocationManager()
+            locManager?.delegate = self
+            
+            if( locManager!.respondsToSelector(Selector("requestWhenInUseAuthorization")) ){
+                locManager!.requestWhenInUseAuthorization()
+            }
+            
+            // locManager!.distanceFilter = 40
+            locManager!.startUpdatingLocation()
+        }
         
-       
-
+       //fetchShops()
     }
     
  
@@ -64,6 +74,7 @@ class ShopListController: UIViewController, GADInterstitialDelegate, ShopFilterO
     
     override func viewDidAppear(animated: Bool) {
         super.viewDidAppear(animated)
+        
         
 
     }
@@ -192,7 +203,7 @@ class ShopListController: UIViewController, GADInterstitialDelegate, ShopFilterO
     func fetchShops(){
         
        // SVProgressHUD.show()
-        
+       
         //retrieve shops and reload table
         ServerManager.retrieveShops(){
             obj, error in
@@ -204,6 +215,48 @@ class ShopListController: UIViewController, GADInterstitialDelegate, ShopFilterO
             
             if obj != nil {
                 self.shops = obj as! NSArray
+                
+                var aux : [NSDictionary] = []
+                
+                for eachShop in self.shops {
+                    if let loc: AnyObject = eachShop.objectForKey("geolocation"){
+                        if let geoloc : AnyObject = loc.objectForKey("location"){
+                            
+                            let lat = geoloc.objectForKey("lat") as! Double
+                            let long = geoloc.objectForKey("lng") as! Double
+
+                            //calculate shop distance
+                            let shopLocation = CLLocation(latitude: lat, longitude: long)
+                            var distanceType = "m"
+                            var distance = self.currentLocation?.distanceFromLocation(shopLocation)
+              
+                            let shopDic = eachShop.mutableCopy() as! NSMutableDictionary
+                            
+                            shopDic.setObject(distance!, forKey: "distanceValue")
+                            
+                            if distance > 1000 {
+                                distanceType = "km"
+                                distance = distance!/1000
+                            }
+                            
+                            var format = "%.0f%@"
+                            
+                            if distanceType == "km" {
+                                format = "%.1f%@"
+                            }
+                            
+                            let distanceStr = String(format: format ,distance!,distanceType)
+                            
+                            shopDic.setObject(distanceStr, forKey: "distance")
+                            aux.append(shopDic)
+                        }
+                    }
+                }
+                
+                sort(&aux, { $1.objectForKey("distanceValue") as! Double > $0.objectForKey("distanceValue") as! Double })
+                self.shops = aux
+
+
             }
             
             self.table.reloadData()
@@ -235,6 +288,13 @@ class ShopListController: UIViewController, GADInterstitialDelegate, ShopFilterO
         
         //cell.textLabel!.textColor = UIColor.whiteColor()
         cell.titleLabel!.text =  shop.objectForKey("name") as? String
+        let rating = shop.objectForKey("rating") as? NSNumber
+        
+        if rating != nil {
+            cell.ratingLabel!.text = "\(rating!.stringValue)/10"
+        }
+        
+        cell.distanceLabel!.text = shop.objectForKey("distance") as? String
         
         if let photos: AnyObject = shop.objectForKey("photos")
         {
@@ -287,6 +347,15 @@ class ShopListController: UIViewController, GADInterstitialDelegate, ShopFilterO
 
 
     
+    //MARK: - CoreLocation Stuff
+    
+    func locationManager(manager: CLLocationManager!, didUpdateLocations locations: [AnyObject]!)
+    {
+        manager.stopUpdatingLocation()
+        currentLocation = locations[0] as? CLLocation
+        fetchShops()
+        
+    }
     
     
     //    func saveImageWithView(view : UIView)

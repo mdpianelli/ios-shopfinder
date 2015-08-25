@@ -9,21 +9,10 @@
 import Foundation
 
 
-// Advertisement Structs
-
-struct Ads {
-    
-    static let bannerId = "ca-app-pub-3524769816987474/6568279341"
-    static let fullscreenId = "ca-app-pub-3524769816987474/8045012542"
-    
-}
-
-
-
 // API Structs
 
-//let API_URL = "http://shop-finder.eu01.aws.af.cm/api"
-let API_URL = "http://localhost:3000"
+let API_URL = "http://shop-finder.eu01.aws.af.cm/api"
+//let API_URL = "http://192.168.1.133:3000/api"
 
 struct API {
     
@@ -36,6 +25,14 @@ struct API {
 }
 
 
+// Advertisement Structs
+
+struct Ads {
+    
+    static let bannerId = "ca-app-pub-3524769816987474/6568279341"
+    static let fullscreenId = "ca-app-pub-3524769816987474/8045012542"
+    
+}
 
 
 

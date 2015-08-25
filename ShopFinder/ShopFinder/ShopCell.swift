@@ -11,5 +11,6 @@ import UIKit
 class ShopCell : JBParallaxCell {
     
         @IBOutlet weak var shopImageView: UIImageView!
-    
+        @IBOutlet weak var ratingLabel: UILabel!
+        @IBOutlet weak var distanceLabel: UILabel!
 }
