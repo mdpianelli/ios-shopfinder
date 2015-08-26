@@ -14,7 +14,15 @@ import Spring
 import GoogleMobileAds
 import CoreLocation
 
-class ShopListController: UIViewController, GADInterstitialDelegate, ShopFilterOptionsControllerDelegate, UIScrollViewDelegate,CLLocationManagerDelegate {
+
+
+class ShopListController: UIViewController, GADInterstitialDelegate, UIScrollViewDelegate,CLLocationManagerDelegate {
+
+    enum SortType {
+        case Distance
+        case Rating
+        case ReviewCount
+    }
 
     
     @IBOutlet weak var table: UITableView!
@@ -25,7 +33,7 @@ class ShopListController: UIViewController, GADInterstitialDelegate, ShopFilterO
     var refreshControl : YALSunnyRefreshControl?  //UIRefreshControl()
     var locManager : CLLocationManager?
     var currentLocation : CLLocation?
-    
+    var sortType : SortType = .Distance
     
     //Segues Identifiers
     let  segueShowFilter  = "showFilter"
@@ -84,6 +92,28 @@ class ShopListController: UIViewController, GADInterstitialDelegate, ShopFilterO
 
     }
     
+    
+    override func prepareForSegue(segue: UIStoryboardSegue, sender: AnyObject?) {
+        
+        // self.transitionManagerManageringDelegate = transitionManagerManagerZoom()
+        if segue.identifier == segueShowFilter {
+            if let options = segue.destinationViewController as? ShopFilterOptionsController {
+                options.delegate = self
+            }
+        }
+        
+        
+        if segue.identifier == segueShowShopDetail {
+            if let vc = segue.destinationViewController as? ShopDetailController {
+                vc.shop = selectedShop
+                vc.transitioningDelegate =  transitionManager
+            }
+        }
+        
+        
+    }
+    
+    
     //MARK: Setup Methods
     
     func initialSetup()
@@ -124,27 +154,6 @@ class ShopListController: UIViewController, GADInterstitialDelegate, ShopFilterO
     }
     
     
-    
-    override func prepareForSegue(segue: UIStoryboardSegue, sender: AnyObject?) {
-     
-       // self.transitionManagerManageringDelegate = transitionManagerManagerZoom()
-        if segue.identifier == segueShowFilter {
-            if let options = segue.destinationViewController as? ShopFilterOptionsController {
-                options.delegate = self
-            }
-        }
-        
-        
-        if segue.identifier == segueShowShopDetail {
-            if let vc = segue.destinationViewController as? ShopDetailController {
-                vc.shop = selectedShop
-                vc.transitioningDelegate =  transitionManager
-            }
-        }
-       
-        
-    }
-    
     func adBannerSetup(){
 
         adBannerFull = GADInterstitial(adUnitID: Ads.fullscreenId)
@@ -152,6 +161,9 @@ class ShopListController: UIViewController, GADInterstitialDelegate, ShopFilterO
         adBannerFull?.loadRequest(GADRequest())
 
     }
+    
+    
+    
     
     //MARK: Receiver Methods
     
@@ -186,6 +198,30 @@ class ShopListController: UIViewController, GADInterstitialDelegate, ShopFilterO
         
         UIApplication.sharedApplication().setStatusBarStyle(UIStatusBarStyle.Default, animated: true)
     }
+    
+    func sortTable(sender: AnyObject?){
+        
+        switch sortType {
+            
+            case .Distance :
+                    sortByDistance()
+
+            case .Rating :
+                    sortByRating()
+
+            case .ReviewCount :
+                    sortByReviewCount()
+
+            default :
+                    sortByDistance()
+        }
+     
+        table.reloadSections(NSIndexSet(index: 0), withRowAnimation:UITableViewRowAnimation.Middle)
+        
+
+       // table.reloadData()
+    }
+    
     
 
     
@@ -229,10 +265,13 @@ class ShopListController: UIViewController, GADInterstitialDelegate, ShopFilterO
                             let shopLocation = CLLocation(latitude: lat, longitude: long)
                             var distanceType = "m"
                             var distance = self.currentLocation?.distanceFromLocation(shopLocation)
-              
+            
+                            
                             let shopDic = eachShop.mutableCopy() as! NSMutableDictionary
                             
+                           
                             shopDic.setObject(distance!, forKey: "distanceValue")
+                            
                             
                             if distance > 1000 {
                                 distanceType = "km"
@@ -241,7 +280,7 @@ class ShopListController: UIViewController, GADInterstitialDelegate, ShopFilterO
                             
                             var format = "%.0f%@"
                             
-                            if distanceType == "km" {
+                            if distanceType == "Km" {
                                 format = "%.1f%@"
                             }
                             
@@ -253,19 +292,48 @@ class ShopListController: UIViewController, GADInterstitialDelegate, ShopFilterO
                     }
                 }
                 
-                sort(&aux, { $1.objectForKey("distanceValue") as! Double > $0.objectForKey("distanceValue") as! Double })
                 self.shops = aux
-
-
+                
             }
             
-            self.table.reloadData()
+            self.sortTable(nil)
+            
          //   SVProgressHUD.dismiss()
             self.refreshControl?.endRefreshing()
         }
     }
     
+    //MARK: Sort Methods
     
+    func sortByDistance() {
+        
+        var aux = self.shops as! [NSDictionary]
+        
+        sort(&aux, { $1.objectForKey("distanceValue") as! Double > $0.objectForKey("distanceValue") as! Double })
+
+       self.shops = aux
+    }
+    
+    func sortByRating() {
+        
+        var aux = self.shops as! [NSDictionary]
+        
+        sort(&aux, {
+            
+            return $1.objectForKey("name") as! String > $0.objectForKey("name") as! String
+        })
+        
+        self.shops = aux
+    }
+    
+    func sortByReviewCount() {
+        
+        var aux = self.shops as! [NSDictionary]
+        
+        sort(&aux, { $1.objectForKey("reviews_count") as! Double > $0.objectForKey("reviews_count") as! Double })
+        
+        self.shops = aux
+    }
     
     
     //MARK: - UITableViewDataSource
@@ -291,7 +359,7 @@ class ShopListController: UIViewController, GADInterstitialDelegate, ShopFilterO
         let rating = shop.objectForKey("rating") as? NSNumber
         
         if rating != nil {
-            cell.ratingLabel!.text = "\(rating!.stringValue)/10"
+            cell.ratingLabel!.text = "\(rating!.stringValue)/5"
         }
         
         cell.distanceLabel!.text = shop.objectForKey("distance") as? String

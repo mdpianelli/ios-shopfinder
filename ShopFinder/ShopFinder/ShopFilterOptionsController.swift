@@ -10,17 +10,12 @@ import UIKit
 import Spring
 
 
-protocol ShopFilterOptionsControllerDelegate: class {
-  
-}
-
-
 
 class ShopFilterOptionsController : UIViewController {
     
     
     @IBOutlet weak var modalView: SpringView!
-    weak var delegate : ShopFilterOptionsControllerDelegate?
+    weak var delegate : ShopListController?
 
     @IBOutlet weak var resetButton: DesignableButton!
     
@@ -70,6 +65,38 @@ class ShopFilterOptionsController : UIViewController {
         dismissViewControllerAnimated(true, completion: nil)
         
         UIApplication.sharedApplication().sendAction("maximizeView:", to:self.delegate, from: self, forEvent: nil)
+    }
+    
+    
+    func callSortTable(){
+        
+        UIApplication.sharedApplication().sendAction("sortTable:", to:self.delegate, from: self, forEvent: nil)
+        
+        resetButtonPressed(self)
+
+    }
+    
+    @IBAction func sortByDistance(sender: AnyObject) {
+    
+        self.delegate?.sortType = .Distance
+        callSortTable()
+    }
+    
+    @IBAction func sortByRating(sender: AnyObject) {
+     
+        self.delegate?.sortType = .Rating
+        
+        callSortTable()
+
+    }
+    
+    @IBAction func sortByReviewCount(sender: AnyObject) {
+        
+        self.delegate?.sortType = .ReviewCount
+
+        callSortTable()
+
+
     }
     
 }
