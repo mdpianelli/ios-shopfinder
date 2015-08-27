@@ -11,3 +11,4 @@
 
 #import "YALSunnyRefreshControl.h"
 #import "JBParallaxCell.h"
+#import "ParallaxHeaderView.h"

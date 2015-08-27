@@ -25,6 +25,8 @@
 		9A47A8951B5D18D20098E743 /* foundation-icons.ttf in Resources */ = {isa = PBXBuildFile; fileRef = 9A47A8911B5D18D20098E743 /* foundation-icons.ttf */; };
 		9A47A8961B5D18D20098E743 /* ionicons.ttf in Resources */ = {isa = PBXBuildFile; fileRef = 9A47A8921B5D18D20098E743 /* ionicons.ttf */; };
 		9A47A8971B5D18D20098E743 /* zocial-regular-webfont.ttf in Resources */ = {isa = PBXBuildFile; fileRef = 9A47A8931B5D18D20098E743 /* zocial-regular-webfont.ttf */; };
+		9A84AAD01B8F397A002CF88B /* ParallaxHeaderView.m in Sources */ = {isa = PBXBuildFile; fileRef = 9A84AACF1B8F397A002CF88B /* ParallaxHeaderView.m */; };
+		9A84AAD31B8F398C002CF88B /* UIImage+ImageEffects.m in Sources */ = {isa = PBXBuildFile; fileRef = 9A84AAD21B8F398C002CF88B /* UIImage+ImageEffects.m */; };
 		9A8CB5BB1B594F06005B9754 /* AppConfig.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9A8CB5BA1B594F06005B9754 /* AppConfig.swift */; };
 		9A8CB5BD1B59AA7E005B9754 /* ShopFilterOptionsController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9A8CB5BC1B59AA7E005B9754 /* ShopFilterOptionsController.swift */; };
 		9AD808FB1B5FDA780077DFD1 /* FADesignableIconButton.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9AD808F61B5FDA780077DFD1 /* FADesignableIconButton.swift */; };
@@ -77,6 +79,10 @@
 		9A47A8911B5D18D20098E743 /* foundation-icons.ttf */ = {isa = PBXFileReference; lastKnownFileType = file; path = "foundation-icons.ttf"; sourceTree = "<group>"; };
 		9A47A8921B5D18D20098E743 /* ionicons.ttf */ = {isa = PBXFileReference; lastKnownFileType = file; path = ionicons.ttf; sourceTree = "<group>"; };
 		9A47A8931B5D18D20098E743 /* zocial-regular-webfont.ttf */ = {isa = PBXFileReference; lastKnownFileType = file; path = "zocial-regular-webfont.ttf"; sourceTree = "<group>"; };
+		9A84AACE1B8F397A002CF88B /* ParallaxHeaderView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = ParallaxHeaderView.h; path = YALSunnyRefreshControll/ParallaxHeaderView.h; sourceTree = "<group>"; };
+		9A84AACF1B8F397A002CF88B /* ParallaxHeaderView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = ParallaxHeaderView.m; path = YALSunnyRefreshControll/ParallaxHeaderView.m; sourceTree = "<group>"; };
+		9A84AAD11B8F398C002CF88B /* UIImage+ImageEffects.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = "UIImage+ImageEffects.h"; sourceTree = "<group>"; };
+		9A84AAD21B8F398C002CF88B /* UIImage+ImageEffects.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = "UIImage+ImageEffects.m"; sourceTree = "<group>"; };
 		9A8CB5B61B594D77005B9754 /* GoogleMobileAds.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = GoogleMobileAds.framework; path = "../../../../../Downloads/GoogleMobileAdsSdkiOS-7.3.1/GoogleMobileAds.framework"; sourceTree = "<group>"; };
 		9A8CB5BA1B594F06005B9754 /* AppConfig.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = AppConfig.swift; sourceTree = "<group>"; };
 		9A8CB5BC1B59AA7E005B9754 /* ShopFilterOptionsController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ShopFilterOptionsController.swift; sourceTree = "<group>"; };
@@ -202,6 +208,7 @@
 		9A45661D1B4D990D00C40073 /* ThirdParty */ = {
 			isa = PBXGroup;
 			children = (
+				9A84AACD1B8F394F002CF88B /* ParallaxHeader */,
 				9AD809081B643E8A0077DFD1 /* YALSunnyRefreshControll */,
 				9A37A6441B6789A20067B8DB /* ParallaxCell */,
 			);
@@ -284,6 +291,17 @@
 				9A47A8931B5D18D20098E743 /* zocial-regular-webfont.ttf */,
 			);
 			path = Fonts;
+			sourceTree = "<group>";
+		};
+		9A84AACD1B8F394F002CF88B /* ParallaxHeader */ = {
+			isa = PBXGroup;
+			children = (
+				9A84AAD11B8F398C002CF88B /* UIImage+ImageEffects.h */,
+				9A84AAD21B8F398C002CF88B /* UIImage+ImageEffects.m */,
+				9A84AACE1B8F397A002CF88B /* ParallaxHeaderView.h */,
+				9A84AACF1B8F397A002CF88B /* ParallaxHeaderView.m */,
+			);
+			name = ParallaxHeader;
 			sourceTree = "<group>";
 		};
 		9AD808F51B5FDA5A0077DFD1 /* Extensions */ = {
@@ -504,7 +522,9 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				9A84AAD01B8F397A002CF88B /* ParallaxHeaderView.m in Sources */,
 				9A8CB5BD1B59AA7E005B9754 /* ShopFilterOptionsController.swift in Sources */,
+				9A84AAD31B8F398C002CF88B /* UIImage+ImageEffects.m in Sources */,
 				9A47010B1B56D77A00A4B8E3 /* ServerManager.swift in Sources */,
 				9AD8090C1B643E8A0077DFD1 /* YALSunnyRefreshControl.m in Sources */,
 				9AD808FB1B5FDA780077DFD1 /* FADesignableIconButton.swift in Sources */,

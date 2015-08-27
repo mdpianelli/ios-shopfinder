@@ -216,7 +216,7 @@ class ShopListController: UIViewController, GADInterstitialDelegate, UIScrollVie
                     sortByDistance()
         }
      
-        table.reloadSections(NSIndexSet(index: 0), withRowAnimation:UITableViewRowAnimation.Middle)
+        table.reloadSections(NSIndexSet(index: 0), withRowAnimation:UITableViewRowAnimation.Fade )
         
 
        // table.reloadData()
@@ -268,7 +268,10 @@ class ShopListController: UIViewController, GADInterstitialDelegate, UIScrollVie
             
                             
                             let shopDic = eachShop.mutableCopy() as! NSMutableDictionary
-                            
+                           
+                            if distance == nil {
+                                distance = 0
+                            }
                            
                             shopDic.setObject(distance!, forKey: "distanceValue")
                             

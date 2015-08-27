@@ -1,0 +1,6 @@
+ShopFinder/ShopFinder.xcodeproj/project.xcworkspace/*
+ShopFinder/ShopFinder.xcworkspace/*
+ShopFinder/ShopFinder.xcodeproj/xcuserdata/*
+.DS_Store
+ShopFinder/Podfile.lock
+ShopFinder/Pods/*

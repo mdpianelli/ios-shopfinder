@@ -23,7 +23,6 @@ class ServerManager : NSObject {
             .responseJSON { (_, _, obj, error) in
                 completionHandler(obj,error)
         }
-              
     }
     
     

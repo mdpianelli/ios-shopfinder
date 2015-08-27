@@ -16,7 +16,7 @@ import Spring
 import GoogleMobileAds
 
 
-class ShopDetailController: UIViewController, MKMapViewDelegate, GADBannerViewDelegate {
+class ShopDetailController: UIViewController, MKMapViewDelegate, GADBannerViewDelegate, UITableViewDelegate, UITableViewDataSource {
 
     
     var shop : NSDictionary?
@@ -25,6 +25,9 @@ class ShopDetailController: UIViewController, MKMapViewDelegate, GADBannerViewDe
     @IBOutlet weak var titleLabel: UILabel!
     @IBOutlet weak var addressLabel: UILabel!
     @IBOutlet weak var mapView: MKMapView!
+    @IBOutlet weak var table: UITableView!
+    
+    @IBOutlet weak var header: ParallaxHeaderView!
     
     var adBanner: GADBannerView?
 
@@ -73,6 +76,9 @@ class ShopDetailController: UIViewController, MKMapViewDelegate, GADBannerViewDe
         //setup adBanner
         adBannerSetup()
         
+        header.headerImage = UIImage(named: "Stars")
+        header.frame.size.height = 150
+        table.tableHeaderView = header
         
         titleLabel.text = shop!.objectForKey("name") as? String
         let address = shop!.objectForKey("address") as? String
@@ -81,7 +87,7 @@ class ShopDetailController: UIViewController, MKMapViewDelegate, GADBannerViewDe
         if let photos: AnyObject = shop!.objectForKey("photos")
         {
             let imageURL = photos[0] as! String
-            imageView!.sd_setImageWithURL(NSURL(string: imageURL))
+            //imageView!.sd_setImageWithURL(NSURL(string: imageURL))
         }
         
         if let loc: AnyObject = shop!.objectForKey("geolocation"){
@@ -91,30 +97,13 @@ class ShopDetailController: UIViewController, MKMapViewDelegate, GADBannerViewDe
                 
                 let annotation = ShopAnnotation(title: titleLabel.text, subtitle: address, lat: lat, lon: long, row: 0)
                 
-                mapView.addAnnotation(annotation)
-                mapView.showAnnotations(mapView.annotations, animated: true)
-                mapView.selectAnnotation(annotation , animated: true)
+//                mapView.addAnnotation(annotation)
+//                mapView.showAnnotations(mapView.annotations, animated: true)
+//                mapView.selectAnnotation(annotation , animated: true)
             }
         }
         
-        imageView.animate()
-
-        //mapView.anima
-        //mapView.showLoading()
-    
-//        var zoomRect : MKMapRect = MKMapRectNull;
-//        
-//        for ( annotation : MKAnnotation in mapView.annotations)
-//        {
-//            
-//            
-//            MKMapPoint annotationPoint = MKMapPointForCoordinate(annotation.coordinate);
-//            MKMapRect pointRect = MKMapRectMake(annotationPoint.x, annotationPoint.y, 0.1, 0.1);
-//            zoomRect = MKMapRectUnion(zoomRect, pointRect);
-//        }
-//        [mapView setVisibleMapRect:zoomRect animated:YES];
-        
-        
+       // imageView.animate()
     }
     
 
@@ -156,10 +145,33 @@ class ShopDetailController: UIViewController, MKMapViewDelegate, GADBannerViewDe
         
         //println(error)
     }
-
     
+    
+    //MARK: UITableView Methods
+
+    func tableView(tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
+        return 50
+    }
+    
+    func tableView(tableView: UITableView, cellForRowAtIndexPath indexPath: NSIndexPath) -> UITableViewCell
+    {
+        let cell  = tableView.dequeueReusableCellWithIdentifier("Cell") as! UITableViewCell
+        
+        return cell
+    }
+    
+    
+    func  scrollViewDidScroll(scrollView: UIScrollView) {
+        let header: ParallaxHeaderView = table.tableHeaderView as! ParallaxHeaderView
+        header.layoutHeaderViewForScrollViewOffset(scrollView.contentOffset)
+        
+        table.tableHeaderView = header
+    }
 
 }
+
+
+
 
 
 
