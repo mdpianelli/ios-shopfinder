@@ -320,7 +320,7 @@ class ShopListController: UIViewController, GADInterstitialDelegate, UIScrollVie
         
         sort(&aux, {
             
-            return $1.objectForKey("name") as! String > $0.objectForKey("name") as! String
+            return $0.objectForKey("rating") as! Double > $1.objectForKey("rating") as! Double
         })
         
         self.shops = aux
@@ -330,7 +330,7 @@ class ShopListController: UIViewController, GADInterstitialDelegate, UIScrollVie
         
         var aux = self.shops as! [NSDictionary]
         
-        sort(&aux, { $1.objectForKey("reviews_count") as! Double > $0.objectForKey("reviews_count") as! Double })
+        sort(&aux, { $0.objectForKey("reviews_count") as! Double > $1.objectForKey("reviews_count") as! Double })
         
         self.shops = aux
     }
@@ -363,6 +363,12 @@ class ShopListController: UIViewController, GADInterstitialDelegate, UIScrollVie
         }
         
         cell.distanceLabel!.text = shop.objectForKey("distance") as? String
+        
+        let reviewCount = shop.objectForKey("reviews_count") as? NSNumber
+        
+        if reviewCount != nil {
+            cell.reviewCountLabel!.text = reviewCount!.stringValue
+        }
         
         if let photos: AnyObject = shop.objectForKey("photos")
         {
