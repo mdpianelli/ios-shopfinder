@@ -16,10 +16,13 @@ import FontAwesomeKit
 
     var icon : Icon? {
         didSet{
-            self.imageFontClass = icon!.type
-            self.imageType = icon!.index
-            self.tintColor = icon!.color
-
+            if icon != nil {
+                self.imageFontClass = icon!.type
+                self.imageType = icon!.index
+                self.tintColor = icon!.color
+            }else{
+                self.alpha = 0
+            }
         }
     }
     

@@ -25,16 +25,17 @@ struct Action {
 }
 
 struct TableRow {
-    
     let title : String
-    let icon : Icon
-    let action : Action
+    var icon : Icon?
+    var action : Action?
+    let height : Int 
+
 }
 
 struct TableSection {
     
     let sectionName : String
-    let rows : [TableRow]
+    var rows : [TableRow]?
     
 }
 
@@ -144,7 +145,7 @@ class SettingsController : UIViewController, UITableViewDelegate, UITableViewDat
                                         
                                         icon: Icon(type: icon["class"] as! NSInteger, index: icon["class"] as! NSInteger, color: UIColor(hex: icon["color"] as! String)),
                                         
-                                        action: Action(type: action["type"] as! String, data: action["data"] )
+                                        action: Action(type: action["type"] as! String, data: action["data"] ),height:60
                                     ))
                                     
                                 }
@@ -172,7 +173,7 @@ class SettingsController : UIViewController, UITableViewDelegate, UITableViewDat
     
     func tableView(tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
         
-        return sections[section].rows.count
+        return sections[section].rows!.count
     }
     
     func numberOfSectionsInTableView(tableView: UITableView) -> Int {
@@ -185,7 +186,7 @@ class SettingsController : UIViewController, UITableViewDelegate, UITableViewDat
         let cell : SettingsCell  = tableView.dequeueReusableCellWithIdentifier("SettingsCell") as!
         SettingsCell
         
-        let itemData = sections[indexPath.section].rows[indexPath.row] as TableRow
+        let itemData = sections[indexPath.section].rows![indexPath.row] as TableRow
         
         cell.titleLabel.text = itemData.title
         cell.iconBtn.icon = itemData.icon
@@ -201,9 +202,9 @@ class SettingsController : UIViewController, UITableViewDelegate, UITableViewDat
         
         tableView.deselectRowAtIndexPath(indexPath, animated: true)
         
-        let rowItem = sections[indexPath.section].rows[indexPath.row] as TableRow
+        let rowItem = sections[indexPath.section].rows![indexPath.row] as TableRow
         
-        switch(rowItem.action.type){
+        switch(rowItem.action!.type){
             
             case "mail":
                         mailAction(rowItem)
@@ -237,7 +238,7 @@ class SettingsController : UIViewController, UITableViewDelegate, UITableViewDat
       
         //open deepLink
         
-        if let dic = item.action.data as? NSDictionary{
+        if let dic = item.action!.data as? NSDictionary{
 
             
             let dlink  = NSURL(string:dic.objectForKey("dlink") as! String)
@@ -265,7 +266,7 @@ class SettingsController : UIViewController, UITableViewDelegate, UITableViewDat
   
     
         
-        if let link = item.action.data as? String {
+        if let link = item.action!.data as? String {
             
             if link.hasPrefix("http") {
                 //open normal link

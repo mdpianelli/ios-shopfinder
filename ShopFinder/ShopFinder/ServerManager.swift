@@ -8,7 +8,7 @@
 
 import Foundation
 import Alamofire
-
+import ReachabilitySwift
 
 
 
@@ -19,10 +19,19 @@ class ServerManager : NSObject {
     
     class func retrieveShops(completionHandler: (AnyObject?, NSError?) -> Void) -> Void {
         
-        Alamofire.request(.GET, API.shops )
-            .responseJSON { (_, _, obj, error) in
-                completionHandler(obj,error)
+        if Reachability.reachabilityForInternetConnection().isReachable() {
+            Alamofire.request(.GET, API.shops )
+                .responseJSON { (_, _, obj, error) in
+                    NSUserDefaults.standardUserDefaults().setObject(obj, forKey: "shopsJSON")
+                    completionHandler(obj,error)
+            }
+        }else{
+            let obj: AnyObject? = NSUserDefaults.standardUserDefaults().objectForKey("shopsJSON")
+            if obj != nil {
+                completionHandler(obj,nil)
+            }
         }
+        
     }
     
     

@@ -15,18 +15,17 @@ import MapKit
 import Spring
 import GoogleMobileAds
 
-
 class ShopDetailController: UIViewController, MKMapViewDelegate, GADBannerViewDelegate, UITableViewDelegate, UITableViewDataSource {
 
     
     var shop : NSDictionary?
-
+    var shopInfo : [TableSection]?
+    
     @IBOutlet weak var imageView: SpringImageView!
     @IBOutlet weak var titleLabel: UILabel!
     @IBOutlet weak var addressLabel: UILabel!
     @IBOutlet weak var mapView: MKMapView!
     @IBOutlet weak var table: UITableView!
-    
     @IBOutlet weak var header: ParallaxHeaderView!
     
     var adBanner: GADBannerView?
@@ -52,6 +51,7 @@ class ShopDetailController: UIViewController, MKMapViewDelegate, GADBannerViewDe
         
         self.navigationItem.title = NSLocalizedString("Shop", comment: "shop")
         
+        scrollViewDidScroll(table)
        
     }
     
@@ -76,12 +76,55 @@ class ShopDetailController: UIViewController, MKMapViewDelegate, GADBannerViewDe
         //setup adBanner
         adBannerSetup()
         
+     
+        titleLabel.text = shop!.objectForKey("name") as? String
+        
+       
+        
+        shopInfo = [TableSection(sectionName:"",rows:[])]
+        
+        if let address = shop!.objectForKey("address") as? String {
+            
+            shopInfo![0].rows?.append(TableRow(title:address ,icon:Icon(type:0,index:215,color:UIColor(hex: "#0091FF")),action:Action(type:"",data:nil),height:60))
+        }
+        
+        
+        if let phoneNumber = shop!.objectForKey("phone_number") as? String {
+        
+           shopInfo![0].rows?.append(TableRow(title:phoneNumber ,icon:Icon(type:0,index:372,color:UIColor(hex: "#0091FF")),action:Action(type:"",data:nil),height:60))
+        }
+        
+        
+        if let website = shop!.objectForKey("website") as? String {
+            
+            shopInfo![0].rows?.append(TableRow(title:website,icon:Icon(type:2,index:221,color:UIColor(hex: "#0091FF")),action:Action(type:"",data:nil),height:60))
+            
+        }
+        
+        
+        if let openingHours = shop!.objectForKey("opening_hours") as? NSDictionary {
+        
+            let weekdayArray = openingHours.objectForKey("weekday_text") as! NSArray
+            
+            shopInfo?.append(
+                TableSection(sectionName:"Opening Hours",rows:[
+                    TableRow(title:weekdayArray[0] as! String,icon:nil,action:nil,height:40),
+                    TableRow(title:weekdayArray[1] as! String,icon:nil,action:nil,height:40),
+                    TableRow(title:weekdayArray[2] as! String,icon:nil,action:nil,height:40),
+                    TableRow(title:weekdayArray[3] as! String,icon:nil,action:nil,height:40),
+                    TableRow(title:weekdayArray[4] as! String,icon:nil,action:nil,height:40),
+                    TableRow(title:weekdayArray[5] as! String,icon:nil,action:nil,height:40),
+                    TableRow(title:weekdayArray[6] as! String,icon:nil,action:nil,height:40),
+                ])
+            )
+            
+        }
+        
         header.headerImage = UIImage(named: "Stars")
-        header.frame.size.height = 150
+        header.frame.size.height = 170
         table.tableHeaderView = header
         
-        titleLabel.text = shop!.objectForKey("name") as? String
-        let address = shop!.objectForKey("address") as? String
+        
        // addressLabel.text = address
         
         if let photos: AnyObject = shop!.objectForKey("photos")
@@ -95,14 +138,16 @@ class ShopDetailController: UIViewController, MKMapViewDelegate, GADBannerViewDe
                 let lat = geoloc.objectForKey("lat") as! Double
                 let long = geoloc.objectForKey("lng") as! Double
                 
-                let annotation = ShopAnnotation(title: titleLabel.text, subtitle: address, lat: lat, lon: long, row: 0)
+                let annotation = ShopAnnotation(title: titleLabel.text, subtitle:shop!.objectForKey("address") as! String, lat: lat, lon: long, row: 0)
                 
-//                mapView.addAnnotation(annotation)
-//                mapView.showAnnotations(mapView.annotations, animated: true)
-//                mapView.selectAnnotation(annotation , animated: true)
+                mapView.addAnnotation(annotation)
+                mapView.showAnnotations(mapView.annotations, animated: true)
+                mapView.selectAnnotation(annotation , animated: true)
             }
         }
         
+        
+        table.reloadData()
        // imageView.animate()
     }
     
@@ -138,6 +183,8 @@ class ShopDetailController: UIViewController, MKMapViewDelegate, GADBannerViewDe
             adBanner?.alpha = 1
         })
         
+        table.contentInset = UIEdgeInsetsMake(0,0,50,0)
+
        
     }
     
@@ -149,13 +196,39 @@ class ShopDetailController: UIViewController, MKMapViewDelegate, GADBannerViewDe
     
     //MARK: UITableView Methods
 
+    func tableView(tableView: UITableView, heightForRowAtIndexPath indexPath: NSIndexPath) -> CGFloat
+    {
+        let row = shopInfo![indexPath.section].rows![indexPath.row] as TableRow
+        return CGFloat(row.height)
+
+    }
+    
+    func tableView(tableView: UITableView, titleForHeaderInSection section: Int) -> String? {
+        return shopInfo![section].sectionName
+    }
+    
+    func numberOfSectionsInTableView(tableView: UITableView) -> Int {
+        return shopInfo!.count
+    }
+    
     func tableView(tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
-        return 50
+        return shopInfo![section].rows!.count
     }
     
     func tableView(tableView: UITableView, cellForRowAtIndexPath indexPath: NSIndexPath) -> UITableViewCell
     {
-        let cell  = tableView.dequeueReusableCellWithIdentifier("Cell") as! UITableViewCell
+        let cell  = tableView.dequeueReusableCellWithIdentifier("Cell") as! ShopDetailCell
+        
+        let data = shopInfo![indexPath.section].rows![indexPath.row] as TableRow
+        
+        cell.infoLabel!.text = data.title
+        cell.iconButton!.icon = data.icon
+        
+        if data.action == nil {
+            cell.selectionStyle = .None
+        }else{
+            cell.selectionStyle = .Default
+        }
         
         return cell
     }
@@ -176,6 +249,13 @@ class ShopDetailController: UIViewController, MKMapViewDelegate, GADBannerViewDe
 
 
 
+
+class ShopDetailCell : UITableViewCell {
+    
+    @IBOutlet weak var infoLabel: UILabel!
+    @IBOutlet weak var iconButton: FADesignableIconButton!
+    
+}
 
 
 

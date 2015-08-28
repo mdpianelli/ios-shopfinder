@@ -16,6 +16,7 @@ import CoreLocation
 
 
 
+
 class ShopListController: UIViewController, GADInterstitialDelegate, UIScrollViewDelegate,CLLocationManagerDelegate {
 
     enum SortType {
@@ -240,17 +241,25 @@ class ShopListController: UIViewController, GADInterstitialDelegate, UIScrollVie
         
        // SVProgressHUD.show()
        
+        if currentLocation == nil{
+            return
+        }
+        
         //retrieve shops and reload table
         ServerManager.retrieveShops(){
             obj, error in
             
+            var data: AnyObject? = obj
+            
             if error != nil {
                 println(error)
+                data = NSUserDefaults.standardUserDefaults().objectForKey("shopsJSON")
+
                 return
             }
             
             if obj != nil {
-                self.shops = obj as! NSArray
+                self.shops = data as! NSArray
                 
                 var aux : [NSDictionary] = []
                 
@@ -509,6 +518,7 @@ class ShopListController: UIViewController, GADInterstitialDelegate, UIScrollVie
 
 
 }
+
 
 
 
