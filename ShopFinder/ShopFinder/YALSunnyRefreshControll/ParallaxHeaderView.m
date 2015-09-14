@@ -64,6 +64,7 @@ static CGFloat kLabelPaddingDist = 8.0f;
         self.imageScrollView.frame = frame;
         self.bluredImageView.alpha =   1 / kDefaultHeaderFrame.size.height * offset.y * 2;
         self.clipsToBounds = YES;
+        
     }
     else
     {
@@ -81,7 +82,7 @@ static CGFloat kLabelPaddingDist = 8.0f;
 - (void)refreshBlurViewForNewImage
 {
     UIImage *screenShot = [self screenShotOfView:self];
-    screenShot = [screenShot applyBlurWithRadius:5 tintColor:[UIColor colorWithWhite:0.6 alpha:0.2] saturationDeltaFactor:1.0 maskImage:nil];
+    screenShot = [screenShot applyBlurWithRadius:6 tintColor:[UIColor colorWithWhite:0.4 alpha:0.5] saturationDeltaFactor:1.0 maskImage:nil];
     self.bluredImageView.image = screenShot;
 }
 

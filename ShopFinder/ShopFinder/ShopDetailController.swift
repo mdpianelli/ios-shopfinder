@@ -15,11 +15,12 @@ import MapKit
 import Spring
 import GoogleMobileAds
 
-class ShopDetailController: UIViewController, MKMapViewDelegate, GADBannerViewDelegate, UITableViewDelegate, UITableViewDataSource {
+class ShopDetailController: BaseController, MKMapViewDelegate, GADBannerViewDelegate, UITableViewDelegate, UITableViewDataSource {
 
     
     var shop : NSDictionary?
     var shopInfo : [TableSection]?
+    var shopAnnotation : ShopAnnotation?
     
     @IBOutlet weak var imageView: SpringImageView!
     @IBOutlet weak var titleLabel: UILabel!
@@ -57,6 +58,8 @@ class ShopDetailController: UIViewController, MKMapViewDelegate, GADBannerViewDe
     
     override func viewDidAppear(animated: Bool) {
         super.viewDidAppear(animated)
+        header.refreshBlurViewForNewImage()
+
     }
     
     override func viewWillDisappear(animated: Bool) {
@@ -85,19 +88,19 @@ class ShopDetailController: UIViewController, MKMapViewDelegate, GADBannerViewDe
         
         if let address = shop!.objectForKey("address") as? String {
             
-            shopInfo![0].rows?.append(TableRow(title:address ,icon:Icon(type:0,index:215,color:UIColor(hex: "#0091FF")),action:Action(type:"",data:nil),height:60))
+            shopInfo![0].rows?.append(TableRow(title:address ,icon:Icon(type:0,index:215,color:UIColor(hex: "#0091FF")),action:Action(type:.Location,data:nil),height:60))
         }
         
         
         if let phoneNumber = shop!.objectForKey("phone_number") as? String {
         
-           shopInfo![0].rows?.append(TableRow(title:phoneNumber ,icon:Icon(type:0,index:372,color:UIColor(hex: "#0091FF")),action:Action(type:"",data:nil),height:60))
+           shopInfo![0].rows?.append(TableRow(title:phoneNumber ,icon:Icon(type:0,index:372,color:UIColor(hex: "#0091FF")),action:Action(type:.Call,data:phoneNumber),height:60))
         }
         
         
         if let website = shop!.objectForKey("website") as? String {
             
-            shopInfo![0].rows?.append(TableRow(title:website,icon:Icon(type:2,index:221,color:UIColor(hex: "#0091FF")),action:Action(type:"",data:nil),height:60))
+            shopInfo![0].rows?.append(TableRow(title:website,icon:Icon(type:2,index:221,color:UIColor(hex: "#0091FF")),action:Action(type:.Link,data:website),height:60))
             
         }
         
@@ -120,18 +123,21 @@ class ShopDetailController: UIViewController, MKMapViewDelegate, GADBannerViewDe
             
         }
         
-        header.headerImage = UIImage(named: "Stars")
+      
         header.frame.size.height = 170
-        table.tableHeaderView = header
-        
-        
-       // addressLabel.text = address
-        
+
         if let photos: AnyObject = shop!.objectForKey("photos")
         {
             let imageURL = photos[0] as! String
-            //imageView!.sd_setImageWithURL(NSURL(string: imageURL))
+            
+            let key = SDWebImageManager.sharedManager().cacheKeyForURL(NSURL(string: imageURL))
+            let img = SDImageCache.sharedImageCache().imageFromDiskCacheForKey(key)
+            header.headerImage = img
         }
+        
+        table.tableHeaderView = header
+
+        
         
         if let loc: AnyObject = shop!.objectForKey("geolocation"){
                 if let geoloc : AnyObject = loc.objectForKey("location"){
@@ -142,7 +148,7 @@ class ShopDetailController: UIViewController, MKMapViewDelegate, GADBannerViewDe
                 
                 mapView.addAnnotation(annotation)
                 mapView.showAnnotations(mapView.annotations, animated: true)
-                mapView.selectAnnotation(annotation , animated: true)
+                shopAnnotation = annotation
             }
         }
         
@@ -200,7 +206,6 @@ class ShopDetailController: UIViewController, MKMapViewDelegate, GADBannerViewDe
     {
         let row = shopInfo![indexPath.section].rows![indexPath.row] as TableRow
         return CGFloat(row.height)
-
     }
     
     func tableView(tableView: UITableView, titleForHeaderInSection section: Int) -> String? {
@@ -214,6 +219,14 @@ class ShopDetailController: UIViewController, MKMapViewDelegate, GADBannerViewDe
     func tableView(tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
         return shopInfo![section].rows!.count
     }
+    
+    // for table parallax effect
+    func  scrollViewDidScroll(scrollView: UIScrollView) {
+        let header: ParallaxHeaderView = table.tableHeaderView as! ParallaxHeaderView
+        header.layoutHeaderViewForScrollViewOffset(scrollView.contentOffset)
+       // table.tableHeaderView = header
+    }
+    
     
     func tableView(tableView: UITableView, cellForRowAtIndexPath indexPath: NSIndexPath) -> UITableViewCell
     {
@@ -233,13 +246,59 @@ class ShopDetailController: UIViewController, MKMapViewDelegate, GADBannerViewDe
         return cell
     }
     
-    
-    func  scrollViewDidScroll(scrollView: UIScrollView) {
-        let header: ParallaxHeaderView = table.tableHeaderView as! ParallaxHeaderView
-        header.layoutHeaderViewForScrollViewOffset(scrollView.contentOffset)
+    func tableView(tableView: UITableView, didSelectRowAtIndexPath indexPath: NSIndexPath){
         
-        table.tableHeaderView = header
+        tableView.deselectRowAtIndexPath(indexPath, animated: true)
+        
+        let row = shopInfo![indexPath.section].rows![indexPath.row] as TableRow
+        
+        if row.action == nil {
+            return
+        }
+        
+        
+        switch(row.action!.type){
+
+            case .Location:
+                locationAction(row)
+            case .Call:
+                callAction(row)
+            case .Link:
+                openLinkAction(row)
+            case .DLink:
+                openDlinkAction(row)
+                
+            default : break;
+        }
+        
     }
+
+    
+    func mapView(mapView: MKMapView!, didSelectAnnotationView view: MKAnnotationView!)
+    {
+        view.rightCalloutAccessoryView = UIButton.buttonWithType(.DetailDisclosure) as! UIView
+        
+    }
+    
+    func mapView(mapView: MKMapView!, annotationView view: MKAnnotationView!, calloutAccessoryControlTapped control: UIControl!)
+    {
+        //TODO: Somethings
+    }
+    
+    
+    func locationAction(row : TableRow){
+    
+
+ //       let indexPath = NSIndexPath(forRow:table.numberOfRowsInSection(table.numberOfSections()-1)-1 , inSection:table.numberOfSections()-1)
+        
+        //table.selectRowAtIndexPath(indexPath, animated: true, scrollPosition: .Bottom)
+        
+        table.setContentOffset(CGPointMake(0,table.contentSize.height-table.frame.height+40), animated: true)
+        mapView.selectAnnotation(shopAnnotation , animated: true)
+
+    }
+    
+ 
 
 }
 
@@ -273,15 +332,16 @@ class ShopAnnotation : NSObject, MKAnnotation {
     
     
     init(title:String!,subtitle:String!,lat:CLLocationDegrees!,lon:CLLocationDegrees!,row:Int!)
-        {
+    {
+    
+        self.title = title
+        self.subtitle = subtitle
+        self.coordinate = CLLocationCoordinate2DMake(lat, lon)
+        self.row = row
+
         
-            self.title = title
-            self.subtitle = subtitle
-            self.coordinate = CLLocationCoordinate2DMake(lat, lon)
-            self.row = row
-            
-            super.init()
-        
-        }
+        super.init()
+    
+    }
     
 }

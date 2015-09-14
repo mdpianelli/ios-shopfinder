@@ -22,11 +22,11 @@ class ServerManager : NSObject {
         if Reachability.reachabilityForInternetConnection().isReachable() {
             Alamofire.request(.GET, API.shops )
                 .responseJSON { (_, _, obj, error) in
-                    NSUserDefaults.standardUserDefaults().setObject(obj, forKey: "shopsJSON")
+                    NSUserDefaults.standardUserDefaults().setObject(obj, forKey: DefaultKeys.ShopsJSON)
                     completionHandler(obj,error)
             }
         }else{
-            let obj: AnyObject? = NSUserDefaults.standardUserDefaults().objectForKey("shopsJSON")
+            let obj: AnyObject? = NSUserDefaults.standardUserDefaults().objectForKey(DefaultKeys.ShopsJSON)
             if obj != nil {
                 completionHandler(obj,nil)
             }

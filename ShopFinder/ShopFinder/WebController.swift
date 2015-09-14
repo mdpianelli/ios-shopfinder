@@ -17,6 +17,7 @@ class WebController : UIViewController, UIWebViewDelegate {
     override func viewDidLoad() {
         super.viewDidLoad()
         
+        webView.scalesPageToFit = true
         webView.loadRequest(NSURLRequest(URL: link!))
     }
 

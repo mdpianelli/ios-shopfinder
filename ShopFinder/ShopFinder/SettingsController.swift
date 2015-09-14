@@ -13,6 +13,16 @@ import Spring
 
 //Table Struct
 
+enum ActionType : String {
+    case Mail = "mail",
+     Link = "link",
+     DLink = "dlink",
+     Call = "call",
+     Location = "location",
+     None = "none"
+    
+}
+
 struct Icon {
     let type : Int
     let index : Int
@@ -20,7 +30,7 @@ struct Icon {
 }
 
 struct Action {
-    let type : String
+    let type : ActionType
     let data : AnyObject?
 }
 
@@ -58,7 +68,7 @@ enum SocialNetwork {
 }
 
 
-class SettingsController : UIViewController, UITableViewDelegate, UITableViewDataSource {
+class SettingsController : BaseController, UITableViewDelegate, UITableViewDataSource {
     
     @IBOutlet weak var table: UITableView!
     @IBOutlet weak var versionBuildLabel: UILabel!
@@ -145,7 +155,7 @@ class SettingsController : UIViewController, UITableViewDelegate, UITableViewDat
                                         
                                         icon: Icon(type: icon["class"] as! NSInteger, index: icon["class"] as! NSInteger, color: UIColor(hex: icon["color"] as! String)),
                                         
-                                        action: Action(type: action["type"] as! String, data: action["data"] ),height:60
+                                        action: Action(type: action["type"] as! ActionType, data: action["data"] ),height:60
                                     ))
                                     
                                 }
@@ -206,13 +216,13 @@ class SettingsController : UIViewController, UITableViewDelegate, UITableViewDat
         
         switch(rowItem.action!.type){
             
-            case "mail":
+            case .Mail:
                         mailAction(rowItem)
             
-            case "link":
+            case .Link:
                         openLinkAction(rowItem)
             
-            case "dlink":
+            case .DLink:
                         openDlinkAction(rowItem)
 
             
@@ -233,55 +243,7 @@ class SettingsController : UIViewController, UITableViewDelegate, UITableViewDat
         
         
     }
-    
-    func openDlinkAction(item: TableRow){
-      
-        //open deepLink
-        
-        if let dic = item.action!.data as? NSDictionary{
-
-            
-            let dlink  = NSURL(string:dic.objectForKey("dlink") as! String)
-            
-           
-            var link : NSURL?
-            if let lStr = dic.objectForKey("link") as? String {
-                link  = NSURL(string:lStr)
-            }
-            
-            if UIApplication.sharedApplication().canOpenURL(dlink!) {
-                UIApplication.sharedApplication().openURL(dlink!)
-            }else{
-                if link != nil {
-                UIApplication.sharedApplication().openURL(link!)
-                }
-            }
-            
-        }
-
-        
-    }
-    
-    func openLinkAction(item: TableRow){
-  
-    
-        
-        if let link = item.action!.data as? String {
-            
-            if link.hasPrefix("http") {
-                //open normal link
-                let nav = self.storyboard?.instantiateViewControllerWithIdentifier("NavWebController") as! UINavigationController
-               let wc = nav.topViewController as! WebController
-                
-                wc.link = NSURL(string: link)
-                wc.title = item.title
-                
-                self.presentViewController(nav, animated: true, completion: nil)
-                
-            }
-        }
-    }
-
+   
     
   
     

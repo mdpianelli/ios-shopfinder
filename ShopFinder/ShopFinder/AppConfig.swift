@@ -9,6 +9,14 @@
 import Foundation
 
 
+// Storage Keys
+
+struct DefaultKeys {
+    static let ShopsJSON = "shopsJSON"
+}
+
+
+
 // API Structs
 
 let API_URL = "http://shop-finder.eu01.aws.af.cm/api"

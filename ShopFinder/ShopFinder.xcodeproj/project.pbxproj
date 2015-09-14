@@ -38,6 +38,8 @@
 		9AD809071B60F3D60077DFD1 /* UIViewController+Style.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9AD809061B60F3D60077DFD1 /* UIViewController+Style.swift */; };
 		9AD8090C1B643E8A0077DFD1 /* YALSunnyRefreshControl.m in Sources */ = {isa = PBXBuildFile; fileRef = 9AD8090A1B643E8A0077DFD1 /* YALSunnyRefreshControl.m */; };
 		9AD8090D1B643E8A0077DFD1 /* YALSunnyRefreshControl.xib in Resources */ = {isa = PBXBuildFile; fileRef = 9AD8090B1B643E8A0077DFD1 /* YALSunnyRefreshControl.xib */; };
+		9AE65A2D1BA6F62C00FDC1B6 /* BaseController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9AE65A2C1BA6F62C00FDC1B6 /* BaseController.swift */; };
+		9AE65A2F1BA7012E00FDC1B6 /* String+Helpers.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9AE65A2E1BA7012E00FDC1B6 /* String+Helpers.swift */; };
 		E3EFD600EB3CCFE5FAA7711A /* Pods.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 381840E40228E8039A62F769 /* Pods.framework */; settings = {ATTRIBUTES = (Weak, ); }; };
 /* End PBXBuildFile section */
 
@@ -96,6 +98,8 @@
 		9AD809091B643E8A0077DFD1 /* YALSunnyRefreshControl.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = YALSunnyRefreshControl.h; sourceTree = "<group>"; };
 		9AD8090A1B643E8A0077DFD1 /* YALSunnyRefreshControl.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = YALSunnyRefreshControl.m; sourceTree = "<group>"; };
 		9AD8090B1B643E8A0077DFD1 /* YALSunnyRefreshControl.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = YALSunnyRefreshControl.xib; sourceTree = "<group>"; };
+		9AE65A2C1BA6F62C00FDC1B6 /* BaseController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = BaseController.swift; sourceTree = "<group>"; };
+		9AE65A2E1BA7012E00FDC1B6 /* String+Helpers.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = "String+Helpers.swift"; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -221,7 +225,7 @@
 				9AD808F51B5FDA5A0077DFD1 /* Extensions */,
 				9A4701091B56D72E00A4B8E3 /* Server */,
 				9A4701051B56AB1600A4B8E3 /* Main */,
-				9A4701061B56AB2300A4B8E3 /* Features */,
+				9A4701061B56AB2300A4B8E3 /* Modules */,
 			);
 			name = Classes;
 			sourceTree = "<group>";
@@ -246,13 +250,14 @@
 			name = Main;
 			sourceTree = "<group>";
 		};
-		9A4701061B56AB2300A4B8E3 /* Features */ = {
+		9A4701061B56AB2300A4B8E3 /* Modules */ = {
 			isa = PBXGroup;
 			children = (
+				9AE65A2B1BA6F61500FDC1B6 /* Base */,
 				9AD809031B5FE8B20077DFD1 /* Settings */,
 				9A47010C1B56E76400A4B8E3 /* Shops */,
 			);
-			name = Features;
+			name = Modules;
 			sourceTree = "<group>";
 		};
 		9A4701091B56D72E00A4B8E3 /* Server */ = {
@@ -311,6 +316,7 @@
 				9AD809001B5FDA930077DFD1 /* Animators */,
 				9AD808F91B5FDA780077DFD1 /* UIView+VisualEffects.swift */,
 				9AD809061B60F3D60077DFD1 /* UIViewController+Style.swift */,
+				9AE65A2E1BA7012E00FDC1B6 /* String+Helpers.swift */,
 			);
 			name = Extensions;
 			sourceTree = "<group>";
@@ -337,7 +343,6 @@
 			isa = PBXGroup;
 			children = (
 				9AD809041B5FE8DF0077DFD1 /* SettingsController.swift */,
-				9A2388DD1B67A3420090927F /* WebController.swift */,
 			);
 			name = Settings;
 			sourceTree = "<group>";
@@ -350,6 +355,15 @@
 				9AD8090B1B643E8A0077DFD1 /* YALSunnyRefreshControl.xib */,
 			);
 			path = YALSunnyRefreshControll;
+			sourceTree = "<group>";
+		};
+		9AE65A2B1BA6F61500FDC1B6 /* Base */ = {
+			isa = PBXGroup;
+			children = (
+				9AE65A2C1BA6F62C00FDC1B6 /* BaseController.swift */,
+				9A2388DD1B67A3420090927F /* WebController.swift */,
+			);
+			name = Base;
 			sourceTree = "<group>";
 		};
 /* End PBXGroup section */
@@ -534,6 +548,7 @@
 				9A4565FC1B4D8B4500C40073 /* AppDelegate.swift in Sources */,
 				9A37A6471B6789AE0067B8DB /* JBParallaxCell.m in Sources */,
 				9AD809051B5FE8DF0077DFD1 /* SettingsController.swift in Sources */,
+				9AE65A2F1BA7012E00FDC1B6 /* String+Helpers.swift in Sources */,
 				9AD809071B60F3D60077DFD1 /* UIViewController+Style.swift in Sources */,
 				9AD808FF1B5FDA780077DFD1 /* ZoomAnimator.swift in Sources */,
 				9AD808FC1B5FDA780077DFD1 /* FADesignableIconLabel.swift in Sources */,
@@ -542,6 +557,7 @@
 				9A4701041B56A99800A4B8E3 /* ShopListController.swift in Sources */,
 				9AD808FD1B5FDA780077DFD1 /* PopAnimator.swift in Sources */,
 				9A4566351B4DA2C600C40073 /* MenuController.swift in Sources */,
+				9AE65A2D1BA6F62C00FDC1B6 /* BaseController.swift in Sources */,
 				9A4701111B56EB5A00A4B8E3 /* ShopDetailController.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
@@ -675,7 +691,6 @@
 				CLANG_ENABLE_MODULES = YES;
 				FRAMEWORK_SEARCH_PATHS = (
 					"$(inherited)",
-					"/Users/marcospianelli/Downloads/GoogleMobileAdsSdkiOS-7.3.1",
 					"$(PROJECT_DIR)/ShopFinder",
 				);
 				INFOPLIST_FILE = ShopFinder/Info.plist;
@@ -694,7 +709,6 @@
 				CLANG_ENABLE_MODULES = YES;
 				FRAMEWORK_SEARCH_PATHS = (
 					"$(inherited)",
-					"/Users/marcospianelli/Downloads/GoogleMobileAdsSdkiOS-7.3.1",
 					"$(PROJECT_DIR)/ShopFinder",
 				);
 				INFOPLIST_FILE = ShopFinder/Info.plist;

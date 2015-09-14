@@ -128,9 +128,11 @@
 }
 
 
-- (UIImage *)applyTintEffectWithColor:(UIColor *)tintColor
+- (UIImage *)applyTintEffectWithColor:(UIColor *)tintColor colorOpacity:(float)colorOpacity saturationDeltaFactor:(float)saturationDeltaFactor blurRadius:(float)blurRadius
 {
-    const CGFloat EffectColorAlpha = 0.6;
+    const CGFloat EffectColorAlpha = colorOpacity;
+    const CGFloat EffectSaturationDeltaFactor = saturationDeltaFactor;
+    const CGFloat EffectBlurRadius = blurRadius;
     UIColor *effectColor = tintColor;
     int componentCount = CGColorGetNumberOfComponents(tintColor.CGColor);
     if (componentCount == 2) {
@@ -145,7 +147,7 @@
             effectColor = [UIColor colorWithRed:r green:g blue:b alpha:EffectColorAlpha];
         }
     }
-    return [self applyBlurWithRadius:10 tintColor:effectColor saturationDeltaFactor:-1.0 maskImage:nil];
+    return [self applyBlurWithRadius:EffectBlurRadius tintColor:effectColor saturationDeltaFactor:EffectSaturationDeltaFactor maskImage:nil];
 }
 
 
