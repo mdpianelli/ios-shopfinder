@@ -19,11 +19,11 @@
 	<key>CFBundleSignature</key>
 	<string>????</string>
 	<key>CFBundleVersion</key>
-	<string>892</string>
+	<string>989</string>
 	<key>LSRequiresIPhoneOS</key>
 	<true/>
 	<key>NSLocationWhenInUseUsageDescription</key>
-	<string>$(PRODUCT_NAME) would like to use your location to calculate nearby shops</string>
+	<string>$(PRODUCT_NAME) would like to use your location</string>
 	<key>UIAppFonts</key>
 	<array>
 		<string>FontAwesome.otf</string>

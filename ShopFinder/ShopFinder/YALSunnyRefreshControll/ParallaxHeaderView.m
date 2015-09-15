@@ -81,9 +81,12 @@ static CGFloat kLabelPaddingDist = 8.0f;
 
 - (void)refreshBlurViewForNewImage
 {
+    self.imageScrollView.frame =  kDefaultHeaderFrame;
+
     UIImage *screenShot = [self screenShotOfView:self];
     screenShot = [screenShot applyBlurWithRadius:6 tintColor:[UIColor colorWithWhite:0.4 alpha:0.5] saturationDeltaFactor:1.0 maskImage:nil];
     self.bluredImageView.image = screenShot;
+    
 }
 
 #pragma mark -
@@ -150,10 +153,12 @@ static CGFloat kLabelPaddingDist = 8.0f;
 
 - (UIImage *)screenShotOfView:(UIView *)view
 {
+
     UIGraphicsBeginImageContextWithOptions(kDefaultHeaderFrame.size, YES, 0.0);
     [self drawViewHierarchyInRect:kDefaultHeaderFrame afterScreenUpdates:NO];
     UIImage *image = UIGraphicsGetImageFromCurrentImageContext();
     UIGraphicsEndImageContext();
+    
     
     return image;
 }

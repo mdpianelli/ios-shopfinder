@@ -19,6 +19,7 @@ enum ActionType : String {
      DLink = "dlink",
      Call = "call",
      Location = "location",
+     Expand = "expand",
      None = "none"
     
 }
@@ -34,11 +35,16 @@ struct Action {
     let data : AnyObject?
 }
 
+enum TableRowType{
+    case Standard,Text
+}
+
 struct TableRow {
     let title : String
     var icon : Icon?
     var action : Action?
-    let height : Int 
+    var height : Int
+    let type : TableRowType
 
 }
 
@@ -150,12 +156,13 @@ class SettingsController : BaseController, UITableViewDelegate, UITableViewDataS
                                     
                                     let action = row["action"] as!  NSDictionary
                             
+                                    let actionType = ActionType(rawValue:action["type"] as! String)
+
                                     
                                     rows.append(TableRow(title: title,
                                         
                                         icon: Icon(type: icon["class"] as! NSInteger, index: icon["class"] as! NSInteger, color: UIColor(hex: icon["color"] as! String)),
-                                        
-                                        action: Action(type: action["type"] as! ActionType, data: action["data"] ),height:60
+                                        action: Action(type:actionType!, data: action["data"] ),height:60,type:.Standard
                                     ))
                                     
                                 }

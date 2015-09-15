@@ -54,6 +54,7 @@ class ShopListController: UIViewController, GADInterstitialDelegate, UIScrollVie
         
         initialSetup()
         
+        
         if locManager == nil {
             locManager =  CLLocationManager()
             locManager?.delegate = self
@@ -62,7 +63,7 @@ class ShopListController: UIViewController, GADInterstitialDelegate, UIScrollVie
                 locManager!.requestWhenInUseAuthorization()
             }
             
-            // locManager!.distanceFilter = 40
+            locManager!.desiredAccuracy = kCLLocationAccuracyBest
             locManager!.startUpdatingLocation()
         }
         
@@ -241,7 +242,8 @@ class ShopListController: UIViewController, GADInterstitialDelegate, UIScrollVie
         
        // SVProgressHUD.show()
        
-        if currentLocation == nil{
+        if CLLocationManager.locationServicesEnabled() &&
+                currentLocation == nil {
             return
         }
         
@@ -252,8 +254,9 @@ class ShopListController: UIViewController, GADInterstitialDelegate, UIScrollVie
             var data: AnyObject? = obj
             
             if error != nil {
+                
                 println(error)
-                data = NSUserDefaults.standardUserDefaults().objectForKey("shopsJSON")
+                data = NSUserDefaults.standardUserDefaults().objectForKey(DefaultKeys.ShopsJSON)
 
                 return
             }

@@ -29,6 +29,8 @@ class ShopDetailController: BaseController, MKMapViewDelegate, GADBannerViewDele
     @IBOutlet weak var table: UITableView!
     @IBOutlet weak var header: ParallaxHeaderView!
     
+    var descriptionExpanded = false
+    
     var adBanner: GADBannerView?
 
     
@@ -58,7 +60,6 @@ class ShopDetailController: BaseController, MKMapViewDelegate, GADBannerViewDele
     
     override func viewDidAppear(animated: Bool) {
         super.viewDidAppear(animated)
-        header.refreshBlurViewForNewImage()
 
     }
     
@@ -69,63 +70,78 @@ class ShopDetailController: BaseController, MKMapViewDelegate, GADBannerViewDele
 
     }
     
+    override func viewDidLayoutSubviews() {
+        super.viewDidLayoutSubviews()
+        header.refreshBlurViewForNewImage()
+
+    }
     
     
-    //MARK: Methods
+    
+    //MARK: Initial Setup Methods
     
     func initialSetup(){
         
-        
-        //setup adBanner
         adBannerSetup()
         
-     
+        shopInfoSetup()
+        
+    }
+    
+    func shopInfoSetup(){
+        
+        //set title
         titleLabel.text = shop!.objectForKey("name") as? String
         
-       
-        
+        //initialize table sections and rows
         shopInfo = [TableSection(sectionName:"",rows:[])]
         
         if let address = shop!.objectForKey("address") as? String {
             
-            shopInfo![0].rows?.append(TableRow(title:address ,icon:Icon(type:0,index:215,color:UIColor(hex: "#0091FF")),action:Action(type:.Location,data:nil),height:60))
+            shopInfo![0].rows?.append(TableRow(title:address ,icon:Icon(type:0,index:215,color:UIColor(hex: "#0091FF")),action:Action(type:.Location,data:nil),height:60,type:.Standard))
         }
         
         
         if let phoneNumber = shop!.objectForKey("phone_number") as? String {
-        
-           shopInfo![0].rows?.append(TableRow(title:phoneNumber ,icon:Icon(type:0,index:372,color:UIColor(hex: "#0091FF")),action:Action(type:.Call,data:phoneNumber),height:60))
+            
+            shopInfo![0].rows?.append(TableRow(title:phoneNumber ,icon:Icon(type:0,index:372,color:UIColor(hex: "#0091FF")),action:Action(type:.Call,data:phoneNumber),height:60,type:.Standard))
         }
         
         
         if let website = shop!.objectForKey("website") as? String {
             
-            shopInfo![0].rows?.append(TableRow(title:website,icon:Icon(type:2,index:221,color:UIColor(hex: "#0091FF")),action:Action(type:.Link,data:website),height:60))
+            shopInfo![0].rows?.append(TableRow(title:website,icon:Icon(type:2,index:221,color:UIColor(hex: "#0091FF")),action:Action(type:.Link,data:website),height:60,type:.Standard))
+            
+        }
+        
+        if let description = shop!.objectForKey("description") as? String {
+            
+            shopInfo![0].rows?.append(TableRow(title:description,icon:nil,action:Action(type:.Expand,data:description),height:90,type:.Text))
             
         }
         
         
         if let openingHours = shop!.objectForKey("opening_hours") as? NSDictionary {
-        
+            
             let weekdayArray = openingHours.objectForKey("weekday_text") as! NSArray
             
             shopInfo?.append(
                 TableSection(sectionName:"Opening Hours",rows:[
-                    TableRow(title:weekdayArray[0] as! String,icon:nil,action:nil,height:40),
-                    TableRow(title:weekdayArray[1] as! String,icon:nil,action:nil,height:40),
-                    TableRow(title:weekdayArray[2] as! String,icon:nil,action:nil,height:40),
-                    TableRow(title:weekdayArray[3] as! String,icon:nil,action:nil,height:40),
-                    TableRow(title:weekdayArray[4] as! String,icon:nil,action:nil,height:40),
-                    TableRow(title:weekdayArray[5] as! String,icon:nil,action:nil,height:40),
-                    TableRow(title:weekdayArray[6] as! String,icon:nil,action:nil,height:40),
-                ])
+                    TableRow(title:weekdayArray[0] as! String,icon:nil,action:nil,height:40,type:.Standard),
+                    TableRow(title:weekdayArray[1] as! String,icon:nil,action:nil,height:40,type:.Standard),
+                    TableRow(title:weekdayArray[2] as! String,icon:nil,action:nil,height:40,type:.Standard),
+                    TableRow(title:weekdayArray[3] as! String,icon:nil,action:nil,height:40,type:.Standard),
+                    TableRow(title:weekdayArray[4] as! String,icon:nil,action:nil,height:40,type:.Standard),
+                    TableRow(title:weekdayArray[5] as! String,icon:nil,action:nil,height:40,type:.Standard),
+                    TableRow(title:weekdayArray[6] as! String,icon:nil,action:nil,height:40,type:.Standard),
+                    ])
             )
             
         }
         
-      
+        
         header.frame.size.height = 170
-
+        
         if let photos: AnyObject = shop!.objectForKey("photos")
         {
             let imageURL = photos[0] as! String
@@ -136,11 +152,11 @@ class ShopDetailController: BaseController, MKMapViewDelegate, GADBannerViewDele
         }
         
         table.tableHeaderView = header
-
+        
         
         
         if let loc: AnyObject = shop!.objectForKey("geolocation"){
-                if let geoloc : AnyObject = loc.objectForKey("location"){
+            if let geoloc : AnyObject = loc.objectForKey("location"){
                 let lat = geoloc.objectForKey("lat") as! Double
                 let long = geoloc.objectForKey("lng") as! Double
                 
@@ -152,11 +168,11 @@ class ShopDetailController: BaseController, MKMapViewDelegate, GADBannerViewDele
             }
         }
         
-        
         table.reloadData()
-       // imageView.animate()
+
     }
     
+  
 
     func adBannerSetup(){
         
@@ -230,27 +246,52 @@ class ShopDetailController: BaseController, MKMapViewDelegate, GADBannerViewDele
     
     func tableView(tableView: UITableView, cellForRowAtIndexPath indexPath: NSIndexPath) -> UITableViewCell
     {
-        let cell  = tableView.dequeueReusableCellWithIdentifier("Cell") as! ShopDetailCell
         
-        let data = shopInfo![indexPath.section].rows![indexPath.row] as TableRow
+        var data = shopInfo![indexPath.section].rows![indexPath.row] as TableRow
         
-        cell.infoLabel!.text = data.title
-        cell.iconButton!.icon = data.icon
         
-        if data.action == nil {
-            cell.selectionStyle = .None
-        }else{
-            cell.selectionStyle = .Default
+        switch(data.type){
+            
+            case .Standard :
+            
+                let cell  = tableView.dequeueReusableCellWithIdentifier("Standard") as! ShopDetailCell
+                
+                cell.infoLabel!.text = data.title
+                
+              //  if !descriptionExpanded {
+                    cell.iconButton!.icon = data.icon
+              //  }
+                
+                println("\(data.icon?.type) + \(data.icon?.index) + \(data.icon?.color)")
+                
+                if data.action == nil {
+                    cell.selectionStyle = .None
+                }else{
+                    cell.selectionStyle = .Default
+                }
+            
+                return cell
+            
+            case .Text :
+            
+                let cell  = tableView.dequeueReusableCellWithIdentifier("Text") as! ShopDetailDescriptionCell
+                
+                cell.descriptionLabel!.text = data.title
+                cell.selectionStyle = .None
+                
+                return cell
+            
+            default : break
         }
-        
-        return cell
+  
     }
+    
     
     func tableView(tableView: UITableView, didSelectRowAtIndexPath indexPath: NSIndexPath){
         
         tableView.deselectRowAtIndexPath(indexPath, animated: true)
         
-        let row = shopInfo![indexPath.section].rows![indexPath.row] as TableRow
+        var row = shopInfo![indexPath.section].rows![indexPath.row] as TableRow
         
         if row.action == nil {
             return
@@ -259,6 +300,8 @@ class ShopDetailController: BaseController, MKMapViewDelegate, GADBannerViewDele
         
         switch(row.action!.type){
 
+            case .Expand :
+                expandAction(row.title,indexPath: indexPath)
             case .Location:
                 locationAction(row)
             case .Call:
@@ -273,6 +316,45 @@ class ShopDetailController: BaseController, MKMapViewDelegate, GADBannerViewDele
         
     }
 
+    //MARK: Actions
+    
+    func expandAction( text: String, indexPath : NSIndexPath){
+
+        //mofidy row height
+        var height = 0
+        
+        if descriptionExpanded {
+            height = 90
+        }else{
+            height = calculateHeightForString(text)
+        }
+        
+        table.beginUpdates()
+        shopInfo![indexPath.section].rows![indexPath.row].height = height
+        table.endUpdates()
+        
+        descriptionExpanded = !descriptionExpanded
+    }
+    
+    func calculateHeightForString(inString:String) -> Int
+    {
+        var messageString = inString
+        var attributes = [UIFont(): UIFont.systemFontOfSize(17.0)]
+        var attrString:NSAttributedString? = NSAttributedString(string: messageString, attributes: attributes)
+        var rect:CGRect = attrString!.boundingRectWithSize(CGSizeMake(170,CGFloat.max), options: NSStringDrawingOptions.UsesLineFragmentOrigin, context:nil )//hear u will get nearer height not the exact value
+        var requredSize:CGRect = rect
+        
+        println( "\(requredSize.height)")
+        
+        return Int(requredSize.height)  //to include button's in your tableview
+        
+    }
+    
+   
+    
+    
+    
+    //MARK: Map View Delegate
     
     func mapView(mapView: MKMapView!, didSelectAnnotationView view: MKAnnotationView!)
     {
@@ -308,6 +390,12 @@ class ShopDetailController: BaseController, MKMapViewDelegate, GADBannerViewDele
 
 
 
+class ShopDetailDescriptionCell : UITableViewCell {
+    
+    @IBOutlet weak var descriptionLabel: UILabel!
+    
+}
+
 
 class ShopDetailCell : UITableViewCell {
     
@@ -315,6 +403,7 @@ class ShopDetailCell : UITableViewCell {
     @IBOutlet weak var iconButton: FADesignableIconButton!
     
 }
+
 
 
 

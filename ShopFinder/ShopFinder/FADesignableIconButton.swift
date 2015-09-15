@@ -97,32 +97,27 @@ import FontAwesomeKit
     
     public func fontAllIcons() -> [NSObject : AnyObject] {
         
-        var dic : [NSObject : AnyObject]
-        
-        
         switch(imageFontClass){
             
         case 0 :
-            dic = FAKFontAwesome.allIcons()
+            return FAKFontAwesome.allIcons()
             
         case 1:
-            dic = FAKFoundationIcons.allIcons()
+            return FAKFoundationIcons.allIcons()
             
         case 2:
-            dic = FAKIonIcons.allIcons()
+            return FAKIonIcons.allIcons()
             
         case 3:
-            dic = FAKZocial.allIcons()
+            return FAKZocial.allIcons()
             
         default :
-            dic = FAKFontAwesome.allIcons()
+            return FAKFontAwesome.allIcons()
         }
         
-        return dic
     }
     
     private func fontClassName() -> String {
-        
         
         let fontClasses = ["FontAwesome","fontcustom","Ionicons","Zocial-Regular"]
         
