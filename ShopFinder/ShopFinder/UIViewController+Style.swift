@@ -15,9 +15,9 @@ extension UIViewController {
     func menuBtn()-> UIBarButtonItem {
         
         // set left navBarIcon to open left menu
-        var cogIcon : FAKFontAwesome = FAKFontAwesome.naviconIconWithSize(20)
+        let cogIcon : FAKFontAwesome = FAKFontAwesome.naviconIconWithSize(20)
         
-        var image = self.imageFromAFont(cogIcon)
+        let image = self.imageFromAFont(cogIcon)
         
         return UIBarButtonItem(image: image, landscapeImagePhone: nil, style:.Plain, target:self, action:"presentLeftMenuViewController:")
         

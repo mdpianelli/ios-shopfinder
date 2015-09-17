@@ -40,7 +40,7 @@ class MenuController: UIViewController, RESideMenuDelegate, UITableViewDataSourc
     
     func tableView(atableView: UITableView, cellForRowAtIndexPath indexPath: NSIndexPath) -> UITableViewCell {
         
-        let cell: UITableViewCell = tableView.dequeueReusableCellWithIdentifier("Cell") as! UITableViewCell
+        let cell = tableView.dequeueReusableCellWithIdentifier("Cell") as UITableViewCell!
         
         cell.textLabel!.textColor = UIColor.whiteColor()
         cell.textLabel!.text = titles[indexPath.row];
@@ -59,10 +59,10 @@ class MenuController: UIViewController, RESideMenuDelegate, UITableViewDataSourc
         switch(indexPath.row)
         {
             case 0 :
-                self.sideMenuViewController.setContentViewController(self.storyboard!.instantiateViewControllerWithIdentifier("NavShopListController") as! UIViewController, animated: true)
+                self.sideMenuViewController.setContentViewController(self.storyboard!.instantiateViewControllerWithIdentifier("NavShopListController") , animated: true)
                 
             case 3:
-                self.sideMenuViewController.setContentViewController(self.storyboard!.instantiateViewControllerWithIdentifier("NavSettingsController") as! UIViewController, animated: true)
+                self.sideMenuViewController.setContentViewController(self.storyboard!.instantiateViewControllerWithIdentifier("NavSettingsController") , animated: true)
                 
             default:break;
         }

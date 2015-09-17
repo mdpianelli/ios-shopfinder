@@ -172,10 +172,9 @@ class ShopListController: UIViewController, GADInterstitialDelegate, UIScrollVie
     
     func minimizeView(sender: AnyObject) {
       
+        let view  = self.navigationController?.view!
         
-        var view  = self.navigationController?.view!
-        
-       springEaseOut(0.4, {
+        SpringAnimation.springEaseOut(0.4, animations:{
    
             view?.transform = CGAffineTransformMakeScale(0.875, 0.875)
             //view?.alpha = 0.85
@@ -189,9 +188,9 @@ class ShopListController: UIViewController, GADInterstitialDelegate, UIScrollVie
     func maximizeView(sender: AnyObject) {
         //SpringButton
 
-        var view = self.navigationController?.view!
+        let view = self.navigationController?.view!
 
-        springEaseIn(0.4, {
+        SpringAnimation.springEaseIn(0.4, animations:{
             
              view?.transform = CGAffineTransformMakeScale(1, 1)
              view?.alpha = 1
@@ -214,8 +213,6 @@ class ShopListController: UIViewController, GADInterstitialDelegate, UIScrollVie
             case .ReviewCount :
                     sortByReviewCount()
 
-            default :
-                    sortByDistance()
         }
      
         table.reloadSections(NSIndexSet(index: 0), withRowAnimation:UITableViewRowAnimation.Fade )
@@ -239,7 +236,7 @@ class ShopListController: UIViewController, GADInterstitialDelegate, UIScrollVie
     //MARK:- Methods
 
     func fetchShops(){
-        
+
        // SVProgressHUD.show()
        
         if CLLocationManager.locationServicesEnabled() &&
@@ -248,74 +245,71 @@ class ShopListController: UIViewController, GADInterstitialDelegate, UIScrollVie
         }
         
         //retrieve shops and reload table
-        ServerManager.retrieveShops(){
-            obj, error in
+        ServerManager.retrieveShops(){  result in
             
-            var data: AnyObject? = obj
+            var data: AnyObject?
             
-            if error != nil {
+            if result.isFailure {
                 
-                println(error)
+                print(result.error)
                 data = NSUserDefaults.standardUserDefaults().objectForKey(DefaultKeys.ShopsJSON)
-
-                return
+           
+            }else{
+                data = result.value
             }
             
-            if obj != nil {
-                self.shops = data as! NSArray
-                
-                var aux : [NSDictionary] = []
-                
-                for eachShop in self.shops {
-                    if let loc: AnyObject = eachShop.objectForKey("geolocation"){
-                        if let geoloc : AnyObject = loc.objectForKey("location"){
-                            
-                            let lat = geoloc.objectForKey("lat") as! Double
-                            let long = geoloc.objectForKey("lng") as! Double
-
-                            //calculate shop distance
-                            let shopLocation = CLLocation(latitude: lat, longitude: long)
-                            var distanceType = "m"
-                            var distance = self.currentLocation?.distanceFromLocation(shopLocation)
+            self.shops = data as! NSArray
             
-                            
-                            let shopDic = eachShop.mutableCopy() as! NSMutableDictionary
-                           
-                            if distance == nil {
-                                distance = 0
-                            }
-                           
-                            shopDic.setObject(distance!, forKey: "distanceValue")
-                            
-                            
-                            if distance > 1000 {
-                                distanceType = "km"
-                                distance = distance!/1000
-                            }
-                            
-                            var format = "%.0f%@"
-                            
-                            if distanceType == "Km" {
-                                format = "%.1f%@"
-                            }
-                            
-                            let distanceStr = String(format: format ,distance!,distanceType)
-                            
-                            shopDic.setObject(distanceStr, forKey: "distance")
-                            aux.append(shopDic)
+            var aux : [NSDictionary] = []
+            
+            for eachShop in self.shops {
+                if let loc: AnyObject = eachShop.objectForKey("geolocation"){
+                    if let geoloc : AnyObject = loc.objectForKey("location"){
+                        
+                        let lat = geoloc.objectForKey("lat") as! Double
+                        let long = geoloc.objectForKey("lng") as! Double
+
+                        //calculate shop distance
+                        let shopLocation = CLLocation(latitude: lat, longitude: long)
+                        var distanceType = "m"
+                        var distance = self.currentLocation?.distanceFromLocation(shopLocation)
+        
+                        
+                        let shopDic = eachShop.mutableCopy() as! NSMutableDictionary
+                       
+                        if distance == nil {
+                            distance = 0
                         }
+                       
+                        shopDic.setObject(distance!, forKey: "distanceValue")
+                        
+                        
+                        if distance > 1000 {
+                            distanceType = "km"
+                            distance = distance!/1000
+                        }
+                        
+                        var format = "%.0f%@"
+                        
+                        if distanceType == "Km" {
+                            format = "%.1f%@"
+                        }
+                        
+                        let distanceStr = String(format: format ,distance!,distanceType)
+                        
+                        shopDic.setObject(distanceStr, forKey: "distance")
+                        aux.append(shopDic)
                     }
                 }
-                
-                self.shops = aux
-                
             }
             
+            self.shops = aux
             self.sortTable(nil)
-            
-         //   SVProgressHUD.dismiss()
             self.refreshControl?.endRefreshing()
+
         }
+        
+    
     }
     
     //MARK: Sort Methods
@@ -324,7 +318,7 @@ class ShopListController: UIViewController, GADInterstitialDelegate, UIScrollVie
         
         var aux = self.shops as! [NSDictionary]
         
-        sort(&aux, { $1.objectForKey("distanceValue") as! Double > $0.objectForKey("distanceValue") as! Double })
+        aux.sortInPlace({ $1.objectForKey("distanceValue") as! Double > $0.objectForKey("distanceValue") as! Double })
 
        self.shops = aux
     }
@@ -333,7 +327,7 @@ class ShopListController: UIViewController, GADInterstitialDelegate, UIScrollVie
         
         var aux = self.shops as! [NSDictionary]
         
-        sort(&aux, {
+        aux.sortInPlace({
             
             return $0.objectForKey("rating") as! Double > $1.objectForKey("rating") as! Double
         })
@@ -345,7 +339,7 @@ class ShopListController: UIViewController, GADInterstitialDelegate, UIScrollVie
         
         var aux = self.shops as! [NSDictionary]
         
-        sort(&aux, { $0.objectForKey("reviews_count") as! Double > $1.objectForKey("reviews_count") as! Double })
+        aux.sortInPlace({ $0.objectForKey("reviews_count") as! Double > $1.objectForKey("reviews_count") as! Double })
         
         self.shops = aux
     }
@@ -385,7 +379,7 @@ class ShopListController: UIViewController, GADInterstitialDelegate, UIScrollVie
             cell.reviewCountLabel!.text = reviewCount!.stringValue
         }
         
-        if let photos: AnyObject = shop.objectForKey("photos")
+        if let photos = shop.objectForKey("photos") as? [AnyObject]
         {
             let imageURL = photos[0] as! String
             
@@ -393,10 +387,9 @@ class ShopListController: UIViewController, GADInterstitialDelegate, UIScrollVie
                 (image, error, _, _) -> Void in
                 
                 cell.imageView?.alpha = 0
-                spring(0.4, {
+                SpringAnimation.spring(0.4, animations:{
                    // cell.imageView?.image = image
                     cell.imageView?.alpha = 1
-
                 })
                // self.table.reloadData()
             })
@@ -414,7 +407,7 @@ class ShopListController: UIViewController, GADInterstitialDelegate, UIScrollVie
     func scrollViewDidScroll(scrollView: UIScrollView) {
      
         // Get visible cells on table view.
-        let visibleCells = self.table.visibleCells() as! [JBParallaxCell]
+        let visibleCells = self.table.visibleCells as! [JBParallaxCell]
         
         for cell : JBParallaxCell in visibleCells {
             cell.cellOnTableView(self.table, didScrollOnView: self.view)
@@ -438,12 +431,11 @@ class ShopListController: UIViewController, GADInterstitialDelegate, UIScrollVie
     
     //MARK: - CoreLocation Stuff
     
-    func locationManager(manager: CLLocationManager!, didUpdateLocations locations: [AnyObject]!)
+    func locationManager(manager: CLLocationManager, didUpdateLocations locations: [CLLocation])
     {
         manager.stopUpdatingLocation()
-        currentLocation = locations[0] as? CLLocation
+        currentLocation = locations[0] 
         fetchShops()
-        
     }
     
     

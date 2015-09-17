@@ -137,46 +137,48 @@ class SettingsController : BaseController, UITableViewDelegate, UITableViewDataS
         
         
         
-        ServerManager.fetchSettings { (data, error) -> Void in
+        ServerManager.fetchSettings { result -> Void in
             
-            
-            if let info = data as? NSDictionary {
-                if let table = info["table"] as? NSDictionary {
-                    if let sections = table["sections"] as? NSArray {
-                        for section in sections{
-                            
-                            var rows : [TableRow] = []
-                            
-                            if let tableRows = section["data"] as? NSArray {
-                                for row in tableRows{
-                                    
-                                    let title = row["title"] as! String
-                                    
-                                    let icon = row["icon"] as! NSDictionary
-                                    
-                                    let action = row["action"] as!  NSDictionary
-                            
-                                    let actionType = ActionType(rawValue:action["type"] as! String)
-
-                                    
-                                    rows.append(TableRow(title: title,
+            if result.isSuccess {
+                
+                if let info = result.value as? NSDictionary {
+                    if let table = info["table"] as? NSDictionary {
+                        if let sections = table["sections"] as? NSArray {
+                            for section in sections{
+                                
+                                var rows : [TableRow] = []
+                                
+                                if let tableRows = section["data"] as? NSArray {
+                                    for row in tableRows{
                                         
-                                        icon: Icon(type: icon["class"] as! NSInteger, index: icon["class"] as! NSInteger, color: UIColor(hex: icon["color"] as! String)),
-                                        action: Action(type:actionType!, data: action["data"] ),height:60,type:.Standard
-                                    ))
+                                        let title = row["title"] as! String
+                                        
+                                        let icon = row["icon"] as! NSDictionary
+                                        
+                                        let action = row["action"] as!  NSDictionary
+                                
+                                        let actionType = ActionType(rawValue:action["type"] as! String)
+
+                                        
+                                        rows.append(TableRow(title: title,
+                                            
+                                            icon: Icon(type: icon["class"] as! NSInteger, index: icon["class"] as! NSInteger, color: UIColor(hex: icon["color"] as! String)),
+                                            action: Action(type:actionType!, data: action["data"] ),height:60,type:.Standard
+                                        ))
+                                        
+                                    }
                                     
                                 }
-                                
+                                self.sections.append(TableSection(sectionName:section["name"] as! String, rows:rows))
                             }
-                            self.sections.append(TableSection(sectionName:section["name"] as! String, rows:rows))
                         }
                     }
                 }
+                
+                self.table.reloadData()
             }
-            
-            self.table.reloadData()
-        }
         
+        }
     
     }
 
@@ -262,7 +264,7 @@ class SettingsCell : UITableViewCell {
     
     
     @IBOutlet weak var titleLabel: UILabel!
-    @IBOutlet weak var iconBtn: FADesignableIconButton!
+    weak var iconBtn: FADesignableIconButton!
     
     
 }

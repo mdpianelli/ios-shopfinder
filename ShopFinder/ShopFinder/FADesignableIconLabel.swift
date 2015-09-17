@@ -56,10 +56,10 @@ import Spring
             let font = UIFont(name:self.fontClassName(), size: self.imageFontSize)
             self.font = font
         
-            var dic : [NSObject : AnyObject] = self.fontAllIcons()
+            let dic : [NSObject : AnyObject] = self.fontAllIcons()
     
             if imageType < dic.count {
-                var fontCode  = dic.keys.array[imageType] as! String
+                let fontCode  = Array(dic.keys)[imageType] as! String
                 self.text = fontCode
             }
         }

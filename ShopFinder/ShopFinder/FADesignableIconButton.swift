@@ -26,7 +26,7 @@ import FontAwesomeKit
         }
     }
     
-    public override var tintColor : UIColor? {
+    public override var tintColor : UIColor! {
         
         didSet{
             self.borderColor = tintColor!
@@ -75,11 +75,11 @@ import FontAwesomeKit
             let font = UIFont(name:self.fontClassName(), size: self.imageFontSize)
             self.titleLabel?.font = font
             
-            var dic : [NSObject : AnyObject] = self.fontAllIcons()
+            let dic : [NSObject : AnyObject] = self.fontAllIcons()
             
             
             if imageType < dic.count {
-                var fontCode  = dic.keys.array[imageType] as! String
+                let fontCode  = Array(dic.keys)[imageType] as! String
                 self.titleLabel?.text = fontCode
                 self.setTitle(fontCode, forState: UIControlState.Normal)
             }

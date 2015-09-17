@@ -15,8 +15,8 @@ class BaseController:  UIViewController {
     
     func callAction(item: TableRow){
         
-        var number = item.action?.data as! String
-        var trimNumber = number.removeWhitespace()
+        let number = item.action?.data as! String
+        let trimNumber = number.removeWhitespace()
         
         if let url = NSURL(string: "tel://\(trimNumber)") {
    

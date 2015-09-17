@@ -27,9 +27,9 @@ class MainRootController:  RESideMenu, RESideMenuDelegate {
         self.delegate = self
         
         //setup controllers
-       self.contentViewController = self.storyboard!.instantiateViewControllerWithIdentifier("NavShopListController") as! UIViewController
+       self.contentViewController = self.storyboard!.instantiateViewControllerWithIdentifier("NavShopListController") 
         
-        self.leftMenuViewController = self.storyboard!.instantiateViewControllerWithIdentifier("MenuController") as! UIViewController
+        self.leftMenuViewController = self.storyboard!.instantiateViewControllerWithIdentifier("MenuController") 
         
 //        self.rightMenuViewController =
 //            self.storyboard!.instantiateViewControllerWithIdentifier("rightMenuViewController") as! UIViewController

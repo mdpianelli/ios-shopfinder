@@ -28,7 +28,7 @@ class ShopFilterOptionsController : UIViewController {
     }
 
     
-    private func titleLabel(#text: String) -> UILabel {
+    private func titleLabel(text text: String) -> UILabel {
         let label = UILabel()
         label.text = text
         label.sizeToFit()

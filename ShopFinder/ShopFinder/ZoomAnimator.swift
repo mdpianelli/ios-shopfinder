@@ -21,12 +21,12 @@ public class ZoomAnimator: NSObject, UIViewControllerTransitioningDelegate, UIVi
         let toView = transitionContext.viewForKey(UITransitionContextToViewKey)!
         
         if !isPresenting {
-            container.addSubview(fromView)
-            container.addSubview(toView)
+            container!.addSubview(fromView)
+            container!.addSubview(toView)
             
             toView.alpha = 0
             toView.transform = CGAffineTransformMakeScale(2, 2)
-            springEaseInOut(duration) {
+            SpringAnimation.springEaseInOut(duration) {
                 fromView.transform = CGAffineTransformMakeScale(0.5, 0.5)
                 fromView.alpha = 0
                 toView.transform = CGAffineTransformIdentity
@@ -34,10 +34,10 @@ public class ZoomAnimator: NSObject, UIViewControllerTransitioningDelegate, UIVi
             }
         }
         else {
-            container.addSubview(toView)
-            container.addSubview(fromView)
+            container!.addSubview(toView)
+            container!.addSubview(fromView)
             
-            springEaseInOut(duration) {
+             SpringAnimation.springEaseInOut(duration) {
                 fromView.transform = CGAffineTransformMakeScale(2, 2)
                 fromView.alpha = 0
                 toView.transform = CGAffineTransformMakeScale(1, 1)
@@ -45,12 +45,12 @@ public class ZoomAnimator: NSObject, UIViewControllerTransitioningDelegate, UIVi
             }
         }
         
-        delay(duration, {
+        delay(duration, closure: {
             transitionContext.completeTransition(true)
         })
     }
     
-    public func transitionDuration(transitionContext: UIViewControllerContextTransitioning) -> NSTimeInterval {
+    public func transitionDuration(transitionContext: UIViewControllerContextTransitioning?) -> NSTimeInterval {
         return duration
     }
     

@@ -65,7 +65,7 @@ extension UIView {
         let vibrancy = UIVibrancyEffect(forBlurEffect: blurEffectView.effect as! UIBlurEffect)
         let vibrancyView = UIVisualEffectView(effect: vibrancy)
         vibrancyView.frame = blurEffectView.bounds
-        vibrancyView.autoresizingMask = .FlexibleWidth | .FlexibleHeight
+        vibrancyView.autoresizingMask = [.FlexibleWidth, .FlexibleHeight]
         return vibrancyView
     }
     
@@ -84,7 +84,7 @@ extension UIView {
         let statusBarBackgroundImage = UIImage(named: "MaskPixel")!.imageWithRenderingMode(.AlwaysTemplate)
         let statusBarBackgroundView = UIImageView(image: statusBarBackgroundImage)
         statusBarBackgroundView.frame = statusBarVibrancyView.bounds
-        statusBarBackgroundView.autoresizingMask = .FlexibleWidth | .FlexibleHeight
+        statusBarBackgroundView.autoresizingMask = [.FlexibleWidth, .FlexibleHeight]
         statusBarVibrancyView.contentView.addSubview(statusBarBackgroundView)
         
         statusBarBlurView.tag = 1

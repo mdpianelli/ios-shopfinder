@@ -13,6 +13,8 @@ import Foundation
 
 struct DefaultKeys {
     static let ShopsJSON = "shopsJSON"
+    static let SettingsJSON = "settingsJSON"
+
 }
 
 

@@ -142,9 +142,9 @@ class ShopDetailController: BaseController, MKMapViewDelegate, GADBannerViewDele
         
         header.frame.size.height = 170
         
-        if let photos: AnyObject = shop!.objectForKey("photos")
+        if let photos = shop!.objectForKey("photos") as? [String]
         {
-            let imageURL = photos[0] as! String
+            let imageURL = photos[0]
             
             let key = SDWebImageManager.sharedManager().cacheKeyForURL(NSURL(string: imageURL))
             let img = SDImageCache.sharedImageCache().imageFromDiskCacheForKey(key)
@@ -201,7 +201,7 @@ class ShopDetailController: BaseController, MKMapViewDelegate, GADBannerViewDele
         //FadeIn banner
         adBanner?.alpha = 0
         
-        spring(1,{
+        SpringAnimation.spring(1,animations: {
             adBanner?.alpha = 1
         })
         
@@ -247,7 +247,7 @@ class ShopDetailController: BaseController, MKMapViewDelegate, GADBannerViewDele
     func tableView(tableView: UITableView, cellForRowAtIndexPath indexPath: NSIndexPath) -> UITableViewCell
     {
         
-        var data = shopInfo![indexPath.section].rows![indexPath.row] as TableRow
+        let data = shopInfo![indexPath.section].rows![indexPath.row] as TableRow
         
         
         switch(data.type){
@@ -260,9 +260,10 @@ class ShopDetailController: BaseController, MKMapViewDelegate, GADBannerViewDele
                 
               //  if !descriptionExpanded {
                     cell.iconButton!.icon = data.icon
+                    cell.contentView.addSubview(cell.iconButton!)
               //  }
                 
-                println("\(data.icon?.type) + \(data.icon?.index) + \(data.icon?.color)")
+                print("\(data.icon?.type) + \(data.icon?.index) + \(data.icon?.color)", terminator: "")
                 
                 if data.action == nil {
                     cell.selectionStyle = .None
@@ -281,7 +282,6 @@ class ShopDetailController: BaseController, MKMapViewDelegate, GADBannerViewDele
                 
                 return cell
             
-            default : break
         }
   
     }
@@ -291,7 +291,7 @@ class ShopDetailController: BaseController, MKMapViewDelegate, GADBannerViewDele
         
         tableView.deselectRowAtIndexPath(indexPath, animated: true)
         
-        var row = shopInfo![indexPath.section].rows![indexPath.row] as TableRow
+        let row = shopInfo![indexPath.section].rows![indexPath.row] as TableRow
         
         if row.action == nil {
             return
@@ -338,15 +338,14 @@ class ShopDetailController: BaseController, MKMapViewDelegate, GADBannerViewDele
     
     func calculateHeightForString(inString:String) -> Int
     {
-        var messageString = inString
-        var attributes = [UIFont(): UIFont.systemFontOfSize(17.0)]
-        var attrString:NSAttributedString? = NSAttributedString(string: messageString, attributes: attributes)
-        var rect:CGRect = attrString!.boundingRectWithSize(CGSizeMake(170,CGFloat.max), options: NSStringDrawingOptions.UsesLineFragmentOrigin, context:nil )//hear u will get nearer height not the exact value
-        var requredSize:CGRect = rect
+        let messageString = inString
+        let attributes = [NSFontAttributeName : UIFont.systemFontOfSize(17.0)]
+        let attrString:NSAttributedString? = NSAttributedString(string: messageString, attributes: attributes)
+        let rect:CGRect = attrString!.boundingRectWithSize(CGSizeMake(table.frame.width,CGFloat.max), options: NSStringDrawingOptions.UsesLineFragmentOrigin, context:nil )//hear u will get nearer height not the exact value
+        let requredSize:CGRect = rect
         
-        println( "\(requredSize.height)")
         
-        return Int(requredSize.height)  //to include button's in your tableview
+        return Int(requredSize.height+40)  //to include button's in your tableview
         
     }
     
@@ -356,13 +355,13 @@ class ShopDetailController: BaseController, MKMapViewDelegate, GADBannerViewDele
     
     //MARK: Map View Delegate
     
-    func mapView(mapView: MKMapView!, didSelectAnnotationView view: MKAnnotationView!)
+    func mapView(mapView: MKMapView, didSelectAnnotationView view: MKAnnotationView)
     {
-        view.rightCalloutAccessoryView = UIButton.buttonWithType(.DetailDisclosure) as! UIView
+        view.rightCalloutAccessoryView = UIButton(type: .DetailDisclosure) as UIView
         
     }
     
-    func mapView(mapView: MKMapView!, annotationView view: MKAnnotationView!, calloutAccessoryControlTapped control: UIControl!)
+    func mapView(mapView: MKMapView, annotationView view: MKAnnotationView, calloutAccessoryControlTapped control: UIControl)
     {
         //TODO: Somethings
     }
@@ -376,7 +375,7 @@ class ShopDetailController: BaseController, MKMapViewDelegate, GADBannerViewDele
         //table.selectRowAtIndexPath(indexPath, animated: true, scrollPosition: .Bottom)
         
         table.setContentOffset(CGPointMake(0,table.contentSize.height-table.frame.height+40), animated: true)
-        mapView.selectAnnotation(shopAnnotation , animated: true)
+        mapView.selectAnnotation(shopAnnotation! , animated: true)
 
     }
     
@@ -400,7 +399,7 @@ class ShopDetailDescriptionCell : UITableViewCell {
 class ShopDetailCell : UITableViewCell {
     
     @IBOutlet weak var infoLabel: UILabel!
-    @IBOutlet weak var iconButton: FADesignableIconButton!
+    weak var iconButton: FADesignableIconButton!
     
 }
 
@@ -415,8 +414,8 @@ class ShopAnnotation : NSObject, MKAnnotation {
     var coordinate : CLLocationCoordinate2D;
     
     // Title and subtitle for use by selection UI.
-    var title: String!
-    var subtitle: String!
+    var title: String?
+    var subtitle: String?
     var row: Int!
     
     
