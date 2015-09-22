@@ -267,8 +267,13 @@ class ShopDetailController: BaseController, MKMapViewDelegate, GADBannerViewDele
                 
                 if data.action == nil {
                     cell.selectionStyle = .None
+                    cell.separatorInset = UIEdgeInsetsMake(0,table.frame.size.width,0,0);
+
+
                 }else{
                     cell.selectionStyle = .Default
+                    cell.separatorInset = UIEdgeInsetsMake(0,0, 0, 0)
+
                 }
             
                 return cell
@@ -333,6 +338,7 @@ class ShopDetailController: BaseController, MKMapViewDelegate, GADBannerViewDele
         shopInfo![indexPath.section].rows![indexPath.row].height = height
         table.endUpdates()
         
+        
         descriptionExpanded = !descriptionExpanded
     }
     
@@ -349,8 +355,7 @@ class ShopDetailController: BaseController, MKMapViewDelegate, GADBannerViewDele
         
     }
     
-   
-    
+      
     
     
     //MARK: Map View Delegate
@@ -368,15 +373,52 @@ class ShopDetailController: BaseController, MKMapViewDelegate, GADBannerViewDele
     
     
     func locationAction(row : TableRow){
-    
-
- //       let indexPath = NSIndexPath(forRow:table.numberOfRowsInSection(table.numberOfSections()-1)-1 , inSection:table.numberOfSections()-1)
         
-        //table.selectRowAtIndexPath(indexPath, animated: true, scrollPosition: .Bottom)
-        
-        table.setContentOffset(CGPointMake(0,table.contentSize.height-table.frame.height+40), animated: true)
-        mapView.selectAnnotation(shopAnnotation! , animated: true)
+//        table.setContentOffset(CGPointMake(0,table.contentSize.height-table.frame.height+40), animated: true)
+//        mapView.selectAnnotation(shopAnnotation! , animated: true)
 
+        let address = "\(shopAnnotation!.coordinate.latitude),\(shopAnnotation!.coordinate.longitude)"
+        
+        let actionController = UIAlertController(title:NSLocalizedString("Show Directions:", comment: ""), message: nil, preferredStyle: .ActionSheet)
+        
+        //Create and add the Cancel action
+        let cancelAction: UIAlertAction = UIAlertAction(title: NSLocalizedString("Cancel", comment: ""), style: .Cancel) { action -> Void in
+            //Just dismiss the action sheet
+            self.dismissViewControllerAnimated(true, completion: nil)
+        }
+        
+        
+       // if UIApplication.sharedApplication().canOpenURL(NSURL(string:"comgooglemaps://")!){
+                
+            let googleAction = UIAlertAction(title: NSLocalizedString("Open in Google Maps", comment: ""), style: .Default) { (action) -> Void in
+                
+                
+                    let url = NSURL(string: "comgooglemaps://?daddr=\(address)&directionsmode=transit")
+                
+                    UIApplication.sharedApplication().openURL(url!)
+                
+            }
+            
+            actionController.addAction(googleAction)
+
+       // }
+        
+        let mapsAction = UIAlertAction(title: NSLocalizedString("Open in Maps", comment: ""), style: .Default) { (action) -> Void in
+            
+            let url = NSURL(string: "http://maps.apple.com/?daddr=\(address)&dirflg=r")
+            
+            UIApplication.sharedApplication().openURL(url!)
+            
+            
+        }
+        
+        
+        actionController.addAction(mapsAction)
+        actionController.addAction(cancelAction)
+        
+        
+        self.presentViewController(actionController, animated: true, completion: nil)
+        
     }
     
  
