@@ -33,6 +33,7 @@ class ShopDetailController: BaseController, MKMapViewDelegate, GADBannerViewDele
     
     var adBanner: GADBannerView?
 
+    let descriptionFieldHeight = 120
     
     //MARK: UIViewController Methods
     
@@ -116,7 +117,7 @@ class ShopDetailController: BaseController, MKMapViewDelegate, GADBannerViewDele
         
         if let description = shop!.objectForKey("description") as? String {
             
-            shopInfo![0].rows?.append(TableRow(title:description,icon:nil,action:Action(type:.Expand,data:description),height:90,type:.Text))
+            shopInfo![0].rows?.append(TableRow(title:description,icon:nil,action:Action(type:.Expand,data:description),height:descriptionFieldHeight,type:.Text))
             
         }
         
@@ -329,7 +330,7 @@ class ShopDetailController: BaseController, MKMapViewDelegate, GADBannerViewDele
         var height = 0
         
         if descriptionExpanded {
-            height = 90
+            height = descriptionFieldHeight
         }else{
             height = calculateHeightForString(text)
         }
@@ -351,28 +352,12 @@ class ShopDetailController: BaseController, MKMapViewDelegate, GADBannerViewDele
         let requredSize:CGRect = rect
         
         
-        return Int(requredSize.height+40)  //to include button's in your tableview
+        return Int(requredSize.height+80)  //to include button's in your tableview
         
     }
     
-      
     
-    
-    //MARK: Map View Delegate
-    
-    func mapView(mapView: MKMapView, didSelectAnnotationView view: MKAnnotationView)
-    {
-        view.rightCalloutAccessoryView = UIButton(type: .DetailDisclosure) as UIView
-        
-    }
-    
-    func mapView(mapView: MKMapView, annotationView view: MKAnnotationView, calloutAccessoryControlTapped control: UIControl)
-    {
-        //TODO: Somethings
-    }
-    
-    
-    func locationAction(row : TableRow){
+    func locationAction(row : TableRow?){
         
 //        table.setContentOffset(CGPointMake(0,table.contentSize.height-table.frame.height+40), animated: true)
 //        mapView.selectAnnotation(shopAnnotation! , animated: true)
@@ -419,6 +404,21 @@ class ShopDetailController: BaseController, MKMapViewDelegate, GADBannerViewDele
         
         self.presentViewController(actionController, animated: true, completion: nil)
         
+    }
+
+    
+    
+    //MARK: Map View Delegate
+    
+    func mapView(mapView: MKMapView, didSelectAnnotationView view: MKAnnotationView)
+    {
+        view.rightCalloutAccessoryView = UIButton(type: .DetailDisclosure) as UIView
+        
+    }
+    
+    func mapView(mapView: MKMapView, annotationView view: MKAnnotationView, calloutAccessoryControlTapped control: UIControl)
+    {
+        locationAction(nil)
     }
     
  

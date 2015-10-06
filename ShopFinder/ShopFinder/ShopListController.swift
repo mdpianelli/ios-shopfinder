@@ -376,7 +376,7 @@ class ShopListController: UIViewController, GADInterstitialDelegate, UIScrollVie
         let reviewCount = shop.objectForKey("reviews_count") as? NSNumber
         
         if reviewCount != nil {
-            cell.reviewCountLabel!.text = reviewCount!.stringValue
+          //  cell.reviewCountLabel!.text = reviewCount!.stringValue
         }
         
         if let photos = shop.objectForKey("photos") as? [AnyObject]
