@@ -13,7 +13,7 @@ import Spring
 public class ZoomAnimator: NSObject, UIViewControllerTransitioningDelegate, UIViewControllerAnimatedTransitioning {
     
     var isPresenting = true
-    var duration = 0.4
+    var duration = 0.35
     
     public func animateTransition(transitionContext: UIViewControllerContextTransitioning) {
         let container = transitionContext.containerView()

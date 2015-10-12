@@ -20,6 +20,7 @@ import FontAwesomeKit
                 self.imageFontClass = icon!.type
                 self.imageType = icon!.index
                 self.tintColor = icon!.color
+                self.alpha = 1
             }else{
                 self.alpha = 0
             }

@@ -259,12 +259,16 @@ class ShopDetailController: BaseController, MKMapViewDelegate, GADBannerViewDele
                 
                 cell.infoLabel!.text = data.title
                 
-              //  if !descriptionExpanded {
+               
+               // if data.icon != nil {
                     cell.iconButton!.icon = data.icon
-                    cell.contentView.addSubview(cell.iconButton!)
               //  }
                 
-                print("\(data.icon?.type) + \(data.icon?.index) + \(data.icon?.color)", terminator: "")
+                //print("\(cell.iconButton!.frame)")
+                
+               // cell.contentView.addSubview(cell.iconButton!)
+                
+              //  print("\(data.icon?.type) + \(data.icon?.index) + \(data.icon?.color)", terminator: "")
                 
                 if data.action == nil {
                     cell.selectionStyle = .None
@@ -369,7 +373,7 @@ class ShopDetailController: BaseController, MKMapViewDelegate, GADBannerViewDele
         //Create and add the Cancel action
         let cancelAction: UIAlertAction = UIAlertAction(title: NSLocalizedString("Cancel", comment: ""), style: .Cancel) { action -> Void in
             //Just dismiss the action sheet
-            self.dismissViewControllerAnimated(true, completion: nil)
+          //  self.dismissViewControllerAnimated(true, completion: nil)
         }
         
         
@@ -441,8 +445,7 @@ class ShopDetailDescriptionCell : UITableViewCell {
 class ShopDetailCell : UITableViewCell {
     
     @IBOutlet weak var infoLabel: UILabel!
-    weak var iconButton: FADesignableIconButton!
-    
+    @IBOutlet weak var iconButton: FADesignableIconButton!
 }
 
 
