@@ -19,7 +19,15 @@ extension UIViewController {
         
         let image = self.imageFromAFont(cogIcon)
         
-        return UIBarButtonItem(image: image, landscapeImagePhone: nil, style:.Plain, target:self, action:"presentLeftMenuViewController:")
+        return UIBarButtonItem(image: image, landscapeImagePhone: nil, style:.Plain, target:self, action:"presentMenu")
+        
+    }
+    
+    func presentMenu(){
+        
+        UIApplication.sharedApplication().setStatusBarStyle(UIStatusBarStyle.LightContent, animated: true)
+        
+        self.presentLeftMenuViewController(self)
         
     }
     

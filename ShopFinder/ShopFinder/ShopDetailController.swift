@@ -203,7 +203,7 @@ class ShopDetailController: BaseController, MKMapViewDelegate, GADBannerViewDele
         adBanner?.alpha = 0
         
         SpringAnimation.spring(1,animations: {
-            adBanner?.alpha = 1
+            self.adBanner?.alpha = 1
         })
         
         table.contentInset = UIEdgeInsetsMake(0,0,50,0)
