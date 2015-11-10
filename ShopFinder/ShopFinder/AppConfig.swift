@@ -51,7 +51,7 @@ struct DefaultKeys {
 
 // API Structs
 
-let API_URL = "http://shop-finder.eu01.aws.af.cm/api"
+let API_URL = "http://shopfinder-peperinopomoro.rhcloud.com/api"
 //let API_URL = "http://192.168.1.133:3000/api"
 
 struct API {

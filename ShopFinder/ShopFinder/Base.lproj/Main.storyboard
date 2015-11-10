@@ -1307,7 +1307,8 @@ Nunc rhoncus odio at condimentum tincidunt. Morbi aliquet felis id justo pulvina
                                         <exclude reference="lrv-rD-0D1"/>
                                     </mask>
                                 </variation>
-                                <variation key="heightClass=regular-widthClass=compact">
+                                <variation key="heightClass=regular-widthClass=compact" misplaced="YES">
+                                    <rect key="frame" x="11" y="40" width="41" height="30"/>
                                     <mask key="constraints">
                                         <include reference="lrv-rD-0D1"/>
                                     </mask>
@@ -1366,6 +1367,7 @@ Nunc rhoncus odio at condimentum tincidunt. Morbi aliquet felis id justo pulvina
                     <connections>
                         <outlet property="header" destination="Cl6-QF-Diz" id="Cne-BY-aA2"/>
                         <outlet property="mapView" destination="xRT-FR-4VS" id="ki5-I6-d9B"/>
+                        <outlet property="ratingLabel" destination="sBn-SI-c4n" id="DT9-Dz-H9p"/>
                         <outlet property="table" destination="eSS-7k-hbE" id="KGD-Qu-MRv"/>
                         <outlet property="titleLabel" destination="KIu-zy-qBu" id="Ymg-uS-FJ5"/>
                     </connections>
@@ -1607,7 +1609,7 @@ Nunc rhoncus odio at condimentum tincidunt. Morbi aliquet felis id justo pulvina
                                                 <exclude reference="Xg1-ep-dLl"/>
                                             </mask>
                                         </variation>
-                                        <variation key="heightClass=regular-widthClass=compact" ambiguous="YES" misplaced="YES">
+                                        <variation key="heightClass=regular-widthClass=compact" misplaced="YES">
                                             <rect key="frame" x="281" y="90" width="50" height="50"/>
                                             <mask key="constraints">
                                                 <include reference="6Lq-Tz-daj"/>
@@ -1651,7 +1653,8 @@ Nunc rhoncus odio at condimentum tincidunt. Morbi aliquet felis id justo pulvina
                                                 <exclude reference="2fn-kY-rcQ"/>
                                             </mask>
                                         </variation>
-                                        <variation key="heightClass=regular-widthClass=compact">
+                                        <variation key="heightClass=regular-widthClass=compact" misplaced="YES">
+                                            <rect key="frame" x="161" y="231" width="79" height="37"/>
                                             <mask key="constraints">
                                                 <include reference="2fn-kY-rcQ"/>
                                                 <exclude reference="AhU-Ch-4B3"/>
@@ -1679,7 +1682,8 @@ Nunc rhoncus odio at condimentum tincidunt. Morbi aliquet felis id justo pulvina
                                                 <exclude reference="MWB-8h-zMj"/>
                                             </mask>
                                         </variation>
-                                        <variation key="heightClass=regular-widthClass=compact">
+                                        <variation key="heightClass=regular-widthClass=compact" misplaced="YES">
+                                            <rect key="frame" x="8" y="8" width="87" height="27"/>
                                             <mask key="constraints">
                                                 <include reference="MWB-8h-zMj"/>
                                             </mask>
@@ -1699,7 +1703,8 @@ Nunc rhoncus odio at condimentum tincidunt. Morbi aliquet felis id justo pulvina
                                                 <exclude reference="TbW-4T-P4Q"/>
                                             </mask>
                                         </variation>
-                                        <variation key="heightClass=regular-widthClass=compact">
+                                        <variation key="heightClass=regular-widthClass=compact" misplaced="YES">
+                                            <rect key="frame" x="41" y="150" width="99" height="32"/>
                                             <mask key="constraints">
                                                 <include reference="TbW-4T-P4Q"/>
                                             </mask>
@@ -1711,6 +1716,9 @@ Nunc rhoncus odio at condimentum tincidunt. Morbi aliquet felis id justo pulvina
                                         <fontDescription key="fontDescription" type="system" weight="thin" pointSize="17"/>
                                         <color key="textColor" red="0.98581582990000005" green="0.98581582990000005" blue="0.98581582990000005" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
                                         <nil key="highlightedColor"/>
+                                        <variation key="heightClass=regular-widthClass=compact" misplaced="YES">
+                                            <rect key="frame" x="154" y="150" width="101" height="32"/>
+                                        </variation>
                                     </label>
                                     <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Comment #" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="6q1-os-slz">
                                         <rect key="frame" x="0.0" y="-21" width="42" height="21"/>
@@ -1718,6 +1726,9 @@ Nunc rhoncus odio at condimentum tincidunt. Morbi aliquet felis id justo pulvina
                                         <fontDescription key="fontDescription" type="system" weight="thin" pointSize="17"/>
                                         <color key="textColor" red="0.98581582990000005" green="0.98581582990000005" blue="0.98581582990000005" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
                                         <nil key="highlightedColor"/>
+                                        <variation key="heightClass=regular-widthClass=compact" misplaced="YES">
+                                            <rect key="frame" x="265" y="150" width="100" height="32"/>
+                                        </variation>
                                     </label>
                                     <button autoresizesSubviews="NO" opaque="NO" clipsSubviews="YES" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="hj5-9v-KEi" customClass="FADesignableIconButton" customModule="ShopFinder" customModuleProvider="target">
                                         <rect key="frame" x="-23" y="-15" width="46" height="30"/>
@@ -1785,7 +1796,8 @@ Nunc rhoncus odio at condimentum tincidunt. Morbi aliquet felis id justo pulvina
                                                 <exclude reference="SKB-Jm-DPF"/>
                                             </mask>
                                         </variation>
-                                        <variation key="heightClass=regular-widthClass=compact">
+                                        <variation key="heightClass=regular-widthClass=compact" misplaced="YES">
+                                            <rect key="frame" x="61" y="85" width="50" height="50"/>
                                             <mask key="constraints">
                                                 <include reference="2QJ-0G-hIV"/>
                                                 <include reference="SKB-Jm-DPF"/>

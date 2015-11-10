@@ -280,7 +280,8 @@ class ShopListController: UIViewController, GADInterstitialDelegate, UIScrollVie
                         if distance == nil {
                             distance = 0
                         }
-                       
+											
+												//set distance value
                         shopDic.setObject(distance!, forKey: "distanceValue")
                         
                         
@@ -296,8 +297,17 @@ class ShopListController: UIViewController, GADInterstitialDelegate, UIScrollVie
                         }
                         
                         let distanceStr = String(format: format ,distance!,distanceType)
-                        
+											
+												//set distance string
                         shopDic.setObject(distanceStr, forKey: "distance")
+											
+												let rating = shopDic.objectForKey("rating") as? NSNumber
+												
+												if rating != nil {
+													  shopDic.setObject("\(rating!.stringValue)/5",forKey: "rating");
+												}
+												
+											
                         aux.append(shopDic)
                     }
                 }
@@ -365,19 +375,15 @@ class ShopListController: UIViewController, GADInterstitialDelegate, UIScrollVie
         
         //cell.textLabel!.textColor = UIColor.whiteColor()
         cell.titleLabel!.text =  shop.objectForKey("name") as? String
-        let rating = shop.objectForKey("rating") as? NSNumber
-        
-        if rating != nil {
-            cell.ratingLabel!.text = "\(rating!.stringValue)/5"
-        }
-        
+			
+				cell.ratingLabel!.text = shop.objectForKey("rating") as? String
+			
         cell.distanceLabel!.text = shop.objectForKey("distance") as? String
         
         let reviewCount = shop.objectForKey("reviews_count") as? NSNumber
         
-        if reviewCount != nil {
-          //  cell.reviewCountLabel!.text = reviewCount!.stringValue
-        }
+				cell.reviewCountLabel!.text = reviewCount?.stringValue
+			
         
         if let photos = shop.objectForKey("photos") as? [AnyObject]
         {
@@ -387,11 +393,9 @@ class ShopListController: UIViewController, GADInterstitialDelegate, UIScrollVie
                 (image, error, _, _) -> Void in
                 
                 cell.imageView?.alpha = 0
-                SpringAnimation.spring(0.4, animations:{
-                   // cell.imageView?.image = image
+                SpringAnimation.spring(0.45, animations:{
                     cell.imageView?.alpha = 1
                 })
-               // self.table.reloadData()
             })
             
         }

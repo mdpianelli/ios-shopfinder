@@ -24,6 +24,8 @@ class ShopDetailController: BaseController, MKMapViewDelegate, GADBannerViewDele
     
     @IBOutlet weak var imageView: SpringImageView!
     @IBOutlet weak var titleLabel: UILabel!
+		@IBOutlet weak var ratingLabel: UILabel!
+	
     @IBOutlet weak var addressLabel: UILabel!
     @IBOutlet weak var mapView: MKMapView!
     @IBOutlet weak var table: UITableView!
@@ -93,7 +95,9 @@ class ShopDetailController: BaseController, MKMapViewDelegate, GADBannerViewDele
         
         //set title
         titleLabel.text = shop!.objectForKey("name") as? String
-        
+				ratingLabel.text = shop!.objectForKey("rating") as? String
+			
+			
         //initialize table sections and rows
         shopInfo = [TableSection(sectionName:"",rows:[])]
         
@@ -188,7 +192,7 @@ class ShopDetailController: BaseController, MKMapViewDelegate, GADBannerViewDele
     
     
     
-    
+	
     //MARK: - GADBannerViewDelegate
     
     func adViewDidReceiveAd(view: GADBannerView!) {
