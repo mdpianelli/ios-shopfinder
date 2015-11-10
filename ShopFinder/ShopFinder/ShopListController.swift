@@ -382,9 +382,10 @@ class ShopListController: UIViewController, GADInterstitialDelegate, UIScrollVie
         
         let reviewCount = shop.objectForKey("reviews_count") as? NSNumber
         
-				cell.reviewCountLabel!.text = reviewCount?.stringValue
+				if reviewCount != nil {
+					 cell.reviewCountLabel!.text = reviewCount!.stringValue
+				}
 			
-        
         if let photos = shop.objectForKey("photos") as? [AnyObject]
         {
             let imageURL = photos[0] as! String
