@@ -40,7 +40,7 @@
 		9AD8090D1B643E8A0077DFD1 /* YALSunnyRefreshControl.xib in Resources */ = {isa = PBXBuildFile; fileRef = 9AD8090B1B643E8A0077DFD1 /* YALSunnyRefreshControl.xib */; };
 		9AE65A2D1BA6F62C00FDC1B6 /* BaseController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9AE65A2C1BA6F62C00FDC1B6 /* BaseController.swift */; };
 		9AE65A2F1BA7012E00FDC1B6 /* String+Helpers.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9AE65A2E1BA7012E00FDC1B6 /* String+Helpers.swift */; };
-		E3EFD600EB3CCFE5FAA7711A /* Pods.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 381840E40228E8039A62F769 /* Pods.framework */; settings = {ATTRIBUTES = (Weak, ); }; };
+		E3EFD600EB3CCFE5FAA7711A /* Pods.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 381840E40228E8039A62F769 /* Pods.framework */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -691,18 +691,27 @@
 			isa = XCBuildConfiguration;
 			baseConfigurationReference = 8B29ED826246084DC28B7E2D /* Pods.debug.xcconfig */;
 			buildSettings = {
+				APPNAME = ShopFinder;
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
+				BASE_URL = "http://($REST_API_DOMAIN)";
 				CLANG_ENABLE_MODULES = YES;
 				CODE_SIGN_IDENTITY = "iPhone Developer";
 				ENABLE_BITCODE = NO;
+				FACEBOOK_APP_ID = 1709529752614767;
+				FACEBOOK_DISPLAY_NAME = Tappas;
 				FRAMEWORK_SEARCH_PATHS = (
 					"$(inherited)",
 					"$(PROJECT_DIR)/ShopFinder",
 				);
 				INFOPLIST_FILE = ShopFinder/Info.plist;
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks";
-				PRODUCT_BUNDLE_IDENTIFIER = "com.barkalastudios.$(PRODUCT_NAME:rfc1034identifier)";
+				LINK_ABOUT_US = "https://privacy.getin8.com/about.html";
+				LINK_FAQ = "https://privacy.getin8.com/faq.html";
+				LINK_PRIVACY = "https://privacy.getin8.com/privacy.html";
+				LINK_TERMS_CONDITIONS = "https://privacy.getin8.com/terms.html";
+				PRODUCT_BUNDLE_IDENTIFIER = com.barkalastudios.tappas;
 				PRODUCT_NAME = "$(TARGET_NAME)";
+				REST_API_DOMAIN = "shopfinder-peperinopomoro.rhcloud.com";
 				SWIFT_OBJC_BRIDGING_HEADER = "ShopFinder/ShopFinder-Bridging-Header.h";
 				SWIFT_OPTIMIZATION_LEVEL = "-Onone";
 			};
@@ -712,18 +721,27 @@
 			isa = XCBuildConfiguration;
 			baseConfigurationReference = 182D109AC3AA1CD2F75BDABF /* Pods.release.xcconfig */;
 			buildSettings = {
+				APPNAME = ShopFinder;
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
+				BASE_URL = "http://($REST_API_DOMAIN)";
 				CLANG_ENABLE_MODULES = YES;
 				CODE_SIGN_IDENTITY = "iPhone Developer";
 				ENABLE_BITCODE = NO;
+				FACEBOOK_APP_ID = 1709529752614767;
+				FACEBOOK_DISPLAY_NAME = Tappas;
 				FRAMEWORK_SEARCH_PATHS = (
 					"$(inherited)",
 					"$(PROJECT_DIR)/ShopFinder",
 				);
 				INFOPLIST_FILE = ShopFinder/Info.plist;
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks";
-				PRODUCT_BUNDLE_IDENTIFIER = "com.barkalastudios.$(PRODUCT_NAME:rfc1034identifier)";
+				LINK_ABOUT_US = "https://privacy.getin8.com/about.html";
+				LINK_FAQ = "https://privacy.getin8.com/faq.html";
+				LINK_PRIVACY = "https://privacy.getin8.com/privacy.html";
+				LINK_TERMS_CONDITIONS = "https://privacy.getin8.com/terms.html";
+				PRODUCT_BUNDLE_IDENTIFIER = com.barkalastudios.tappas;
 				PRODUCT_NAME = "$(TARGET_NAME)";
+				REST_API_DOMAIN = api.getin8.com;
 				SWIFT_OBJC_BRIDGING_HEADER = "ShopFinder/ShopFinder-Bridging-Header.h";
 			};
 			name = Release;

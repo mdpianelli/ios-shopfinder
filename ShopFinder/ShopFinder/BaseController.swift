@@ -7,7 +7,6 @@
 //
 
 import UIKit
-import UIAlertView_Blocks
 
 class BaseController:  UIViewController {
 
@@ -20,16 +19,16 @@ class BaseController:  UIViewController {
         
         if let url = NSURL(string: "tel://\(trimNumber)") {
    
-            UIAlertView.showWithTitle(NSLocalizedString("Would you like to call?",comment:""), message:"", cancelButtonTitle: "Cancel", otherButtonTitles:["Call"]) { (alertView, index) -> Void in
-                
-                switch(index){
-                case 1 :
-                    UIApplication.sharedApplication().openURL(url)
-                    
-                default : break;
-                    
-                }
-            }
+					
+					let alertVC = UIAlertController(title:NSLocalizedString("Would you like to call?", comment: ""), message: nil, preferredStyle: .Alert)
+					
+					//Create and add the Cancel action
+					let callAction: UIAlertAction = UIAlertAction(title: NSLocalizedString("Call", comment:""), style: .Default) { action -> Void in
+							UIApplication.sharedApplication().openURL(url);
+					}
+			
+					alertVC.addAction(callAction)
+					self.presentViewController(alertVC, animated: true, completion: nil)
             
         }
     

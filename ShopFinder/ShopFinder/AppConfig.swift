@@ -61,7 +61,13 @@ struct API {
     static let shops =  base + "/shops"
     
     static let settings = base + "/settings"
-    
+	
+	
+	func baseURL()->String{
+		let appInfo = NSBundle.mainBundle().objectForInfoDictionaryKey("ApplicationInfo") as! NSDictionary
+		return appInfo["BASE_URL"] as! String
+	}
+	
 }
 
 

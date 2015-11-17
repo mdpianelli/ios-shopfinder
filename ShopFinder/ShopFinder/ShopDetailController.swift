@@ -366,10 +366,7 @@ class ShopDetailController: BaseController, MKMapViewDelegate, GADBannerViewDele
     
     
     func locationAction(row : TableRow?){
-        
-//        table.setContentOffset(CGPointMake(0,table.contentSize.height-table.frame.height+40), animated: true)
-//        mapView.selectAnnotation(shopAnnotation! , animated: true)
-
+			
         let address = "\(shopAnnotation!.coordinate.latitude),\(shopAnnotation!.coordinate.longitude)"
         
         let actionController = UIAlertController(title:NSLocalizedString("Show Directions:", comment: ""), message: nil, preferredStyle: .ActionSheet)
