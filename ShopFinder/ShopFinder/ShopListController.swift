@@ -397,7 +397,7 @@ class ShopListController: UIViewController, GADInterstitialDelegate, UIScrollVie
 							cell.shopImageView?.alpha = 0
 							cell.shopImageView.transform = CGAffineTransformMakeScale(0,0)
 
-							SpringAnimation.spring(2, animations:{
+							SpringAnimation.spring(0.6, animations:{
 								cell.shopImageView?.alpha = 1
 								cell.shopImageView.transform = CGAffineTransformMakeScale(1,1)
 							})

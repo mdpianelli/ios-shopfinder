@@ -225,7 +225,7 @@
 				9AD808F51B5FDA5A0077DFD1 /* Extensions */,
 				9A4701091B56D72E00A4B8E3 /* Server */,
 				9A4701051B56AB1600A4B8E3 /* Main */,
-				9A4701061B56AB2300A4B8E3 /* Modules */,
+				9A4701061B56AB2300A4B8E3 /* View Controllers */,
 			);
 			name = Classes;
 			sourceTree = "<group>";
@@ -250,14 +250,14 @@
 			name = Main;
 			sourceTree = "<group>";
 		};
-		9A4701061B56AB2300A4B8E3 /* Modules */ = {
+		9A4701061B56AB2300A4B8E3 /* View Controllers */ = {
 			isa = PBXGroup;
 			children = (
 				9AE65A2B1BA6F61500FDC1B6 /* Base */,
 				9AD809031B5FE8B20077DFD1 /* Settings */,
 				9A47010C1B56E76400A4B8E3 /* Shops */,
 			);
-			name = Modules;
+			name = "View Controllers";
 			sourceTree = "<group>";
 		};
 		9A4701091B56D72E00A4B8E3 /* Server */ = {
