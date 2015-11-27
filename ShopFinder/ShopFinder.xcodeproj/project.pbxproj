@@ -500,7 +500,7 @@
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 			shellPath = /bin/sh;
-			shellScript = "";
+			shellScript = "\"${PODS_ROOT}/Fabric/Fabric.framework/run\" ca12dafc1acd97e0c50cb0bbc4ab0f084ff48712 b5f90ae5c068643350d76315fbccb8292bf58abe2b5d335d3875d87022a87225";
 		};
 		D48AA2473828A1C602EE1086 /* Copy Pods Resources */ = {
 			isa = PBXShellScriptBuildPhase;

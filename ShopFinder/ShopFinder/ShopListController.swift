@@ -379,7 +379,8 @@ class ShopListController: UIViewController, GADInterstitialDelegate, UIScrollVie
 				cell.ratingLabel!.text = shop.objectForKey("rating") as? String
 			
         cell.distanceLabel!.text = shop.objectForKey("distance") as? String
-        
+			
+			
         let reviewCount = shop.objectForKey("reviews_count") as? NSNumber
         
 				if reviewCount != nil {
@@ -392,11 +393,15 @@ class ShopListController: UIViewController, GADInterstitialDelegate, UIScrollVie
             
             cell.shopImageView!.sd_setImageWithURL(NSURL(string: imageURL), completed:{
                 (image, error, _, _) -> Void in
-                
-                cell.imageView?.alpha = 0
-                SpringAnimation.spring(0.45, animations:{
-                    cell.imageView?.alpha = 1
-                })
+							
+							cell.shopImageView?.alpha = 0
+							cell.shopImageView.transform = CGAffineTransformMakeScale(0,0)
+
+							SpringAnimation.spring(2, animations:{
+								cell.shopImageView?.alpha = 1
+								cell.shopImageView.transform = CGAffineTransformMakeScale(1,1)
+							})
+							
             })
             
         }
