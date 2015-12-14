@@ -13,4 +13,4 @@
 #import "JBParallaxCell.h"
 #import "ParallaxHeaderView.h"
 
-#import <GoogleMobileAds/GoogleMobileAds.h>
+//#import <GoogleMobileAds/GoogleMobileAds.h>

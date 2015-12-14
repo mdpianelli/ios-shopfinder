@@ -13,9 +13,9 @@ import FontAwesomeKit
 import SDWebImage
 import MapKit
 import Spring
-import GoogleMobileAds
+//import GoogleMobileAds
 
-class ShopDetailController: BaseController, MKMapViewDelegate, GADBannerViewDelegate, UITableViewDelegate, UITableViewDataSource {
+class ShopDetailController: BaseController, MKMapViewDelegate, UITableViewDelegate, UITableViewDataSource {
 
     
     var shop : NSDictionary?
@@ -26,6 +26,7 @@ class ShopDetailController: BaseController, MKMapViewDelegate, GADBannerViewDele
     @IBOutlet weak var titleLabel: UILabel!
 		@IBOutlet weak var ratingLabel: UILabel!
 	
+
     @IBOutlet weak var addressLabel: UILabel!
     @IBOutlet weak var mapView: MKMapView!
     @IBOutlet weak var table: UITableView!
@@ -33,7 +34,7 @@ class ShopDetailController: BaseController, MKMapViewDelegate, GADBannerViewDele
     
     var descriptionExpanded = false
     
-    var adBanner: GADBannerView?
+   // var adBanner: GADBannerView?
 
     let descriptionFieldHeight = 120
     
@@ -69,7 +70,7 @@ class ShopDetailController: BaseController, MKMapViewDelegate, GADBannerViewDele
     override func viewWillDisappear(animated: Bool) {
         super.viewWillDisappear(animated)
     
-        adBanner?.delegate = nil
+       //   adBanner?.delegate = nil
 
     }
     
@@ -181,46 +182,55 @@ class ShopDetailController: BaseController, MKMapViewDelegate, GADBannerViewDele
 
     func adBannerSetup(){
         
-        adBanner = GADBannerView(adSize: kGADAdSizeSmartBannerPortrait)
-        adBanner?.adSize = kGADAdSizeSmartBannerPortrait
-        adBanner?.adUnitID = Ads.bannerId
-        adBanner?.rootViewController = self
-        adBanner?.autoloadEnabled = true;
-        adBanner?.delegate = self
-        adBanner?.loadRequest(GADRequest())
+//        adBanner = GADBannerView(adSize: kGADAdSizeSmartBannerPortrait)
+//        adBanner?.adSize = kGADAdSizeSmartBannerPortrait
+//        adBanner?.adUnitID = Ads.bannerId
+//        adBanner?.rootViewController = self
+//        adBanner?.autoloadEnabled = true;
+//        adBanner?.delegate = self
+//        adBanner?.loadRequest(GADRequest())
     }
     
     
     
 	
     //MARK: - GADBannerViewDelegate
-    
-    func adViewDidReceiveAd(view: GADBannerView!) {
-        
-        var frame  = adBanner!.frame
-        frame.origin.y = self.view.frame.size.height - frame.size.height
-        adBanner?.frame = frame
-        self.view.addSubview(adBanner!)
-
-        
-        //FadeIn banner
-        adBanner?.alpha = 0
-        
-        SpringAnimation.spring(1,animations: {
-            self.adBanner?.alpha = 1
-        })
-        
-        table.contentInset = UIEdgeInsetsMake(0,0,50,0)
-
-       
-    }
-    
-    func adView(view: GADBannerView!, didFailToReceiveAdWithError error: GADRequestError!){
-        
-        //println(error)
-    }
-    
-    
+//    
+//    func adViewDidReceiveAd(view: GADBannerView!) {
+//        
+//        var frame  = adBanner!.frame
+//        frame.origin.y = self.view.frame.size.height - frame.size.height
+//        adBanner?.frame = frame
+//        self.view.addSubview(adBanner!)
+//
+//        
+//        //FadeIn banner
+//        adBanner?.alpha = 0
+//        
+//        SpringAnimation.spring(1,animations: {
+//            self.adBanner?.alpha = 1
+//        })
+//        
+//        table.contentInset = UIEdgeInsetsMake(0,0,50,0)
+//
+//       
+//    }
+//    
+//    func adView(view: GADBannerView!, didFailToReceiveAdWithError error: GADRequestError!){
+//        
+//        //println(error)
+//    }
+//    
+	
+	
+		//MARK: Actions
+	
+		@IBAction func shareAction(sender: UIButton) {
+	
+	
+		}
+	
+	
     //MARK: UITableView Methods
 
     func tableView(tableView: UITableView, heightForRowAtIndexPath indexPath: NSIndexPath) -> CGFloat

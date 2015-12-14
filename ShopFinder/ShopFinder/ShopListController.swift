@@ -11,13 +11,13 @@ import SVProgressHUD
 import FontAwesomeKit
 import SDWebImage
 import Spring
-import GoogleMobileAds
+//import GoogleMobileAds
 import CoreLocation
 
 
 
 
-class ShopListController: UIViewController, GADInterstitialDelegate, UIScrollViewDelegate,CLLocationManagerDelegate {
+class ShopListController: UIViewController, UIScrollViewDelegate,CLLocationManagerDelegate {
 
     enum SortType {
         case Distance
@@ -28,7 +28,7 @@ class ShopListController: UIViewController, GADInterstitialDelegate, UIScrollVie
     
     @IBOutlet weak var table: UITableView!
     
-    var adBannerFull : GADInterstitial?
+   // var adBannerFull : GADInterstitial?
     var shops : NSArray = []
     var selectedShop : NSDictionary?
     var refreshControl : YALSunnyRefreshControl?  //UIRefreshControl()
@@ -74,11 +74,11 @@ class ShopListController: UIViewController, GADInterstitialDelegate, UIScrollVie
  
     override func viewWillAppear(animated: Bool) {
         super.viewWillAppear(animated)
-
-        if(adBannerFull?.hasBeenUsed != true){
-         //   adBannerSetup()
-        }
-        
+//
+//        if(adBannerFull?.hasBeenUsed != true){
+//         //   adBannerSetup()
+//        }
+			
     
     }
     
@@ -157,10 +157,10 @@ class ShopListController: UIViewController, GADInterstitialDelegate, UIScrollVie
     
     
     func adBannerSetup(){
-
-        adBannerFull = GADInterstitial(adUnitID: Ads.fullscreenId)
-        adBannerFull?.delegate = self
-        adBannerFull?.loadRequest(GADRequest())
+//
+//        adBannerFull = GADInterstitial(adUnitID: Ads.fullscreenId)
+//        adBannerFull?.delegate = self
+//        adBannerFull?.loadRequest(GADRequest())
 
     }
     
@@ -226,13 +226,13 @@ class ShopListController: UIViewController, GADInterstitialDelegate, UIScrollVie
     
     //MARK:-  GADInterstitialDelegate
     
-    
-    func interstitialDidReceiveAd(ad: GADInterstitial!)
-    {
-        adBannerFull?.presentFromRootViewController(self)
-    }
-    
-    
+//    
+//    func interstitialDidReceiveAd(ad: GADInterstitial!)
+//    {
+//        adBannerFull?.presentFromRootViewController(self)
+//    }
+//    
+	
     //MARK:- Methods
 
     func fetchShops(){
@@ -365,7 +365,8 @@ class ShopListController: UIViewController, GADInterstitialDelegate, UIScrollVie
     func numberOfSectionsInTableView(tableView: UITableView) -> Int {
         return 1;
     }
-    
+	
+	
     
     func tableView(tableView: UITableView, cellForRowAtIndexPath indexPath: NSIndexPath) -> UITableViewCell{
         
@@ -390,20 +391,21 @@ class ShopListController: UIViewController, GADInterstitialDelegate, UIScrollVie
         if let photos = shop.objectForKey("photos") as? [AnyObject]
         {
             let imageURL = photos[0] as! String
-            
+					
             cell.shopImageView!.sd_setImageWithURL(NSURL(string: imageURL), completed:{
-                (image, error, _, _) -> Void in
+                (image, error, cacheType,_) -> Void in
 							
-							cell.shopImageView?.alpha = 0
-							cell.shopImageView.transform = CGAffineTransformMakeScale(0,0)
+								if cacheType == .None {
+									cell.shopImageView?.alpha = 0
+									cell.shopImageView.transform = CGAffineTransformMakeScale(0,0)
 
-							SpringAnimation.spring(0.6, animations:{
-								cell.shopImageView?.alpha = 1
-								cell.shopImageView.transform = CGAffineTransformMakeScale(1,1)
-							})
-							
+									SpringAnimation.spring(0.6, animations:{
+										cell.shopImageView?.alpha = 1
+										cell.shopImageView.transform = CGAffineTransformMakeScale(1,1)
+									})
+									
+								}
             })
-            
         }
         
         

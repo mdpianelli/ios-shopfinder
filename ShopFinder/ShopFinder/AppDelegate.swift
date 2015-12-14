@@ -9,8 +9,8 @@
 import UIKit
 import FBSDKCoreKit
 
-import Fabric
-import Crashlytics
+//import Fabric
+//import Crashlytics
 
 
 @UIApplicationMain
@@ -26,7 +26,7 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
 				FBSDKApplicationDelegate.sharedInstance().application(application, didFinishLaunchingWithOptions: launchOptions)
 			
 				//Fabric Init
-				Fabric.with([Crashlytics.self])
+				//Fabric.with([Crashlytics.self])
 
         return true
     }
