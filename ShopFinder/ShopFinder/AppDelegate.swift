@@ -9,8 +9,8 @@
 import UIKit
 import FBSDKCoreKit
 
-//import Fabric
-//import Crashlytics
+import Fabric
+import Crashlytics
 
 
 @UIApplicationMain
@@ -22,11 +22,11 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
     func application(application: UIApplication, didFinishLaunchingWithOptions launchOptions: [NSObject: AnyObject]?) -> Bool {
         // Override point for customization after application launch.
 			
-				//log event to Facebook
-				FBSDKApplicationDelegate.sharedInstance().application(application, didFinishLaunchingWithOptions: launchOptions)
-			
-				//Fabric Init
-				//Fabric.with([Crashlytics.self])
+		//log event to Facebook
+		FBSDKApplicationDelegate.sharedInstance().application(application, didFinishLaunchingWithOptions: launchOptions)
+	
+	
+		Fabric.with([Crashlytics.self])
 
         return true
     }

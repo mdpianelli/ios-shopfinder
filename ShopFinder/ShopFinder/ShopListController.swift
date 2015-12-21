@@ -251,9 +251,14 @@ class ShopListController: UIViewController, UIScrollViewDelegate,CLLocationManag
             
             if result.isFailure {
                 
-                print(result.error)
                 data = NSUserDefaults.standardUserDefaults().objectForKey(DefaultKeys.ShopsJSON)
-           
+				
+				if data == nil {
+					print(result.error)
+
+					return
+				}
+				
             }else{
                 data = result.value
             }
@@ -301,12 +306,12 @@ class ShopListController: UIViewController, UIScrollViewDelegate,CLLocationManag
 												//set distance string
                         shopDic.setObject(distanceStr, forKey: "distance")
 											
-												let rating = shopDic.objectForKey("rating") as? NSNumber
-												
-												if rating != nil {
-													  shopDic.setObject("\(rating!.stringValue)/5",forKey: "rating");
-												}
-												
+						let rating = shopDic.objectForKey("rating") as? NSNumber
+						
+						if rating != nil {
+							  shopDic.setObject("\(rating!.stringValue)/5",forKey: "rating-str");
+						}
+						
 											
                         aux.append(shopDic)
                     }
@@ -367,7 +372,6 @@ class ShopListController: UIViewController, UIScrollViewDelegate,CLLocationManag
     }
 	
 	
-    
     func tableView(tableView: UITableView, cellForRowAtIndexPath indexPath: NSIndexPath) -> UITableViewCell{
         
         let cell: ShopCell = tableView.dequeueReusableCellWithIdentifier("Cell") as! ShopCell
@@ -376,18 +380,20 @@ class ShopListController: UIViewController, UIScrollViewDelegate,CLLocationManag
         
         //cell.textLabel!.textColor = UIColor.whiteColor()
         cell.titleLabel!.text =  shop.objectForKey("name") as? String
-			
-				cell.ratingLabel!.text = shop.objectForKey("rating") as? String
-			
-        cell.distanceLabel!.text = shop.objectForKey("distance") as? String
-			
-			
-        let reviewCount = shop.objectForKey("reviews_count") as? NSNumber
-        
-				if reviewCount != nil {
-					 cell.reviewCountLabel!.text = reviewCount!.stringValue
-				}
-			
+		
+		if let rating = shop.objectForKey("rating-str") as? String {
+			cell.ratingLabel!.text = rating
+		}
+		
+		if let distance = shop.objectForKey("distance") as? String{
+			cell.distanceLabel!.text = distance
+		}
+		
+		if let reviewCount = shop.objectForKey("reviews_count") as? NSNumber{
+			 cell.reviewCountLabel!.text = reviewCount.stringValue
+		}
+		
+		
         if let photos = shop.objectForKey("photos") as? [AnyObject]
         {
             let imageURL = photos[0] as! String

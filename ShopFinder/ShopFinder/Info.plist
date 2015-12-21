@@ -2,6 +2,25 @@
 <!DOCTYPE plist PUBLIC "-//Apple//DTD PLIST 1.0//EN" "http://www.apple.com/DTDs/PropertyList-1.0.dtd">
 <plist version="1.0">
 <dict>
+	<key>ApplicationInfo</key>
+	<dict>
+		<key>BASE_URL</key>
+		<string>$(BASE_URL)</string>
+		<key>FACEBOOK_PLACEMENT_ID</key>
+		<string>$(FACEBOOK_PLACEMENT_ID)</string>
+		<key>LINK_ABOUT_US</key>
+		<string>$(LINK_ABOUT_US)</string>
+		<key>LINK_FAQ</key>
+		<string>$(LINK_FAQ)</string>
+		<key>LINK_PRIVACY</key>
+		<string>$(LINK_PRIVACY)</string>
+		<key>LINK_TERMS_CONDITIONS</key>
+		<string>$(LINK_TERMS_CONDITIONS)</string>
+		<key>PARSE_APPLICATION_ID</key>
+		<string>$(PARSE_APPLICATION_ID)</string>
+		<key>PARSE_CLIENT_ID</key>
+		<string>$(PARSE_CLIENT_ID)</string>
+	</dict>
 	<key>CFBundleDevelopmentRegion</key>
 	<string>en</string>
 	<key>CFBundleDisplayName</key>

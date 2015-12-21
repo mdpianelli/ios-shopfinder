@@ -137,11 +137,9 @@ class SettingsController : BaseController, UITableViewDelegate, UITableViewDataS
         
         
         
-        ServerManager.fetchSettings { result -> Void in
-            
-            if result.isSuccess {
-                
-                if let info = result.value as? NSDictionary {
+        ServerManager.fetchSettings { data -> Void in
+			
+                if let info = data as? NSDictionary {
                     if let table = info["table"] as? NSDictionary {
                         if let sections = table["sections"] as? NSArray {
                             for section in sections{
@@ -177,8 +175,6 @@ class SettingsController : BaseController, UITableViewDelegate, UITableViewDataS
                 
                 self.table.reloadData()
             }
-        
-        }
     
     }
 

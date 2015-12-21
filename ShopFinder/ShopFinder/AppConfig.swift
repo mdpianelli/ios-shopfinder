@@ -51,25 +51,56 @@ struct DefaultKeys {
 
 // API Structs
 
-let API_URL = "http://shopfinder-peperinopomoro.rhcloud.com/api"
 //let API_URL = "http://192.168.1.133:3000/api"
 
 struct API {
-    
-    static let base = API_URL
-    
-    static let shops =  base + "/shops"
-    
-    static let settings = base + "/settings"
 	
+	static func baseURL()-> String
+	{
+		let mainBundle = NSBundle.mainBundle();
+		let appInfo = mainBundle.objectForInfoDictionaryKey("ApplicationInfo");
+		return appInfo!["BASE_URL"] as! String
+	}
 	
-	func baseURL()->String{
-		let appInfo = NSBundle.mainBundle().objectForInfoDictionaryKey("ApplicationInfo") as! NSDictionary
-		return appInfo["BASE_URL"] as! String
+	static var api : String {
+		get {
+			return "\(baseURL())/api"
+		}
+	}
+	
+	static var shops : String{
+		get{
+			return "\(api)/shops"
+		}
+	}
+	
+	static var settings : String {
+		get{
+			return "\(api)/settings"
+		}
 	}
 	
 }
 
+
+struct App {
+	
+	// Share JSON values
+	static var shareImageLink = "AppShareImageLink"
+	static var shareMessage = "AppShareMessage"
+	static var shareLink = "AppShareLink"
+	
+	// Share Tracking
+	static var shareFacebook = "shareFacebook"
+	static var shareTwitter = "shareTwitter"
+	static var shareMail = "shareMail"
+
+	// App's Assets
+	static var menuBackgroundImage = "AppMenuBackgroundImage"
+	
+	
+	
+}
 
 // Advertisement Structs
 

@@ -96,7 +96,7 @@ class ShopDetailController: BaseController, MKMapViewDelegate, UITableViewDelega
         
         //set title
         titleLabel.text = shop!.objectForKey("name") as? String
-				ratingLabel.text = shop!.objectForKey("rating") as? String
+		ratingLabel.text = shop!.objectForKey("rating-str") as? String
 			
 			
         //initialize table sections and rows
@@ -223,13 +223,7 @@ class ShopDetailController: BaseController, MKMapViewDelegate, UITableViewDelega
 //    
 	
 	
-		//MARK: Actions
-	
-		@IBAction func shareAction(sender: UIButton) {
-	
-	
-		}
-	
+
 	
     //MARK: UITableView Methods
 
@@ -340,6 +334,14 @@ class ShopDetailController: BaseController, MKMapViewDelegate, UITableViewDelega
         
     }
 
+	//MARK: IB Actions
+	
+	@IBAction func shareAction(sender: UIButton) {
+		SocialManager.share(self)
+	}
+	
+	
+	
     //MARK: Actions
     
     func expandAction( text: String, indexPath : NSIndexPath){
@@ -439,27 +441,6 @@ class ShopDetailController: BaseController, MKMapViewDelegate, UITableViewDelega
  
 
 }
-
-
-
-
-
-
-
-class ShopDetailDescriptionCell : UITableViewCell {
-    
-    @IBOutlet weak var descriptionLabel: UILabel!
-    
-}
-
-
-class ShopDetailCell : UITableViewCell {
-    
-    @IBOutlet weak var infoLabel: UILabel!
-    @IBOutlet weak var iconButton: FADesignableIconButton!
-}
-
-
 
 
 

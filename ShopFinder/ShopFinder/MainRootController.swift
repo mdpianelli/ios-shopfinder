@@ -15,8 +15,7 @@ class MainRootController:  RESideMenu, RESideMenuDelegate {
 
     override func awakeFromNib() {
 
-       
-
+	
         self.menuPreferredStatusBarStyle = UIStatusBarStyle.LightContent
         self.contentViewShadowColor = UIColor.blackColor()
         self.contentViewShadowOffset = CGSizeMake(0,0)
@@ -36,7 +35,45 @@ class MainRootController:  RESideMenu, RESideMenuDelegate {
         
         
     }
-    
-    
-  
+	
+	override func viewDidLoad() {
+		super.viewDidLoad()
+		
+		//prefetch all app's settings
+		SocialManager.prefetchSharingAssets()
+		
+		ServerManager.prefetchAppSettings { (result) -> Void in
+			guard let dic = result as? NSDictionary else{
+				return;
+			}
+			
+			guard let  link  = dic[App.menuBackgroundImage] as? String else{
+				return;
+			}
+			
+		
+			ServerManager.fetchImageWithURL(link, completionHandler: { (result) -> Void in
+				if result.isSuccess{
+					self.backgroundImage = result.value;
+				}
+			})
+			
+			
+		}
+			
+	}
+	
+	
+	func sideMenu(sideMenu: RESideMenu!, willHideMenuViewController menuViewController: UIViewController!)
+	{
+		UIApplication.sharedApplication().setStatusBarStyle(UIStatusBarStyle.Default, animated: true)
+
+	}
+	
+	
+	func sideMenu(sideMenu: RESideMenu!, willShowMenuViewController menuViewController: UIViewController!)
+	{
+		UIApplication.sharedApplication().setStatusBarStyle(UIStatusBarStyle.LightContent, animated: true)
+
+	}
 }

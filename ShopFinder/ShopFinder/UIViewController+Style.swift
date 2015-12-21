@@ -24,9 +24,7 @@ extension UIViewController {
     }
     
     func presentMenu(){
-        
-        UIApplication.sharedApplication().setStatusBarStyle(UIStatusBarStyle.LightContent, animated: true)
-        
+                
         self.presentLeftMenuViewController(self)
         
     }

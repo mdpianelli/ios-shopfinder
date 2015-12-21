@@ -16,8 +16,8 @@ class MenuController: UIViewController, RESideMenuDelegate, UITableViewDataSourc
     @IBOutlet weak var tableView: UITableView!
 
     
-    let titles = ["Home", "Calendar", "Profile", "Settings"]
-    let images = ["IconHome", "IconCalendar", "IconProfile", "IconSettings"]
+    let titles = ["Home", "Nearby", "Settings"]
+    let images = ["IconHome","IconProfile", "IconSettings"]
 
     
     override func viewDidLoad() {
@@ -43,6 +43,7 @@ class MenuController: UIViewController, RESideMenuDelegate, UITableViewDataSourc
         let cell = tableView.dequeueReusableCellWithIdentifier("Cell") as UITableViewCell!
         
         cell.textLabel!.textColor = UIColor.whiteColor()
+		cell.textLabel!.font = UIFont.systemFontOfSize(20)
         cell.textLabel!.text = titles[indexPath.row];
         cell.imageView!.image = UIImage(named:images[indexPath.row])
 
