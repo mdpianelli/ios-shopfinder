@@ -17,16 +17,30 @@ class ServerManager : NSObject {
     
     
     
-    class func retrieveShops(completionHandler: (Result<AnyObject>) -> Void) -> Void {
-        
+    class func retrieveShops(completionHandler: (NSArray) -> Void) -> Void {
+			
+			
         Alamofire.request(.GET, API.shops).responseJSON { (request, response, result) -> Void in
-            
-            if result.isSuccess {
-                NSUserDefaults.standardUserDefaults().setObject(result.value!, forKey: DefaultKeys.ShopsJSON)
-            }
-            
-            completionHandler(result)
-
+					
+						var data : AnyObject?
+					
+						if result.isFailure {
+							data = NSUserDefaults.standardUserDefaults().objectForKey(DefaultKeys.ShopsJSON)
+							
+							if data == nil {
+								print(result.error)
+								return
+							}
+							
+						}else{
+							NSUserDefaults.standardUserDefaults().setObject(result.value!, forKey: DefaultKeys.ShopsJSON)
+							data = result.value
+						}
+					
+					if data != nil {
+            completionHandler(data as! NSArray)
+					}
+					
         }
         
        // if Reachability.reachabilityForInternetConnection().isReachable() {
@@ -90,10 +104,11 @@ class ServerManager : NSObject {
 			return
 		}
 		
-		Alamofire.request(.GET, link! ).responseJSON { (request, response, result) -> Void in
+		
+		Alamofire.request(.GET, link! ).responseData { (request, response, result) -> Void in
 			
-			if result.isSuccess {
-				let img = UIImage(data: result.value as! NSData)
+			if response?.statusCode == 200 {
+				let img = UIImage(data: result.value!)
 				completionHandler(Result.Success(img!))
 			}
 		}

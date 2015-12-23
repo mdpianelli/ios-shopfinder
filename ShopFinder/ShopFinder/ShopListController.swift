@@ -29,8 +29,8 @@ class ShopListController: UIViewController, UIScrollViewDelegate,CLLocationManag
     @IBOutlet weak var table: UITableView!
     
    // var adBannerFull : GADInterstitial?
-    var shops : NSArray = []
-    var selectedShop : NSDictionary?
+    var shops : [Shop] = []
+    var selectedShop : Shop?
     var refreshControl : YALSunnyRefreshControl?  //UIRefreshControl()
     var locManager : CLLocationManager?
     var currentLocation : CLLocation?
@@ -199,8 +199,9 @@ class ShopListController: UIViewController, UIScrollViewDelegate,CLLocationManag
         
         UIApplication.sharedApplication().setStatusBarStyle(UIStatusBarStyle.Default, animated: true)
     }
-    
-    func sortTable(sender: AnyObject?){
+	
+	
+    func sortTable(){
         
         switch sortType {
             
@@ -216,10 +217,7 @@ class ShopListController: UIViewController, UIScrollViewDelegate,CLLocationManag
         }
      
         table.reloadSections(NSIndexSet(index: 0), withRowAnimation:UITableViewRowAnimation.Fade )
-        
-
-       // table.reloadData()
-    }
+			}
     
     
 
@@ -245,83 +243,21 @@ class ShopListController: UIViewController, UIScrollViewDelegate,CLLocationManag
         }
         
         //retrieve shops and reload table
-        ServerManager.retrieveShops(){  result in
-            
-            var data: AnyObject?
-            
-            if result.isFailure {
-                
-                data = NSUserDefaults.standardUserDefaults().objectForKey(DefaultKeys.ShopsJSON)
+        ServerManager.retrieveShops(){  data in
 				
-				if data == nil {
-					print(result.error)
-
-					return
-				}
-				
-            }else{
-                data = result.value
-            }
-            
-            self.shops = data as! NSArray
-            
-            var aux : [NSDictionary] = []
-            
-            for eachShop in self.shops {
-                if let loc: AnyObject = eachShop.objectForKey("geolocation"){
-                    if let geoloc : AnyObject = loc.objectForKey("location"){
-                        
-                        let lat = geoloc.objectForKey("lat") as! Double
-                        let long = geoloc.objectForKey("lng") as! Double
-
-                        //calculate shop distance
-                        let shopLocation = CLLocation(latitude: lat, longitude: long)
-                        var distanceType = "m"
-                        var distance = self.currentLocation?.distanceFromLocation(shopLocation)
-        
-                        
-                        let shopDic = eachShop.mutableCopy() as! NSMutableDictionary
-                       
-                        if distance == nil {
-                            distance = 0
-                        }
-											
-												//set distance value
-                        shopDic.setObject(distance!, forKey: "distanceValue")
-                        
-                        
-                        if distance > 1000 {
-                            distanceType = "km"
-                            distance = distance!/1000
-                        }
-                        
-                        var format = "%.0f%@"
-                        
-                        if distanceType == "Km" {
-                            format = "%.1f%@"
-                        }
-                        
-                        let distanceStr = String(format: format ,distance!,distanceType)
-											
-												//set distance string
-                        shopDic.setObject(distanceStr, forKey: "distance")
-											
-						let rating = shopDic.objectForKey("rating") as? NSNumber
+					for eachShopDic in data {
+							
+							let eachShop = Shop(initWithDic: eachShopDic as! NSDictionary)
 						
-						if rating != nil {
-							  shopDic.setObject("\(rating!.stringValue)/5",forKey: "rating-str");
-						}
+							if eachShop.geolocation != nil {
+								eachShop.distance = self.currentLocation?.distanceFromLocation(eachShop.geolocation!)
+							}
 						
-											
-                        aux.append(shopDic)
-                    }
-                }
-            }
-            
-            self.shops = aux
-            self.sortTable(nil)
-            self.refreshControl?.endRefreshing()
-
+							self.shops.append(eachShop)
+					}
+					
+					self.sortTable()
+					self.refreshControl?.endRefreshing()
         }
         
     
@@ -330,33 +266,15 @@ class ShopListController: UIViewController, UIScrollViewDelegate,CLLocationManag
     //MARK: Sort Methods
     
     func sortByDistance() {
-        
-        var aux = self.shops as! [NSDictionary]
-        
-        aux.sortInPlace({ $1.objectForKey("distanceValue") as! Double > $0.objectForKey("distanceValue") as! Double })
-
-       self.shops = aux
+			self.shops.sortInPlace({ $1.distance! > $0.distance! })
     }
     
     func sortByRating() {
-        
-        var aux = self.shops as! [NSDictionary]
-        
-        aux.sortInPlace({
-            
-            return $0.objectForKey("rating") as! Double > $1.objectForKey("rating") as! Double
-        })
-        
-        self.shops = aux
+			self.shops.sortInPlace({ $1.rating!.doubleValue > $0.rating!.doubleValue })
     }
     
     func sortByReviewCount() {
-        
-        var aux = self.shops as! [NSDictionary]
-        
-        aux.sortInPlace({ $0.objectForKey("reviews_count") as! Double > $1.objectForKey("reviews_count") as! Double })
-        
-        self.shops = aux
+			self.shops.sortInPlace({ $1.reviewCount?.integerValue > $0.reviewCount?.integerValue })
     }
     
     
@@ -376,27 +294,20 @@ class ShopListController: UIViewController, UIScrollViewDelegate,CLLocationManag
         
         let cell: ShopCell = tableView.dequeueReusableCellWithIdentifier("Cell") as! ShopCell
         
-        let shop = shops[indexPath.row] as! NSDictionary
-        
-        //cell.textLabel!.textColor = UIColor.whiteColor()
-        cell.titleLabel!.text =  shop.objectForKey("name") as? String
+			  let shop = shops[indexPath.row]
+				
+				cell.titleLabel!.text =  shop.name
 		
-		if let rating = shop.objectForKey("rating-str") as? String {
-			cell.ratingLabel!.text = rating
-		}
+				cell.ratingLabel!.text = shop.ratingString()
+			
+				cell.distanceLabel!.text = shop.distanceString()
+			
+				cell.reviewCountLabel!.text = shop.reviewCount?.stringValue
+			
 		
-		if let distance = shop.objectForKey("distance") as? String{
-			cell.distanceLabel!.text = distance
-		}
-		
-		if let reviewCount = shop.objectForKey("reviews_count") as? NSNumber{
-			 cell.reviewCountLabel!.text = reviewCount.stringValue
-		}
-		
-		
-        if let photos = shop.objectForKey("photos") as? [AnyObject]
+        if let photos = shop.gallery
         {
-            let imageURL = photos[0] as! String
+            let imageURL = photos[0]
 					
             cell.shopImageView!.sd_setImageWithURL(NSURL(string: imageURL), completed:{
                 (image, error, cacheType,_) -> Void in
@@ -439,7 +350,7 @@ class ShopListController: UIViewController, UIScrollViewDelegate,CLLocationManag
         tableView.deselectRowAtIndexPath(indexPath, animated: true)
         
         // set selected shop
-        selectedShop = shops[indexPath.row] as? NSDictionary
+        selectedShop = shops[indexPath.row]
         
         self.performSegueWithIdentifier(segueShowShopDetail, sender: self)
 

@@ -86,9 +86,10 @@ struct API {
 struct App {
 	
 	// Share JSON values
-	static var shareImageLink = "AppShareImageLink"
-	static var shareMessage = "AppShareMessage"
-	static var shareLink = "AppShareLink"
+	static var shareDic = "share"
+	static var shareImageLink = "appShareImageLink"
+	static var shareMessage = "appShareMessage"
+	static var shareLink = "appShareLink"
 	
 	// Share Tracking
 	static var shareFacebook = "shareFacebook"
@@ -96,7 +97,7 @@ struct App {
 	static var shareMail = "shareMail"
 
 	// App's Assets
-	static var menuBackgroundImage = "AppMenuBackgroundImage"
+	static var menuBackgroundImage = "appMenuBackgroundImageLink"
 	
 	
 	

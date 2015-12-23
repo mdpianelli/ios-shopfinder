@@ -17,8 +17,8 @@ import Spring
 
 class ShopDetailController: BaseController, MKMapViewDelegate, UITableViewDelegate, UITableViewDataSource {
 
-    
-    var shop : NSDictionary?
+	
+    var shop : Shop?
     var shopInfo : [TableSection]?
     var shopAnnotation : ShopAnnotation?
     
@@ -94,52 +94,50 @@ class ShopDetailController: BaseController, MKMapViewDelegate, UITableViewDelega
     
     func shopInfoSetup(){
         
-        //set title
-        titleLabel.text = shop!.objectForKey("name") as? String
-		ratingLabel.text = shop!.objectForKey("rating-str") as? String
-			
+				//set title
+				titleLabel.text = shop?.name
+				ratingLabel.text = shop?.ratingString()
+				
 			
         //initialize table sections and rows
         shopInfo = [TableSection(sectionName:"",rows:[])]
         
-        if let address = shop!.objectForKey("address") as? String {
+        if let address = shop!.address {
             
             shopInfo![0].rows?.append(TableRow(title:address ,icon:Icon(type:0,index:215,color:UIColor(hex: "#0091FF")),action:Action(type:.Location,data:nil),height:60,type:.Standard))
         }
         
         
-        if let phoneNumber = shop!.objectForKey("phone_number") as? String {
+        if let phoneNumber = shop!.phoneNumber {
             
             shopInfo![0].rows?.append(TableRow(title:phoneNumber ,icon:Icon(type:0,index:372,color:UIColor(hex: "#0091FF")),action:Action(type:.Call,data:phoneNumber),height:60,type:.Standard))
         }
         
         
-        if let website = shop!.objectForKey("website") as? String {
+        if let website = shop!.website {
             
             shopInfo![0].rows?.append(TableRow(title:website,icon:Icon(type:2,index:221,color:UIColor(hex: "#0091FF")),action:Action(type:.Link,data:website),height:60,type:.Standard))
             
         }
         
-        if let description = shop!.objectForKey("description") as? String {
+        if let description = shop!.description {
             
             shopInfo![0].rows?.append(TableRow(title:description,icon:nil,action:Action(type:.Expand,data:description),height:descriptionFieldHeight,type:.Text))
             
         }
         
         
-        if let openingHours = shop!.objectForKey("opening_hours") as? NSDictionary {
-            
-            let weekdayArray = openingHours.objectForKey("weekday_text") as! NSArray
-            
+        if let weekdayArray = shop!.openingHours  {
+					
             shopInfo?.append(
                 TableSection(sectionName:"Opening Hours",rows:[
-                    TableRow(title:weekdayArray[0] as! String,icon:nil,action:nil,height:40,type:.Standard),
-                    TableRow(title:weekdayArray[1] as! String,icon:nil,action:nil,height:40,type:.Standard),
-                    TableRow(title:weekdayArray[2] as! String,icon:nil,action:nil,height:40,type:.Standard),
-                    TableRow(title:weekdayArray[3] as! String,icon:nil,action:nil,height:40,type:.Standard),
-                    TableRow(title:weekdayArray[4] as! String,icon:nil,action:nil,height:40,type:.Standard),
-                    TableRow(title:weekdayArray[5] as! String,icon:nil,action:nil,height:40,type:.Standard),
-                    TableRow(title:weekdayArray[6] as! String,icon:nil,action:nil,height:40,type:.Standard),
+                    TableRow(title:weekdayArray[0],icon:nil,action:nil,height:40,type:.Standard),
+                    TableRow(title:weekdayArray[1],icon:nil,action:nil,height:40,type:.Standard),
+                    TableRow(title:weekdayArray[2],icon:nil,action:nil,height:40,type:.Standard),
+                    TableRow(title:weekdayArray[3],icon:nil,action:nil,height:40,type:.Standard),
+                    TableRow(title:weekdayArray[4],icon:nil,action:nil,height:40,type:.Standard),
+                    TableRow(title:weekdayArray[5],icon:nil,action:nil,height:40,type:.Standard),
+                    TableRow(title:weekdayArray[6],icon:nil,action:nil,height:40,type:.Standard),
                     ])
             )
             
@@ -148,7 +146,7 @@ class ShopDetailController: BaseController, MKMapViewDelegate, UITableViewDelega
         
         header.frame.size.height = 170
         
-        if let photos = shop!.objectForKey("photos") as? [String]
+        if let photos = shop!.gallery
         {
             let imageURL = photos[0]
             
@@ -161,17 +159,12 @@ class ShopDetailController: BaseController, MKMapViewDelegate, UITableViewDelega
         
         
         
-        if let loc: AnyObject = shop!.objectForKey("geolocation"){
-            if let geoloc : AnyObject = loc.objectForKey("location"){
-                let lat = geoloc.objectForKey("lat") as! Double
-                let long = geoloc.objectForKey("lng") as! Double
-                
-                let annotation = ShopAnnotation(title: titleLabel.text, subtitle:shop!.objectForKey("address") as! String, lat: lat, lon: long, row: 0)
-                
-                mapView.addAnnotation(annotation)
-                mapView.showAnnotations(mapView.annotations, animated: true)
-                shopAnnotation = annotation
-            }
+        if let loc: CLLocation = shop!.geolocation{
+						let annotation = ShopAnnotation(title: titleLabel.text, subtitle:shop!.address, lat:loc.coordinate.latitude, lon: loc.coordinate.longitude, row: 0)
+						
+						mapView.addAnnotation(annotation)
+						mapView.showAnnotations(mapView.annotations, animated: true)
+						shopAnnotation = annotation
         }
         
         table.reloadData()
@@ -337,7 +330,11 @@ class ShopDetailController: BaseController, MKMapViewDelegate, UITableViewDelega
 	//MARK: IB Actions
 	
 	@IBAction func shareAction(sender: UIButton) {
-		SocialManager.share(self)
+		
+		if shop != nil {
+		 SocialManager.shareShop(shop!)
+		}
+		
 	}
 	
 	

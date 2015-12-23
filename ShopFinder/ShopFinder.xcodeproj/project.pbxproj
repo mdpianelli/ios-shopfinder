@@ -11,6 +11,7 @@
 		9A0492E51C275F2B00F858CA /* ShopDetailCells.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9A0492E41C275F2B00F858CA /* ShopDetailCells.swift */; };
 		9A0492E71C2764B300F858CA /* SocialManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9A0492E61C2764B300F858CA /* SocialManager.swift */; };
 		9A2388DE1B67A3420090927F /* WebController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9A2388DD1B67A3420090927F /* WebController.swift */; };
+		9A24F5A51C29BFA500B1C663 /* Shop.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9A24F5A41C29BFA500B1C663 /* Shop.swift */; };
 		9A37A6471B6789AE0067B8DB /* JBParallaxCell.m in Sources */ = {isa = PBXBuildFile; fileRef = 9A37A6461B6789AE0067B8DB /* JBParallaxCell.m */; };
 		9A4565FC1B4D8B4500C40073 /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9A4565FB1B4D8B4500C40073 /* AppDelegate.swift */; };
 		9A4566011B4D8B4500C40073 /* Main.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 9A4565FF1B4D8B4500C40073 /* Main.storyboard */; };
@@ -64,6 +65,7 @@
 		9A0492E41C275F2B00F858CA /* ShopDetailCells.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ShopDetailCells.swift; sourceTree = "<group>"; };
 		9A0492E61C2764B300F858CA /* SocialManager.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = SocialManager.swift; sourceTree = "<group>"; };
 		9A2388DD1B67A3420090927F /* WebController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = WebController.swift; sourceTree = "<group>"; };
+		9A24F5A41C29BFA500B1C663 /* Shop.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = Shop.swift; path = Models/Shop.swift; sourceTree = "<group>"; };
 		9A37A6451B6789AE0067B8DB /* JBParallaxCell.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = JBParallaxCell.h; sourceTree = "<group>"; };
 		9A37A6461B6789AE0067B8DB /* JBParallaxCell.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = JBParallaxCell.m; sourceTree = "<group>"; };
 		9A4565F61B4D8B4400C40073 /* ShopFinder.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = ShopFinder.app; sourceTree = BUILT_PRODUCTS_DIR; };
@@ -166,6 +168,14 @@
 			name = Detail;
 			sourceTree = "<group>";
 		};
+		9A24F5A31C29BF8100B1C663 /* Models */ = {
+			isa = PBXGroup;
+			children = (
+				9A24F5A41C29BFA500B1C663 /* Shop.swift */,
+			);
+			name = Models;
+			sourceTree = "<group>";
+		};
 		9A37A6441B6789A20067B8DB /* ParallaxCell */ = {
 			isa = PBXGroup;
 			children = (
@@ -247,6 +257,7 @@
 		9A4566321B4DA28800C40073 /* Classes */ = {
 			isa = PBXGroup;
 			children = (
+				9A24F5A31C29BF8100B1C663 /* Models */,
 				9AD808F51B5FDA5A0077DFD1 /* Extensions */,
 				9A4701091B56D72E00A4B8E3 /* Managers */,
 				9A4701051B56AB1600A4B8E3 /* Foundation */,
@@ -574,6 +585,7 @@
 				9A4701041B56A99800A4B8E3 /* ShopListController.swift in Sources */,
 				9AD808FD1B5FDA780077DFD1 /* PopAnimator.swift in Sources */,
 				9A4566351B4DA2C600C40073 /* MenuController.swift in Sources */,
+				9A24F5A51C29BFA500B1C663 /* Shop.swift in Sources */,
 				9AE65A2D1BA6F62C00FDC1B6 /* BaseController.swift in Sources */,
 				9A4701111B56EB5A00A4B8E3 /* ShopDetailController.swift in Sources */,
 			);

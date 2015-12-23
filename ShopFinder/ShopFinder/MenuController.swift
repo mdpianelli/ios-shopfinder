@@ -43,7 +43,7 @@ class MenuController: UIViewController, RESideMenuDelegate, UITableViewDataSourc
         let cell = tableView.dequeueReusableCellWithIdentifier("Cell") as UITableViewCell!
         
         cell.textLabel!.textColor = UIColor.whiteColor()
-		cell.textLabel!.font = UIFont.systemFontOfSize(20)
+		    cell.textLabel!.font = UIFont.systemFontOfSize(20)
         cell.textLabel!.text = titles[indexPath.row];
         cell.imageView!.image = UIImage(named:images[indexPath.row])
 
@@ -62,7 +62,7 @@ class MenuController: UIViewController, RESideMenuDelegate, UITableViewDataSourc
             case 0 :
                 self.sideMenuViewController.setContentViewController(self.storyboard!.instantiateViewControllerWithIdentifier("NavShopListController") , animated: true)
                 
-            case 3:
+            case 2:
                 self.sideMenuViewController.setContentViewController(self.storyboard!.instantiateViewControllerWithIdentifier("NavSettingsController") , animated: true)
                 
             default:break;

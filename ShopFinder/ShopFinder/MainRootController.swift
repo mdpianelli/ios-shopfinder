@@ -42,12 +42,16 @@ class MainRootController:  RESideMenu, RESideMenuDelegate {
 		//prefetch all app's settings
 		SocialManager.prefetchSharingAssets()
 		
+		
 		ServerManager.prefetchAppSettings { (result) -> Void in
+			
 			guard let dic = result as? NSDictionary else{
 				return;
 			}
 			
-			guard let  link  = dic[App.menuBackgroundImage] as? String else{
+			let config = dic["config"] as? NSDictionary
+			
+			guard let  link  = config![App.menuBackgroundImage] as? String else{
 				return;
 			}
 			
