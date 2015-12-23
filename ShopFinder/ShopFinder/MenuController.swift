@@ -40,13 +40,11 @@ class MenuController: UIViewController, RESideMenuDelegate, UITableViewDataSourc
     
     func tableView(atableView: UITableView, cellForRowAtIndexPath indexPath: NSIndexPath) -> UITableViewCell {
         
-        let cell = tableView.dequeueReusableCellWithIdentifier("Cell") as UITableViewCell!
-        
-        cell.textLabel!.textColor = UIColor.whiteColor()
-		    cell.textLabel!.font = UIFont.systemFontOfSize(20)
-        cell.textLabel!.text = titles[indexPath.row];
-        cell.imageView!.image = UIImage(named:images[indexPath.row])
-
+        let cell = tableView.dequeueReusableCellWithIdentifier(MenuTableViewCell.idenfitier()) as! MenuTableViewCell
+			
+				cell.titleLabel.text = titles[indexPath.row]
+				cell.iconView.imageType = 106
+			
         return cell
     }
     
@@ -54,8 +52,9 @@ class MenuController: UIViewController, RESideMenuDelegate, UITableViewDataSourc
     //MARK : - UITableViewDelegate
     
     func tableView(atableView: UITableView, didSelectRowAtIndexPath indexPath: NSIndexPath) {
-        
-        tableView.deselectRowAtIndexPath(indexPath, animated: true)
+			
+			
+        //tableView.deselectRowAtIndexPath(indexPath, animated: true)
         
         switch(indexPath.row)
         {
@@ -74,4 +73,26 @@ class MenuController: UIViewController, RESideMenuDelegate, UITableViewDataSourc
     
     
     
+}
+
+
+class MenuTableViewCell : UITableViewCell {
+	
+	@IBOutlet weak var titleLabel: UILabel!
+	@IBOutlet weak var iconView: FADesignableIconButton!
+	
+	class func idenfitier()-> String {
+		return "MenuTableViewCell"
+	}
+
+	required init?(coder aDecoder: NSCoder) {
+	    super.init(coder: aDecoder)
+		let bgView = UIView(frame: self.contentView.frame)
+		bgView.backgroundColor = UIColor.lightGrayColor().colorWithAlphaComponent(0.7)
+		self.selectedBackgroundView = bgView
+
+	}
+	
+	
+	
 }

@@ -245,6 +245,8 @@ class ShopListController: UIViewController, UIScrollViewDelegate,CLLocationManag
         //retrieve shops and reload table
         ServerManager.retrieveShops(){  data in
 				
+					self.shops.removeAll()
+					
 					for eachShopDic in data {
 							
 							let eachShop = Shop(initWithDic: eachShopDic as! NSDictionary)

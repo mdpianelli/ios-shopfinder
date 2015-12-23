@@ -70,7 +70,7 @@ class ShopFilterOptionsController : UIViewController {
     
     func callSortTable(){
         
-        UIApplication.sharedApplication().sendAction("sortTable:", to:self.delegate, from: self, forEvent: nil)
+        UIApplication.sharedApplication().sendAction("sortTable", to:self.delegate, from: self, forEvent: nil)
         
         resetButtonPressed(self)
 
@@ -93,7 +93,6 @@ class ShopFilterOptionsController : UIViewController {
     @IBAction func sortByReviewCount(sender: AnyObject) {
         
         self.delegate?.sortType = .ReviewCount
-
         callSortTable()
 
 
