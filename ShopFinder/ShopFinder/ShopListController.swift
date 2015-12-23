@@ -13,7 +13,7 @@ import SDWebImage
 import Spring
 //import GoogleMobileAds
 import CoreLocation
-
+import SVProgressHUD
 
 
 
@@ -51,7 +51,7 @@ class ShopListController: UIViewController, UIScrollViewDelegate,CLLocationManag
 
     override func viewDidLoad() {
         super.viewDidLoad()
-        
+			
         initialSetup()
         
         
@@ -124,9 +124,9 @@ class ShopListController: UIViewController, UIScrollViewDelegate,CLLocationManag
         setupNavMenu()
       // adBannerSetup()
         
-        table.contentInset = UIEdgeInsetsMake(100, 0, 0, 0)
-        table.scrollIndicatorInsets = table.contentInset
-        
+//        table.contentInset = UIEdgeInsetsMake(100, 0, 0, 0)
+//        table.scrollIndicatorInsets = table.contentInset
+//        
         refreshControl = YALSunnyRefreshControl.attachToScrollView(self.table, target: self, refreshAction: Selector("fetchShops"))
     }
     
@@ -174,7 +174,7 @@ class ShopListController: UIViewController, UIScrollViewDelegate,CLLocationManag
       
         let view  = self.navigationController?.view!
         
-        SpringAnimation.springEaseOut(0.4, animations:{
+        SpringAnimation.spring(0.45, animations:{
    
             view?.transform = CGAffineTransformMakeScale(0.875, 0.875)
             //view?.alpha = 0.85
@@ -190,7 +190,7 @@ class ShopListController: UIViewController, UIScrollViewDelegate,CLLocationManag
 
         let view = self.navigationController?.view!
 
-        SpringAnimation.springEaseIn(0.4, animations:{
+        SpringAnimation.spring(0.45, animations:{
             
              view?.transform = CGAffineTransformMakeScale(1, 1)
              view?.alpha = 1
@@ -235,7 +235,7 @@ class ShopListController: UIViewController, UIScrollViewDelegate,CLLocationManag
 
     func fetchShops(){
 
-       // SVProgressHUD.show()
+       SVProgressHUD.show()
        
         if CLLocationManager.locationServicesEnabled() &&
                 currentLocation == nil {
@@ -260,6 +260,8 @@ class ShopListController: UIViewController, UIScrollViewDelegate,CLLocationManag
 					
 					self.sortTable()
 					self.refreshControl?.endRefreshing()
+					SVProgressHUD.dismiss()
+
         }
         
     
@@ -365,8 +367,12 @@ class ShopListController: UIViewController, UIScrollViewDelegate,CLLocationManag
     func locationManager(manager: CLLocationManager, didUpdateLocations locations: [CLLocation])
     {
         manager.stopUpdatingLocation()
-        currentLocation = locations[0] 
+			
+			if currentLocation == nil {
+        currentLocation = locations[0]
         fetchShops()
+			}
+			
     }
     
     

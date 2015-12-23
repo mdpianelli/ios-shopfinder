@@ -133,7 +133,10 @@ class SettingsController : BaseController, UITableViewDelegate, UITableViewDataS
         
         self.navigationItem.leftBarButtonItem = self.menuBtn()
 
-        self.table.contentInset = UIEdgeInsetsMake(0, 0,20,0)
+        var inset = self.table.contentInset
+				inset.bottom = 20
+				self.table.contentInset = inset
+			
         
         
         

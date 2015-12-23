@@ -10,12 +10,14 @@ import UIKit
 import RESideMenu
 
 class MainRootController:  RESideMenu, RESideMenuDelegate {
-    
-    
+	
+		var navController : UINavigationController?
+	
 
     override func awakeFromNib() {
-
-	
+			
+				navController = self.storyboard?.instantiateViewControllerWithIdentifier("AppNavigationController") as? UINavigationController
+			
         self.menuPreferredStatusBarStyle = UIStatusBarStyle.LightContent
         self.contentViewShadowColor = UIColor.blackColor()
         self.contentViewShadowOffset = CGSizeMake(0,0)
@@ -26,8 +28,11 @@ class MainRootController:  RESideMenu, RESideMenuDelegate {
         self.delegate = self
         
         //setup controllers
-       self.contentViewController = self.storyboard!.instantiateViewControllerWithIdentifier("NavShopListController") 
-        
+       self.contentViewController = navController
+   
+			navController?.setViewControllers(
+				[self.storyboard!.instantiateViewControllerWithIdentifier("ShopListController")], animated: false)
+			
         self.leftMenuViewController = self.storyboard!.instantiateViewControllerWithIdentifier("MenuController") 
         
 //        self.rightMenuViewController =

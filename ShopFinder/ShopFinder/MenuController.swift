@@ -55,18 +55,26 @@ class MenuController: UIViewController, RESideMenuDelegate, UITableViewDataSourc
 			
 			
         //tableView.deselectRowAtIndexPath(indexPath, animated: true)
-        
+			
+				let nav = self.sideMenuViewController.contentViewController as? UINavigationController
+				var vc : UIViewController?
+			
+			
         switch(indexPath.row)
         {
             case 0 :
-                self.sideMenuViewController.setContentViewController(self.storyboard!.instantiateViewControllerWithIdentifier("NavShopListController") , animated: true)
-                
+										vc = self.storyboard!.instantiateViewControllerWithIdentifier("ShopListController")
+					
             case 2:
-                self.sideMenuViewController.setContentViewController(self.storyboard!.instantiateViewControllerWithIdentifier("NavSettingsController") , animated: true)
+										vc = self.storyboard!.instantiateViewControllerWithIdentifier("SettingsController")
                 
             default:break;
         }
-    
+			
+				if vc != nil {
+					nav?.setViewControllers([vc!], animated: true)
+				}
+			
         self.sideMenuViewController.hideMenuViewController()
 
     }
