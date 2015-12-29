@@ -80,6 +80,11 @@ struct API {
 		}
 	}
 	
+	static var review : String {
+		get{
+			return "\(api)/shops/%@/reviews"
+		}
+	}
 }
 
 

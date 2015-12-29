@@ -20,6 +20,8 @@ enum ActionType : String {
      Call = "call",
      Location = "location",
      Expand = "expand",
+	 ViewPhoto = "ViewPhoto",
+
      None = "none"
     
 }
@@ -36,7 +38,7 @@ struct Action {
 }
 
 enum TableRowType{
-    case Standard,Text
+    case Standard,Text,Gallery
 }
 
 struct TableRow {

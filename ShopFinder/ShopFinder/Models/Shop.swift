@@ -12,6 +12,7 @@ import CoreLocation
 
 class Shop: AnyObject {
 	
+	var id : String?
 	var name : String?
 	var rating : NSNumber?
 	var address : String?
@@ -24,20 +25,23 @@ class Shop: AnyObject {
 	var reviewCount : NSNumber?
 	
 	var distance : CLLocationDistance?
-	
+	var reviews : [Review]?
 	
 	
 	
 		init(initWithDic dic : NSDictionary){
 		
+			id = dic["_id"] as? String
 			name = dic["name"] as? String
 			rating = dic["rating"] as? NSNumber
 			address = dic["address"] as? String
 			phoneNumber = dic["phone_number"] as? String
-			website = dic["website"] as? String
 			description = dic["description"] as? String
 			gallery = dic["photos"] as? [String]
 			reviewCount = dic["reviews_count"] as? NSNumber
+			
+			website = dic["website"] as? String
+			website = website?.stringByReplacingOccurrencesOfString("http://", withString:"")
 			
 			if let loc: AnyObject = dic["geolocation"]{
 				if let geoloc : AnyObject = loc["location"]{
@@ -88,4 +92,25 @@ class Shop: AnyObject {
 
 	}
 	
+	func fetchReviews(completionHandler: (Shop) -> Void) -> Void {
+		
+		ServerManager.fetchShopReviews(self) { (result) -> Void in
+			
+			if result.isSuccess {
+				
+				let reviews = result.value as? [NSDictionary]
+				var array : [Review] = []
+				
+				for eachReview : NSDictionary in reviews! {
+					array.append(Review(initWithDic: eachReview))
+				}
+				
+				self.reviews = array
+				completionHandler(self)
+			}
+			
+		}
+	}
+	
+
 }

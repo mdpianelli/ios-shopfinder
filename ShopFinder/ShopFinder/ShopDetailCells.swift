@@ -7,6 +7,7 @@
 //
 
 import Foundation
+import SDWebImage
 
 
 
@@ -23,3 +24,27 @@ class ShopDetailCell : UITableViewCell {
 	@IBOutlet weak var iconButton: FADesignableIconButton!
 }
 
+
+class ShopDetailGalleryCell : UITableViewCell {
+	
+	@IBOutlet weak var collectionView: UICollectionView!
+	
+	
+	
+	func setCollectionViewDataSourceDelegate
+		<D: protocol<UICollectionViewDataSource, UICollectionViewDelegate>>
+		(dataSourceDelegate: D, forRow row: Int) {
+					
+			collectionView.delegate = dataSourceDelegate
+			collectionView.dataSource = dataSourceDelegate
+			collectionView.tag = row
+			collectionView.reloadData()
+	}
+	
+}
+
+class ShopDetailGalleryPhotoCell : UICollectionViewCell {
+
+	@IBOutlet weak var imageView: UIImageView!
+	
+}

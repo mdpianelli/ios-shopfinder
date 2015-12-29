@@ -13,9 +13,11 @@ import FontAwesomeKit
 import SDWebImage
 import MapKit
 import Spring
+import FSImageViewer
+
 //import GoogleMobileAds
 
-class ShopDetailController: BaseController, MKMapViewDelegate, UITableViewDelegate, UITableViewDataSource {
+class ShopDetailController: BaseController, MKMapViewDelegate, UITableViewDelegate, UITableViewDataSource,UICollectionViewDataSource, UICollectionViewDelegate {
 
 	
     var shop : Shop?
@@ -94,14 +96,30 @@ class ShopDetailController: BaseController, MKMapViewDelegate, UITableViewDelega
     
     func shopInfoSetup(){
         
-				//set title
-				titleLabel.text = shop?.name
-				ratingLabel.text = shop?.ratingString()
-				
+		//set title
+		titleLabel.text = shop?.name
+		ratingLabel.text = shop?.ratingString()
+		
+		//start fetching reviews
+		shop?.fetchReviews({ (shop) -> Void in
 			
+			var reviewRows : [TableRow] = []
+			
+			for eachReview : Review in shop.reviews! {
+				reviewRows.append(TableRow(title:eachReview.text!,icon:nil,action:Action(type:.Expand,data:eachReview.text!),height:60,type:.Text))
+			}
+	
+			self.shopInfo?.append(
+				TableSection(sectionName:"Reviews",rows:reviewRows)
+			)
+			
+			self.table.reloadData()
+		})
+		
+		
         //initialize table sections and rows
         shopInfo = [TableSection(sectionName:"",rows:[])]
-        
+		
         if let address = shop!.address {
             
             shopInfo![0].rows?.append(TableRow(title:address ,icon:Icon(type:0,index:215,color:UIColor(hex: "#0091FF")),action:Action(type:.Location,data:nil),height:60,type:.Standard))
@@ -128,22 +146,30 @@ class ShopDetailController: BaseController, MKMapViewDelegate, UITableViewDelega
         
         
         if let weekdayArray = shop!.openingHours  {
-					
+			
+			var rows : [TableRow] = []
+			
+			for eachOpening in weekdayArray {
+				rows.append(TableRow(title:eachOpening,icon:nil,action:nil,height:55,type:.Text))
+			}
+			
             shopInfo?.append(
-                TableSection(sectionName:"Opening Hours",rows:[
-                    TableRow(title:weekdayArray[0],icon:nil,action:nil,height:40,type:.Standard),
-                    TableRow(title:weekdayArray[1],icon:nil,action:nil,height:40,type:.Standard),
-                    TableRow(title:weekdayArray[2],icon:nil,action:nil,height:40,type:.Standard),
-                    TableRow(title:weekdayArray[3],icon:nil,action:nil,height:40,type:.Standard),
-                    TableRow(title:weekdayArray[4],icon:nil,action:nil,height:40,type:.Standard),
-                    TableRow(title:weekdayArray[5],icon:nil,action:nil,height:40,type:.Standard),
-                    TableRow(title:weekdayArray[6],icon:nil,action:nil,height:40,type:.Standard),
-                    ])
+                TableSection(sectionName:"Opening Hours",rows:rows)
             )
             
         }
-        
-        
+		
+		
+		 shopInfo?.append(TableSection(sectionName:"Gallery",rows:[
+			TableRow(title:"",icon:nil,action:Action(type: .ViewPhoto, data: shop?.gallery),height:120,type:.Gallery)]))
+			
+			
+			
+			
+			
+
+		
+		
         header.frame.size.height = 170
         
         if let photos = shop!.gallery
@@ -292,12 +318,19 @@ class ShopDetailController: BaseController, MKMapViewDelegate, UITableViewDelega
                 cell.selectionStyle = .None
                 
                 return cell
-            
+			
+			case .Gallery :
+			
+				 let cell  = tableView.dequeueReusableCellWithIdentifier("Gallery") as! ShopDetailGalleryCell
+				
+				cell.setCollectionViewDataSourceDelegate(self, forRow: indexPath.row)
+				
+				return cell
         }
   
     }
-    
-    
+	
+	
     func tableView(tableView: UITableView, didSelectRowAtIndexPath indexPath: NSIndexPath){
         
         tableView.deselectRowAtIndexPath(indexPath, animated: true)
@@ -434,10 +467,76 @@ class ShopDetailController: BaseController, MKMapViewDelegate, UITableViewDelega
     {
         locationAction(nil)
     }
-    
- 
+	
+	
+	//MARK: UICollectionView Delegate/DataSource for Gallery
+	
+
+	internal func collectionView(collectionView: UICollectionView, numberOfItemsInSection section: Int) -> Int{
+		
+		return (shop?.gallery?.count)!
+	}
+
+	internal func collectionView(collectionView: UICollectionView, cellForItemAtIndexPath indexPath: NSIndexPath) -> UICollectionViewCell{
+		
+		let photoCell = collectionView.dequeueReusableCellWithReuseIdentifier("GalleryPhoto", forIndexPath: indexPath) as! ShopDetailGalleryPhotoCell
+		
+		let imageLink = shop!.gallery![indexPath.row]
+		
+		photoCell.imageView.sd_setImageWithURL(NSURL(string: imageLink)!, completed:{
+			image,error,cacheType, imageURL in
+			
+			if cacheType == .None {
+				let imgView = photoCell.imageView
+
+				imgView.alpha = 0
+				imgView.transform = CGAffineTransformMakeScale(0,0)
+				
+				SpringAnimation.spring(0.6, animations:{
+					imgView.alpha = 1
+					imgView.transform = CGAffineTransformMakeScale(1,1)
+				})
+			}
+			
+		})
+		return photoCell
+	
+	}
+	
+	internal func collectionView(collectionView: UICollectionView, didDeselectItemAtIndexPath indexPath: NSIndexPath){
+		
+		var imageArray : [FSImage] = []
+		
+		for eachImageLink in (shop?.gallery)! {
+			let img = FSBasicImage(imageURL: NSURL(string: eachImageLink)!)
+			imageArray.append(img)
+		}
+		
+		let imageVC = FSImageViewerViewController(imageSource: FSBasicImageSource(images:imageArray), imageIndex: indexPath.row)
+		
+//		self.view.addSubview(imageVC.view)
+//		imageVC.view.center = self.view.center
+//		imageVC.view.transform = CGAffineTransformMakeScale(0,0)
+//		
+//		SpringAnimation.spring(1) { () -> Void in
+//			imageVC.view.transform = CGAffineTransformMakeScale(1,1)
+//		}
+		let size = 50 as CGFloat
+		let closeBtn = FADesignableIconButton.closeButton(CGRectMake(self.view.frame.size.width - size, 5, size, size))
+		closeBtn.tintColor = UIColor.redColor()
+		closeBtn.addTarget(self, action: Selector("dismiss:"), forControlEvents: .TouchUpInside)
+		imageVC.view.addSubview(closeBtn)
+		
+	//	self.presentViewController(imageVC, animated: true, completion: nil)
+		
+		self.showViewController(imageVC, sender: self)
+		
+		
+	}
+
 
 }
+
 
 
 

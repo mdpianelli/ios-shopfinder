@@ -108,7 +108,7 @@ class ShopListController: UIViewController, UIScrollViewDelegate,CLLocationManag
         if segue.identifier == segueShowShopDetail {
             if let vc = segue.destinationViewController as? ShopDetailController {
                 vc.shop = selectedShop
-                vc.transitioningDelegate =  transitionManager
+                vc.transitioningDelegate = transitionManager
             }
         }
         
@@ -134,7 +134,8 @@ class ShopListController: UIViewController, UIScrollViewDelegate,CLLocationManag
     
     func setupNavMenu(){
         
-    
+		
+		self.navigationItem.title = "Tappas"
         self.view.showLoading()
         
         // set left navBarIcon to open left menu

@@ -12,6 +12,8 @@ pod 'SDWebImage', '~>3.7'
 #pod 'Google-Mobile-Ads-SDK'
 pod 'ReachabilitySwift'
 pod 'SVProgressHUD'
+pod 'FSImageViewer'
+
 
 pod 'Fabric'
 pod 'Crashlytics'

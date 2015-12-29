@@ -29,6 +29,7 @@
 		9A47A8951B5D18D20098E743 /* foundation-icons.ttf in Resources */ = {isa = PBXBuildFile; fileRef = 9A47A8911B5D18D20098E743 /* foundation-icons.ttf */; };
 		9A47A8961B5D18D20098E743 /* ionicons.ttf in Resources */ = {isa = PBXBuildFile; fileRef = 9A47A8921B5D18D20098E743 /* ionicons.ttf */; };
 		9A47A8971B5D18D20098E743 /* zocial-regular-webfont.ttf in Resources */ = {isa = PBXBuildFile; fileRef = 9A47A8931B5D18D20098E743 /* zocial-regular-webfont.ttf */; };
+		9A5CC8B41C31A6D100E61ECC /* Review.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9A5CC8B31C31A6D100E61ECC /* Review.swift */; };
 		9A84AAD01B8F397A002CF88B /* ParallaxHeaderView.m in Sources */ = {isa = PBXBuildFile; fileRef = 9A84AACF1B8F397A002CF88B /* ParallaxHeaderView.m */; };
 		9A84AAD31B8F398C002CF88B /* UIImage+ImageEffects.m in Sources */ = {isa = PBXBuildFile; fileRef = 9A84AAD21B8F398C002CF88B /* UIImage+ImageEffects.m */; };
 		9A8CB5BB1B594F06005B9754 /* AppConfig.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9A8CB5BA1B594F06005B9754 /* AppConfig.swift */; };
@@ -89,6 +90,7 @@
 		9A47A8911B5D18D20098E743 /* foundation-icons.ttf */ = {isa = PBXFileReference; lastKnownFileType = file; path = "foundation-icons.ttf"; sourceTree = "<group>"; };
 		9A47A8921B5D18D20098E743 /* ionicons.ttf */ = {isa = PBXFileReference; lastKnownFileType = file; path = ionicons.ttf; sourceTree = "<group>"; };
 		9A47A8931B5D18D20098E743 /* zocial-regular-webfont.ttf */ = {isa = PBXFileReference; lastKnownFileType = file; path = "zocial-regular-webfont.ttf"; sourceTree = "<group>"; };
+		9A5CC8B31C31A6D100E61ECC /* Review.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = Review.swift; path = Models/Review.swift; sourceTree = "<group>"; };
 		9A84AACE1B8F397A002CF88B /* ParallaxHeaderView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = ParallaxHeaderView.h; path = YALSunnyRefreshControll/ParallaxHeaderView.h; sourceTree = "<group>"; };
 		9A84AACF1B8F397A002CF88B /* ParallaxHeaderView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = ParallaxHeaderView.m; path = YALSunnyRefreshControll/ParallaxHeaderView.m; sourceTree = "<group>"; };
 		9A84AAD11B8F398C002CF88B /* UIImage+ImageEffects.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = "UIImage+ImageEffects.h"; sourceTree = "<group>"; };
@@ -172,6 +174,7 @@
 			isa = PBXGroup;
 			children = (
 				9A24F5A41C29BFA500B1C663 /* Shop.swift */,
+				9A5CC8B31C31A6D100E61ECC /* Review.swift */,
 			);
 			name = Models;
 			sourceTree = "<group>";
@@ -570,6 +573,7 @@
 				9AD808FB1B5FDA780077DFD1 /* FADesignableIconButton.swift in Sources */,
 				9A8CB5BB1B594F06005B9754 /* AppConfig.swift in Sources */,
 				9A47010F1B56E77E00A4B8E3 /* ShopCell.swift in Sources */,
+				9A5CC8B41C31A6D100E61ECC /* Review.swift in Sources */,
 				9A45661C1B4D98B300C40073 /* MainRootController.swift in Sources */,
 				9A4565FC1B4D8B4500C40073 /* AppDelegate.swift in Sources */,
 				9A37A6471B6789AE0067B8DB /* JBParallaxCell.m in Sources */,

@@ -115,4 +115,17 @@ class ServerManager : NSObject {
 		
 	}
 	
+	
+	class func fetchShopReviews(shop: Shop, completionHandler: (Result<AnyObject>) -> Void) -> Void {
+		//NSUserDefaults.standardUserDefaults().removeObjectForKey(DefaultKeys.ShopsJSON)
+		let link  = NSString(format: API.review, shop.id!) as String
+		
+	
+		Alamofire.request(.GET,link).responseJSON { (request, response, result) -> Void in
+			completionHandler(result)
+		}
+		
+	}
+	
+	
 }

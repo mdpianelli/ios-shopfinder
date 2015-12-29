@@ -125,5 +125,16 @@ import FontAwesomeKit
         
         return fontClasses[abs(self.imageFontClass%fontClasses.count)]
     }
+	
+	public class func closeButton(frame : CGRect) -> FADesignableIconButton {
+		
+		let closeBtn = FADesignableIconButton(frame: frame)
+		
+		closeBtn.imageType = 70
+		closeBtn.imageFontClass = 2
+		closeBtn.imageFontSize = frame.size.height
+	
+		return closeBtn
+	}
     
 }
