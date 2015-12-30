@@ -29,6 +29,8 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
 	
 		Fabric.with([Crashlytics.self])
 
+		ServerManager.setupManager()
+		
         return true
     }
 

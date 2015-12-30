@@ -244,7 +244,7 @@ class ShopListController: UIViewController, UIScrollViewDelegate,CLLocationManag
         }
         
         //retrieve shops and reload table
-        ServerManager.retrieveShops(){  data in
+		ServerManager.fetchShops(location:currentLocation!){  data in
 				
 					self.shops.removeAll()
 					
@@ -371,8 +371,8 @@ class ShopListController: UIViewController, UIScrollViewDelegate,CLLocationManag
         manager.stopUpdatingLocation()
 			
 			if currentLocation == nil {
-        currentLocation = locations[0]
-        fetchShops()
+				currentLocation = locations[0]
+				fetchShops()
 			}
 			
     }

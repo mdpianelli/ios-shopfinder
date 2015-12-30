@@ -68,6 +68,12 @@ struct API {
 		}
 	}
 	
+	static var authenticate : String{
+		get{
+			return "\(api)/authenticate"
+		}
+	}
+	
 	static var shops : String{
 		get{
 			return "\(api)/shops"

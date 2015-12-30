@@ -9,18 +9,49 @@
 import Foundation
 import Alamofire
 //import ReachabilitySwift
+import CoreLocation
 
 
 
 
 class ServerManager : NSObject {
+	
+	class func setupManager(){
+		
+		ServerManager.authenticateUser()
+		//Alamofire.Manager.sharedInstance.session.configuration.HTTPAdditionalHeaders = ["x-access-token":"TOKEN"]
+	}
     
-    
-    
-    class func retrieveShops(completionHandler: (NSArray) -> Void) -> Void {
+	
+	class func authenticateUser(){
+	
+		// Re capochax TODO: Create a proper registration
+		let myParams = "username=tappas&password=j3/nTB5(s?=+h6zv"
+		let postData = myParams.dataUsingEncoding(NSASCIIStringEncoding, allowLossyConversion: true)
+		let postLength = String(format: "%d", postData!.length)
+		
+		let myRequest = NSMutableURLRequest(URL: NSURL(string:API.authenticate)!)
+		myRequest.HTTPMethod = "POST"
+		myRequest.setValue(postLength, forHTTPHeaderField: "Content-Length")
+		myRequest.setValue("application/x-www-form-urlencoded", forHTTPHeaderField: "Content-Type")
+		myRequest.HTTPBody = postData
+		
+		
+		let request = Alamofire.request(myRequest)
+		request.responseJSON(completionHandler: {(request, response, result) -> Void in
+
+			NSLog("assda")
 			
+		})
+		
+		
+	}
+	
+	
+	class func fetchShops(location loc : CLLocation,completionHandler: (NSArray) -> Void) -> Void {
 			
-        Alamofire.request(.GET, API.shops).responseJSON { (request, response, result) -> Void in
+		
+		Alamofire.request(.POST, API.shops, parameters: ["user":"tappas","latitude":"\(loc.coordinate.latitude)","longitude":"\(loc.coordinate.longitude)"], encoding: .JSON, headers: nil).responseJSON { (request, response, result) -> Void in
 					
 						var data : AnyObject?
 					
@@ -61,7 +92,7 @@ class ServerManager : NSObject {
 	
 	
 	class func prefetchAppSettings(completionHandler: (AnyObject?) -> Void) -> Void {
-		
+
 		//fetch App Settings
 		Alamofire.request(.GET, API.settings).responseJSON { (request, response, result) -> Void in
 			
