@@ -27,7 +27,13 @@ class BaseController:  UIViewController {
 							UIApplication.sharedApplication().openURL(url);
 					}
 			
+					let cancelAction: UIAlertAction = UIAlertAction(title: NSLocalizedString("Cancel", comment:""), style: .Default) { action -> Void in
+
+					}
+			
+					alertVC.addAction(cancelAction)
 					alertVC.addAction(callAction)
+
 					self.presentViewController(alertVC, animated: true, completion: nil)
             
         }

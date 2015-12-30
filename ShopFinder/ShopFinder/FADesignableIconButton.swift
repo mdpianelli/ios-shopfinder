@@ -31,7 +31,7 @@ import FontAwesomeKit
         
         didSet{
             self.borderColor = tintColor!
-            self.titleLabel?.textColor = tintColor!
+			self.setTitleColor(tintColor!, forState: .Normal)
         }
     }
     
@@ -130,8 +130,7 @@ import FontAwesomeKit
 		
 		let closeBtn = FADesignableIconButton(frame: frame)
 		
-		closeBtn.imageType = 70
-		closeBtn.imageFontClass = 2
+		closeBtn.icon = Icon(type:2,index:70,color:UIColor.whiteColor())
 		closeBtn.imageFontSize = frame.size.height
 	
 		return closeBtn

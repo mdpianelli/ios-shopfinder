@@ -13,6 +13,7 @@ import Fabric
 import Crashlytics
 
 
+
 @UIApplicationMain
 class AppDelegate: UIResponder, UIApplicationDelegate {
 
@@ -33,10 +34,10 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
 
 	
 	
-		func application(application: UIApplication, openURL url: NSURL, sourceApplication: String?, annotation: AnyObject) -> Bool {
-			return FBSDKApplicationDelegate.sharedInstance().application(application, openURL: url, sourceApplication: sourceApplication, annotation: annotation)
-			
-		}
+	func application(application: UIApplication, openURL url: NSURL, sourceApplication: String?, annotation: AnyObject) -> Bool {
+		return FBSDKApplicationDelegate.sharedInstance().application(application, openURL: url, sourceApplication: sourceApplication, annotation: annotation)
+		
+	}
 	
     func applicationWillResignActive(application: UIApplication) {
         // Sent when the application is about to move from active to inactive state. This can occur for certain types of temporary interruptions (such as an incoming phone call or SMS message) or when the user quits the application and it begins the transition to the background state.
@@ -62,6 +63,23 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
         // Called when the application is about to terminate. Save data if appropriate. See also applicationDidEnterBackground:.
     }
 
+
+
+	
+	//MARK - Handle Rotation
+	func application(application: UIApplication, supportedInterfaceOrientationsForWindow window: UIWindow?) -> UIInterfaceOrientationMask {
+		
+		let vc = self.window?.rootViewController?.presentedViewController?.presentedViewController as? GalleryViewerController
+		
+		if vc != nil && vc!.isPresented {
+			return .All;
+		} else {
+			return .Portrait
+		}
+
+	}
+	
+	
 
 }
 

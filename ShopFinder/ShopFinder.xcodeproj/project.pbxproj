@@ -29,6 +29,7 @@
 		9A47A8951B5D18D20098E743 /* foundation-icons.ttf in Resources */ = {isa = PBXBuildFile; fileRef = 9A47A8911B5D18D20098E743 /* foundation-icons.ttf */; };
 		9A47A8961B5D18D20098E743 /* ionicons.ttf in Resources */ = {isa = PBXBuildFile; fileRef = 9A47A8921B5D18D20098E743 /* ionicons.ttf */; };
 		9A47A8971B5D18D20098E743 /* zocial-regular-webfont.ttf in Resources */ = {isa = PBXBuildFile; fileRef = 9A47A8931B5D18D20098E743 /* zocial-regular-webfont.ttf */; };
+		9A4D2AFA1C34127500B4A5A9 /* GalleryViewerController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9A4D2AF91C34127500B4A5A9 /* GalleryViewerController.swift */; };
 		9A5CC8B41C31A6D100E61ECC /* Review.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9A5CC8B31C31A6D100E61ECC /* Review.swift */; };
 		9A84AAD01B8F397A002CF88B /* ParallaxHeaderView.m in Sources */ = {isa = PBXBuildFile; fileRef = 9A84AACF1B8F397A002CF88B /* ParallaxHeaderView.m */; };
 		9A84AAD31B8F398C002CF88B /* UIImage+ImageEffects.m in Sources */ = {isa = PBXBuildFile; fileRef = 9A84AAD21B8F398C002CF88B /* UIImage+ImageEffects.m */; };
@@ -90,6 +91,7 @@
 		9A47A8911B5D18D20098E743 /* foundation-icons.ttf */ = {isa = PBXFileReference; lastKnownFileType = file; path = "foundation-icons.ttf"; sourceTree = "<group>"; };
 		9A47A8921B5D18D20098E743 /* ionicons.ttf */ = {isa = PBXFileReference; lastKnownFileType = file; path = ionicons.ttf; sourceTree = "<group>"; };
 		9A47A8931B5D18D20098E743 /* zocial-regular-webfont.ttf */ = {isa = PBXFileReference; lastKnownFileType = file; path = "zocial-regular-webfont.ttf"; sourceTree = "<group>"; };
+		9A4D2AF91C34127500B4A5A9 /* GalleryViewerController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = GalleryViewerController.swift; sourceTree = "<group>"; };
 		9A5CC8B31C31A6D100E61ECC /* Review.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = Review.swift; path = Models/Review.swift; sourceTree = "<group>"; };
 		9A84AACE1B8F397A002CF88B /* ParallaxHeaderView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = ParallaxHeaderView.h; path = YALSunnyRefreshControll/ParallaxHeaderView.h; sourceTree = "<group>"; };
 		9A84AACF1B8F397A002CF88B /* ParallaxHeaderView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = ParallaxHeaderView.m; path = YALSunnyRefreshControll/ParallaxHeaderView.m; sourceTree = "<group>"; };
@@ -260,10 +262,11 @@
 		9A4566321B4DA28800C40073 /* Classes */ = {
 			isa = PBXGroup;
 			children = (
+				9A4565FB1B4D8B4500C40073 /* AppDelegate.swift */,
+				9A8CB5BA1B594F06005B9754 /* AppConfig.swift */,
 				9A24F5A31C29BF8100B1C663 /* Models */,
 				9AD808F51B5FDA5A0077DFD1 /* Extensions */,
 				9A4701091B56D72E00A4B8E3 /* Managers */,
-				9A4701051B56AB1600A4B8E3 /* Foundation */,
 				9A4701061B56AB2300A4B8E3 /* View Controllers */,
 			);
 			name = Classes;
@@ -276,15 +279,6 @@
 				9A4566041B4D8B4500C40073 /* LaunchScreen.xib */,
 			);
 			name = Storyboards;
-			sourceTree = "<group>";
-		};
-		9A4701051B56AB1600A4B8E3 /* Foundation */ = {
-			isa = PBXGroup;
-			children = (
-				9A4565FB1B4D8B4500C40073 /* AppDelegate.swift */,
-				9A8CB5BA1B594F06005B9754 /* AppConfig.swift */,
-			);
-			name = Foundation;
 			sourceTree = "<group>";
 		};
 		9A4701061B56AB2300A4B8E3 /* View Controllers */ = {
@@ -401,6 +395,7 @@
 			children = (
 				9AE65A2C1BA6F62C00FDC1B6 /* BaseController.swift */,
 				9A2388DD1B67A3420090927F /* WebController.swift */,
+				9A4D2AF91C34127500B4A5A9 /* GalleryViewerController.swift */,
 			);
 			name = Base;
 			sourceTree = "<group>";
@@ -565,6 +560,7 @@
 			buildActionMask = 2147483647;
 			files = (
 				9A84AAD01B8F397A002CF88B /* ParallaxHeaderView.m in Sources */,
+				9A4D2AFA1C34127500B4A5A9 /* GalleryViewerController.swift in Sources */,
 				9A8CB5BD1B59AA7E005B9754 /* ShopFilterOptionsController.swift in Sources */,
 				9A84AAD31B8F398C002CF88B /* UIImage+ImageEffects.m in Sources */,
 				9A47010B1B56D77A00A4B8E3 /* ServerManager.swift in Sources */,

@@ -23,7 +23,8 @@ class ShopDetailController: BaseController, MKMapViewDelegate, UITableViewDelega
     var shop : Shop?
     var shopInfo : [TableSection]?
     var shopAnnotation : ShopAnnotation?
-    
+	var gallery : UICollectionView?
+	
     @IBOutlet weak var imageView: SpringImageView!
     @IBOutlet weak var titleLabel: UILabel!
 		@IBOutlet weak var ratingLabel: UILabel!
@@ -80,6 +81,7 @@ class ShopDetailController: BaseController, MKMapViewDelegate, UITableViewDelega
         super.viewDidLayoutSubviews()
         header.refreshBlurViewForNewImage()
 
+		
     }
     
     
@@ -91,7 +93,8 @@ class ShopDetailController: BaseController, MKMapViewDelegate, UITableViewDelega
         adBannerSetup()
         
         shopInfoSetup()
-        
+		
+	
     }
     
     func shopInfoSetup(){
@@ -162,13 +165,7 @@ class ShopDetailController: BaseController, MKMapViewDelegate, UITableViewDelega
 		
 		 shopInfo?.append(TableSection(sectionName:"Gallery",rows:[
 			TableRow(title:"",icon:nil,action:Action(type: .ViewPhoto, data: shop?.gallery),height:120,type:.Gallery)]))
-			
-			
-			
-			
-			
 
-		
 		
         header.frame.size.height = 170
         
@@ -194,7 +191,7 @@ class ShopDetailController: BaseController, MKMapViewDelegate, UITableViewDelega
         }
         
         table.reloadData()
-
+	
     }
     
   
@@ -263,15 +260,19 @@ class ShopDetailController: BaseController, MKMapViewDelegate, UITableViewDelega
     func tableView(tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
         return shopInfo![section].rows!.count
     }
-    
-    // for table parallax effect
-    func  scrollViewDidScroll(scrollView: UIScrollView) {
-        let header: ParallaxHeaderView = table.tableHeaderView as! ParallaxHeaderView
-        header.layoutHeaderViewForScrollViewOffset(scrollView.contentOffset)
-       // table.tableHeaderView = header
-    }
-    
-    
+	
+	func tableView(tableView: UITableView, willDisplayCell cell: UITableViewCell, forRowAtIndexPath indexPath: NSIndexPath)
+	{
+		let data = shopInfo![indexPath.section].rows![indexPath.row] as TableRow
+
+		switch data.type {
+			case .Gallery :
+					gallery?.reloadData()
+			default: break;
+		
+		}
+	}
+	
     func tableView(tableView: UITableView, cellForRowAtIndexPath indexPath: NSIndexPath) -> UITableViewCell
     {
         
@@ -324,6 +325,7 @@ class ShopDetailController: BaseController, MKMapViewDelegate, UITableViewDelega
 				 let cell  = tableView.dequeueReusableCellWithIdentifier("Gallery") as! ShopDetailGalleryCell
 				
 				cell.setCollectionViewDataSourceDelegate(self, forRow: indexPath.row)
+				gallery = cell.collectionView
 				
 				return cell
         }
@@ -359,6 +361,17 @@ class ShopDetailController: BaseController, MKMapViewDelegate, UITableViewDelega
         }
         
     }
+	
+	
+	// for table parallax effect
+	func  scrollViewDidScroll(scrollView: UIScrollView) {
+		let header: ParallaxHeaderView = table.tableHeaderView as! ParallaxHeaderView
+		header.layoutHeaderViewForScrollViewOffset(scrollView.contentOffset)
+		// table.tableHeaderView = header
+	}
+	
+	
+	
 
 	//MARK: IB Actions
 	
@@ -502,35 +515,24 @@ class ShopDetailController: BaseController, MKMapViewDelegate, UITableViewDelega
 		return photoCell
 	
 	}
-	
-	internal func collectionView(collectionView: UICollectionView, didDeselectItemAtIndexPath indexPath: NSIndexPath){
+	@IBAction func tapAction( tapGR: UITapGestureRecognizer) {
+		
+		let touchPoint = tapGR.locationInView(gallery)
+
+		let indexPath = gallery?.indexPathForItemAtPoint(touchPoint)
+		
+		//gallery?.selectItemAtIndexPath(indexPath, animated: true, scrollPosition: .None)
+
 		
 		var imageArray : [FSImage] = []
-		
+
 		for eachImageLink in (shop?.gallery)! {
 			let img = FSBasicImage(imageURL: NSURL(string: eachImageLink)!)
 			imageArray.append(img)
 		}
 		
-		let imageVC = FSImageViewerViewController(imageSource: FSBasicImageSource(images:imageArray), imageIndex: indexPath.row)
-		
-//		self.view.addSubview(imageVC.view)
-//		imageVC.view.center = self.view.center
-//		imageVC.view.transform = CGAffineTransformMakeScale(0,0)
-//		
-//		SpringAnimation.spring(1) { () -> Void in
-//			imageVC.view.transform = CGAffineTransformMakeScale(1,1)
-//		}
-		let size = 50 as CGFloat
-		let closeBtn = FADesignableIconButton.closeButton(CGRectMake(self.view.frame.size.width - size, 5, size, size))
-		closeBtn.tintColor = UIColor.redColor()
-		closeBtn.addTarget(self, action: Selector("dismiss:"), forControlEvents: .TouchUpInside)
-		imageVC.view.addSubview(closeBtn)
-		
-	//	self.presentViewController(imageVC, animated: true, completion: nil)
-		
+		let imageVC = GalleryViewerController(imageSource: FSBasicImageSource(images:imageArray), imageIndex: indexPath!.row)
 		self.showViewController(imageVC, sender: self)
-		
 		
 	}
 

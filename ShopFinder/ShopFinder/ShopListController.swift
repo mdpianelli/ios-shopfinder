@@ -275,16 +275,17 @@ class ShopListController: UIViewController, UIScrollViewDelegate,CLLocationManag
     }
     
     func sortByRating() {
-			self.shops.sortInPlace({ $1.rating!.doubleValue > $0.rating!.doubleValue })
+			self.shops.sortInPlace({ $1.rating!.doubleValue < $0.rating!.doubleValue })
     }
     
     func sortByReviewCount() {
-			self.shops.sortInPlace({ $1.reviewCount?.integerValue > $0.reviewCount?.integerValue })
+			self.shops.sortInPlace({ $1.reviewCount?.integerValue < $0.reviewCount?.integerValue })
     }
     
     
     //MARK: - UITableViewDataSource
-    
+	
+	
     func tableView(tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
         
         return shops.count
@@ -293,8 +294,7 @@ class ShopListController: UIViewController, UIScrollViewDelegate,CLLocationManag
     func numberOfSectionsInTableView(tableView: UITableView) -> Int {
         return 1;
     }
-	
-	
+
     func tableView(tableView: UITableView, cellForRowAtIndexPath indexPath: NSIndexPath) -> UITableViewCell{
         
         let cell: ShopCell = tableView.dequeueReusableCellWithIdentifier("Cell") as! ShopCell
@@ -334,8 +334,9 @@ class ShopListController: UIViewController, UIScrollViewDelegate,CLLocationManag
         return cell
     }
     
-    
-    
+		
+
+
     //MARK: - UITableViewDelegate
     
     func scrollViewDidScroll(scrollView: UIScrollView) {

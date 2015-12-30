@@ -28,8 +28,10 @@ class ShopDetailCell : UITableViewCell {
 class ShopDetailGalleryCell : UITableViewCell {
 	
 	@IBOutlet weak var collectionView: UICollectionView!
-	
-	
+
+	func reloadCollectionView(){
+		collectionView.reloadData()
+	}
 	
 	func setCollectionViewDataSourceDelegate
 		<D: protocol<UICollectionViewDataSource, UICollectionViewDelegate>>
@@ -38,7 +40,7 @@ class ShopDetailGalleryCell : UITableViewCell {
 			collectionView.delegate = dataSourceDelegate
 			collectionView.dataSource = dataSourceDelegate
 			collectionView.tag = row
-			collectionView.reloadData()
+			collectionView.performSelector(Selector("reloadData"), withObject:nil, afterDelay:0.1)
 	}
 	
 }
@@ -46,5 +48,7 @@ class ShopDetailGalleryCell : UITableViewCell {
 class ShopDetailGalleryPhotoCell : UICollectionViewCell {
 
 	@IBOutlet weak var imageView: UIImageView!
+	
+	
 	
 }
