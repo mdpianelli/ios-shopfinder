@@ -74,7 +74,7 @@ class BaseController:  UIViewController {
             
             if link.hasPrefix("http") {
                 //open normal link
-                let nav = self.storyboard?.instantiateViewControllerWithIdentifier("NavWebController") as! UINavigationController
+                let nav = self.storyboard?.instantiateViewControllerWithIdentifier("WebController") as! UINavigationController
                 let wc = nav.topViewController as! WebController
                 
                 wc.link = NSURL(string: link)

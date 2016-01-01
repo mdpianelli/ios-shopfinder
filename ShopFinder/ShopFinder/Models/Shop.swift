@@ -98,10 +98,13 @@ class Shop: AnyObject {
 			
 			if result.isSuccess {
 				
-				let reviews = result.value as? [NSDictionary]
+				guard let reviews = result.value as? [NSDictionary] else{
+					return
+				}
+				
 				var array : [Review] = []
 				
-				for eachReview : NSDictionary in reviews! {
+				for eachReview : NSDictionary in reviews {
 					array.append(Review(initWithDic: eachReview))
 				}
 				

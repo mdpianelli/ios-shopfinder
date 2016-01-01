@@ -16,17 +16,47 @@ import CoreLocation
 
 class ServerManager : NSObject {
 	
+	static var manager : Manager?
+	
 	class func setupManager(){
 		
-		ServerManager.authenticateUser()
-		//Alamofire.Manager.sharedInstance.session.configuration.HTTPAdditionalHeaders = ["x-access-token":"TOKEN"]
-	}
-    
+		//Get the latest token used
+		let latestToken = NSUserDefaults.standardUserDefaults().objectForKey(App.tokenKey) as? String
+		
+		if latestToken != nil {
+			App.token = latestToken
+			configureManager()
+		}
+		
 	
-	class func authenticateUser(){
+		ServerManager.authenticateUser { (result) -> Void in
+			if App.token != nil {
+				configureManager()
+			}
+			
+		}
+		
+	}
+	
+	class func configureManager(){
+		
+		// Adding headers
+		var defaultHeaders = Alamofire.Manager.sharedInstance.session.configuration.HTTPAdditionalHeaders ?? [:]
+		defaultHeaders["x-access-token"] = App.token
+		
+		let configuration = NSURLSessionConfiguration.defaultSessionConfiguration()
+		configuration.HTTPAdditionalHeaders = defaultHeaders
+		
+		// Adding parameters
+		manager = Alamofire.Manager(configuration: configuration)
+		
+		
+	}
+	
+	class func authenticateUser(completionHandler: (Result<AnyObject>) -> Void){
 	
 		// Re capochax TODO: Create a proper registration
-		let myParams = "username=tappas&password=j3/nTB5(s?=+h6zv"
+		let myParams = "name=tappas&password=j3%2FnTB5(s%3F%3D%2Bh6zv"
 		let postData = myParams.dataUsingEncoding(NSASCIIStringEncoding, allowLossyConversion: true)
 		let postLength = String(format: "%d", postData!.length)
 		
@@ -37,10 +67,20 @@ class ServerManager : NSObject {
 		myRequest.HTTPBody = postData
 		
 		
-		let request = Alamofire.request(myRequest)
+		let request = manager!.request(myRequest)
 		request.responseJSON(completionHandler: {(request, response, result) -> Void in
 
-			NSLog("assda")
+			if result.isSuccess {
+				
+				guard let token = result.value!["token"] as? String else{
+					NSLog("Authentication failed, no token returned")
+					return
+				}
+
+				NSUserDefaults.standardUserDefaults().setObject(token, forKey: App.tokenKey)
+				App.token = token
+				completionHandler(result)
+			}
 			
 		})
 		
@@ -51,7 +91,7 @@ class ServerManager : NSObject {
 	class func fetchShops(location loc : CLLocation,completionHandler: (NSArray) -> Void) -> Void {
 			
 		
-		Alamofire.request(.POST, API.shops, parameters: ["user":"tappas","latitude":"\(loc.coordinate.latitude)","longitude":"\(loc.coordinate.longitude)"], encoding: .JSON, headers: nil).responseJSON { (request, response, result) -> Void in
+		manager!.request(.GET, API.shops, parameters: ["user":"tappas","latitude":"\(loc.coordinate.latitude)","longitude":"\(loc.coordinate.longitude)"], encoding: .JSON, headers: nil).responseJSON { (request, response, result) -> Void in
 					
 						var data : AnyObject?
 					
@@ -75,7 +115,7 @@ class ServerManager : NSObject {
         }
         
        // if Reachability.reachabilityForInternetConnection().isReachable() {
-//            Alamofire.request(.GET, API.shops )
+//            manager!.request(.GET, API.shops )
 //                .responseJSON { (_, _, obj, error) in
 //                    NSUserDefaults.standardUserDefaults().setObject(obj, forKey: DefaultKeys.ShopsJSON)
 //                    completionHandler(obj,error)
@@ -94,7 +134,7 @@ class ServerManager : NSObject {
 	class func prefetchAppSettings(completionHandler: (AnyObject?) -> Void) -> Void {
 
 		//fetch App Settings
-		Alamofire.request(.GET, API.settings).responseJSON { (request, response, result) -> Void in
+		manager!.request(.GET, API.settings).responseJSON { (request, response, result) -> Void in
 			
 			if result.isSuccess {
 				let dic = result.value as! NSDictionary
@@ -116,7 +156,7 @@ class ServerManager : NSObject {
 			return
 		}else{
 			
-			Alamofire.request(.GET, API.settings).responseJSON { (request, response, result) -> Void in
+			manager!.request(.GET, API.settings).responseJSON { (request, response, result) -> Void in
 				
 				if result.isSuccess {
 					let dic = result.value as! NSDictionary
@@ -136,7 +176,7 @@ class ServerManager : NSObject {
 		}
 		
 		
-		Alamofire.request(.GET, link! ).responseData { (request, response, result) -> Void in
+		manager!.request(.GET, link! ).responseData { (request, response, result) -> Void in
 			
 			if response?.statusCode == 200 {
 				let img = UIImage(data: result.value!)
@@ -152,7 +192,7 @@ class ServerManager : NSObject {
 		let link  = NSString(format: API.review, shop.id!) as String
 		
 	
-		Alamofire.request(.GET,link).responseJSON { (request, response, result) -> Void in
+		manager!.request(.GET,link).responseJSON { (request, response, result) -> Void in
 			completionHandler(result)
 		}
 		

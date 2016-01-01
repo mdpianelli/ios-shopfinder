@@ -96,6 +96,10 @@ struct API {
 
 struct App {
 	
+	// Keys 
+	static var tokenKey = "tokenKey"
+	static var token : String?
+
 	// Share JSON values
 	static var shareDic = "share"
 	static var shareImageLink = "appShareImageLink"

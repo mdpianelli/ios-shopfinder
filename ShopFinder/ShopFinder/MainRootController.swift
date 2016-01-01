@@ -54,9 +54,11 @@ class MainRootController:  RESideMenu, RESideMenuDelegate {
 				return;
 			}
 			
-			let config = dic["config"] as? NSDictionary
+			guard let config = dic["config"] as? NSDictionary else{
+				return
+			}
 			
-			guard let  link  = config![App.menuBackgroundImage] as? String else{
+			guard let  link  = config[App.menuBackgroundImage] as? String else{
 				return;
 			}
 			
