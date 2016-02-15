@@ -28,14 +28,6 @@ class ServerManager : NSObject {
 			configureManager()
 		}
 		
-	
-		ServerManager.authenticateUser { (result) -> Void in
-			if App.token != nil {
-				configureManager()
-			}
-			
-		}
-		
 	}
 	
 	class func configureManager(){
@@ -67,7 +59,8 @@ class ServerManager : NSObject {
 		myRequest.HTTPBody = postData
 		
 		
-		let request = manager!.request(myRequest)
+		let request = Alamofire.Manager.sharedInstance.request(myRequest)
+		
 		request.responseJSON(completionHandler: {(request, response, result) -> Void in
 
 			if result.isSuccess {
@@ -79,10 +72,13 @@ class ServerManager : NSObject {
 
 				NSUserDefaults.standardUserDefaults().setObject(token, forKey: App.tokenKey)
 				App.token = token
+				self.configureManager()
 				completionHandler(result)
 			}
 			
 		})
+		
+		request.resume()
 		
 		
 	}

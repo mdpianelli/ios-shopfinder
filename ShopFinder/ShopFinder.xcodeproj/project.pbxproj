@@ -10,6 +10,7 @@
 		9A0492E31C275ECA00F858CA /* ShopsDetailAdsExtension.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9A0492E21C275ECA00F858CA /* ShopsDetailAdsExtension.swift */; };
 		9A0492E51C275F2B00F858CA /* ShopDetailCells.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9A0492E41C275F2B00F858CA /* ShopDetailCells.swift */; };
 		9A0492E71C2764B300F858CA /* SocialManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9A0492E61C2764B300F858CA /* SocialManager.swift */; };
+		9A1CFC2D1C71833300098E37 /* SplashController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9A1CFC2C1C71833300098E37 /* SplashController.swift */; };
 		9A2388DE1B67A3420090927F /* WebController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9A2388DD1B67A3420090927F /* WebController.swift */; };
 		9A24F5A51C29BFA500B1C663 /* Shop.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9A24F5A41C29BFA500B1C663 /* Shop.swift */; };
 		9A37A6471B6789AE0067B8DB /* JBParallaxCell.m in Sources */ = {isa = PBXBuildFile; fileRef = 9A37A6461B6789AE0067B8DB /* JBParallaxCell.m */; };
@@ -66,6 +67,7 @@
 		9A0492E21C275ECA00F858CA /* ShopsDetailAdsExtension.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ShopsDetailAdsExtension.swift; sourceTree = "<group>"; };
 		9A0492E41C275F2B00F858CA /* ShopDetailCells.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ShopDetailCells.swift; sourceTree = "<group>"; };
 		9A0492E61C2764B300F858CA /* SocialManager.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = SocialManager.swift; sourceTree = "<group>"; };
+		9A1CFC2C1C71833300098E37 /* SplashController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = SplashController.swift; sourceTree = "<group>"; };
 		9A2388DD1B67A3420090927F /* WebController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = WebController.swift; sourceTree = "<group>"; };
 		9A24F5A41C29BFA500B1C663 /* Shop.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = Shop.swift; path = Models/Shop.swift; sourceTree = "<group>"; };
 		9A37A6451B6789AE0067B8DB /* JBParallaxCell.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = JBParallaxCell.h; sourceTree = "<group>"; };
@@ -158,6 +160,7 @@
 			children = (
 				9A45661B1B4D98B300C40073 /* MainRootController.swift */,
 				9A4566341B4DA2C600C40073 /* MenuController.swift */,
+				9A1CFC2C1C71833300098E37 /* SplashController.swift */,
 			);
 			name = "Main Controllers";
 			sourceTree = "<group>";
@@ -573,6 +576,7 @@
 				9A45661C1B4D98B300C40073 /* MainRootController.swift in Sources */,
 				9A4565FC1B4D8B4500C40073 /* AppDelegate.swift in Sources */,
 				9A37A6471B6789AE0067B8DB /* JBParallaxCell.m in Sources */,
+				9A1CFC2D1C71833300098E37 /* SplashController.swift in Sources */,
 				9A0492E71C2764B300F858CA /* SocialManager.swift in Sources */,
 				9AD809051B5FE8DF0077DFD1 /* SettingsController.swift in Sources */,
 				9AE65A2F1BA7012E00FDC1B6 /* String+Helpers.swift in Sources */,
